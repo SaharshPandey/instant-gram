@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "682820098782",
+    "firebase_url": "https://instantgram-5c343.firebaseio.com",
+    "project_id": "instantgram-5c343",
+    "storage_bucket": "instantgram-5c343.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682820098782:android:115cd4f688e7bcb4",
+        "android_client_info": {
+          "package_name": "com.example.iknownothing.instantgram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682820098782-h9h49tbt8eqgr9f37jb55da72b4alstq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.iknownothing.instantgram",
+            "certificate_hash": "3c553a4c5341514a9fac8b329cf5042f018dde5c"
+          }
+        },
+        {
+          "client_id": "682820098782-0trt93r04r66hvvpsv90ti7rb5gfcenk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCARn4pPNhI44YeAom24qLkS_oub6meaEM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682820098782-0trt93r04r66hvvpsv90ti7rb5gfcenk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
