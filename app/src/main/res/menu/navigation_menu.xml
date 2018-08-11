@@ -1,33 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item
-    android:id="@+id/nav_home"
-    android:title="Home"
+    <item
+        android:id="@+id/nav_post"
+        android:title="Add New Post"
+        android:icon="@drawable/add_post"
     >
-</item>
+    </item>
+    <item
+        android:id="@+id/nav_profile"
+        android:title="Profile"
+        android:icon="@drawable/profile_icon"
+        >
+    </item>
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home"
+        android:icon="@drawable/home"
+        >
+    </item>
     <item
         android:id="@+id/nav_friends"
         android:title="Friends"
+        android:icon="@drawable/friends"
         >
     </item>
     <item
         android:id="@+id/nav_find_friends"
         android:title="Find Friends"
+        android:icon="@drawable/find_people"
         >
     </item>
     <item
         android:id="@+id/nav_messages"
         android:title="Messages"
+        android:icon="@drawable/messages"
         >
     </item>
     <item
         android:id="@+id/nav_settings"
         android:title="Settings"
+        android:icon="@drawable/settings"
         >
     </item>
     <item
         android:id="@+id/nav_Logout"
         android:title="Logout"
+        android:icon="@drawable/logout"
         >
     </item>
 </menu>
