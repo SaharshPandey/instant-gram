@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class LoginActivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
 
+public class LoginActivity extends AppCompatActivity {
+    private FirebaseAuth mAuth;
     private Button LoginButton;
     private TextView UserEmail,UserPassword;
     private TextView SignUp;
@@ -18,16 +20,21 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mAuth = FirebaseAuth.getInstance();
         SignUp = findViewById(R.id.register_account_link);
         LoginButton = findViewById(R.id.login_account);
         UserEmail = findViewById(R.id.login_email);
         UserPassword = findViewById(R.id.login_password);
+
+
+        //Signup Button Listener that redirects to SendUserToRegisterAccount() method......
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SendUserToRegisterAccount();
             }
         });
+
     }
 
     private void SendUserToRegisterAccount() {
@@ -36,3 +43,20 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 }
+/*
+
+        //Login Button Listener that redirects to SendUserToHome() method......
+       SignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendUserToHome(UserEmail.getText().toString().trim(),UserPassword.getText().toString().trim());
+            }
+        });
+    }
+
+   private void SendUserToHome(String email,String password) {
+
+        mAuth.signInWithEmailAndPassword(email, password);
+    }
+
+ */
