@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    //Private objects of FirebaseAuth, NavigationView,DrawerLayout,ToolBar,processDialog
     private FirebaseAuth mAuth;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //instantiating Objects
         loadingBar = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         mToolbar = findViewById(R.id.main_page_toolbar);
@@ -46,14 +50,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         navigationView = findViewById(R.id.navigation_view);
+
+        //Inflating Navigation Header in Navigation Menu....
         View view =navigationView.inflateHeaderView(R.layout.navigation_header);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 UserItemSelector(item);
                 return false;
             }
-
+            //Checking when the menu item has been clicked..
             private void UserItemSelector(MenuItem item) {
                 switch (item.getItemId())
                 {
@@ -90,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+//onStart method is used for checking that user is LoggedIn or not?......
     @Override
     protected void onStart()
     {
@@ -101,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             SendUserToLoginActivity();
         }
     }
-
+//Method to redirect User to Login Activity....
     private void SendUserToLoginActivity() {
 
         Intent loginIntent =new Intent(MainActivity.this, LoginActivity.class);
