@@ -9,12 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 
 public class MainActivity extends AppCompatActivity {
+    private FirebaseAuth mAuth;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private RecyclerView postList;
@@ -25,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        mAuth = FirebaseAuth.getInstance();
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
@@ -76,6 +81,26 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        FirebaseUser currentuser =mAuth.getCurrentUser();
+        if(currentuser ==null)
+        {
+            SendUserToLoginActivity();
+        }
+    }
+
+    private void SendUserToLoginActivity() {
+
+        Intent loginIntent =new Intent(MainActivity.this, LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(loginIntent);
+        finish();
+    }
+
     @Override
 public boolean onOptionsItemSelected(MenuItem item)
 {
