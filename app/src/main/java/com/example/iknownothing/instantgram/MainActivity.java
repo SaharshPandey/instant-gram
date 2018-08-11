@@ -1,5 +1,6 @@
 package com.example.iknownothing.instantgram;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -25,11 +26,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView postList;
     private Toolbar mToolbar;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    ProgressDialog loadingBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        loadingBar = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
@@ -74,7 +76,14 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this,"Settings",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_Logout:
-                        Toast.makeText(MainActivity.this,"Logout",Toast.LENGTH_SHORT).show();
+                        loadingBar.setTitle("Logging Out");
+                        loadingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        loadingBar.show();
+                        loadingBar.setCanceledOnTouchOutside(true);
+                        Toast.makeText(MainActivity.this,"Logging Out",Toast.LENGTH_SHORT).show();
+                        mAuth.signOut();
+                        loadingBar.dismiss();
+                        SendUserToLoginActivity();
                         break;
                 }
             }
