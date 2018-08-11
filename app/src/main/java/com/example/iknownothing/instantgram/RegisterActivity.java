@@ -77,7 +77,8 @@ public class RegisterActivity extends AppCompatActivity {
                     else
                     {
                         String message = task.getException().getMessage();
-                        Toast.makeText(RegisterActivity.this, "message", Toast.LENGTH_SHORT).show();
+                        loadingBar.dismiss();
+                        Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
                 }
             });
