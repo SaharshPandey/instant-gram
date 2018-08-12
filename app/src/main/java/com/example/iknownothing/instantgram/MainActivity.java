@@ -16,12 +16,18 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity {
 
     //Private objects of FirebaseAuth, NavigationView,DrawerLayout,ToolBar,processDialog
     private FirebaseAuth mAuth;
+    private DatabaseReference UserRef;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private RecyclerView postList;
@@ -36,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         //instantiating Objects
         loadingBar = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
+
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
@@ -106,8 +114,40 @@ public class MainActivity extends AppCompatActivity {
         {
             SendUserToLoginActivity();
         }
+        else{
+            ChechUserExistence();
+
+
+        }
     }
-//Method to redirect User to Login Activity....
+
+    private void ChechUserExistence() {
+        final String Current_User_Id=mAuth.getCurrentUser().getUid();
+        UserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(!dataSnapshot.hasChild(Current_User_Id))
+                {
+                    SendUserToSetupActivity();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void SendUserToSetupActivity() {
+        Intent setupIntent =new Intent(MainActivity.this,SetupActivity.class);
+        setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(setupIntent);
+        finish();
+    }
+
+    //Method to redirect User to Login Activity....
     private void SendUserToLoginActivity() {
 
         Intent loginIntent =new Intent(MainActivity.this, LoginActivity.class);
