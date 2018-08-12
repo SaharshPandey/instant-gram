@@ -1,5 +1,7 @@
 package com.example.iknownothing.instantgram;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +28,7 @@ public class SetupActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     private DatabaseReference UsersRef;
     private String CurrentUserId;
-
+    private ProgressDialog loadingBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +42,7 @@ public class SetupActivity extends AppCompatActivity {
         countryName = findViewById(R.id.country);
         circleImage = findViewById(R.id.circleimage);
         setup = findViewById(R.id.setup);
-
+        loadingBar =new ProgressDialog(this);
 
         setup.setOnClickListener(new View.OnClickListener(){
 
@@ -65,6 +67,12 @@ public class SetupActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    loadingBar.setTitle("Saving Information");
+                    loadingBar.setMessage("Please wait until we save your Information to the Database");
+                    loadingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    loadingBar.show();
+                    loadingBar.setCanceledOnTouchOutside(true);
+
                     HashMap userMap =new HashMap();
                     userMap.put("username",username);
                     userMap.put("fullname",fullname);
@@ -77,12 +85,14 @@ public class SetupActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task task) {
                             if(task.isSuccessful())
-                            {
+                            {   SendUserToMainActivity();
+                                loadingBar.dismiss();
                                 Toast.makeText(SetupActivity.this,"Your Account is Created Successfully",Toast.LENGTH_LONG);
-                                
+
                             }
                             else {
                                 String message = task.getException().toString();
+                                loadingBar.dismiss();
                                 Toast.makeText(SetupActivity.this,message,Toast.LENGTH_LONG);
                             }
                         }
@@ -91,5 +101,11 @@ public class SetupActivity extends AppCompatActivity {
             }
         });
     }
+    private void SendUserToMainActivity() {
+        Intent homeIntent = new Intent(SetupActivity.this, MainActivity.class);
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homeIntent);
+        finish();
 
-}
+    }
+    }
