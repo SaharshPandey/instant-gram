@@ -17,6 +17,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.HashMap;
 
@@ -31,12 +35,16 @@ public class SetupActivity extends AppCompatActivity {
     private String CurrentUserId;
     private ProgressDialog loadingBar;
     final static int GalleryPic=1;
+    private StorageReference UserProfileImageRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
         mAuth = FirebaseAuth.getInstance();
+        UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
+        
         CurrentUserId = mAuth.getCurrentUser().getUid();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(CurrentUserId);
         userName = findViewById(R.id.username);
@@ -123,6 +131,18 @@ public class SetupActivity extends AppCompatActivity {
         if(requestCode == GalleryPic && requestCode == RESULT_OK && data != null)
         {
             Uri ImageUri = data.getData();
+            CropImage.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setAspectRatio(1,1)
+                    .start(this);
+            if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
+            {
+                CropImage.ActivityResult result= CropImage.getActivityResult(data);
+                if(requestCode == RESULT_OK)
+                {
+                    Uri reultUri =result.getUri();
+                }
+            }
         }
 
     }
