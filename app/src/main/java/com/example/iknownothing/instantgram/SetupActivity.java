@@ -136,8 +136,7 @@ public class SetupActivity extends AppCompatActivity {
             Uri ImageUri = data.getData();             //here we getting the image.....in ImageUri
 
             //When the user Select the image he will be redirected to the Image Cropping Activity...
-            CropImage.activity()
-                    .setGuidelines(CropImageView.Guidelines.ON)
+            CropImage.activity(ImageUri)
                     .setAspectRatio(1, 1)
                     .start(this);
         }
