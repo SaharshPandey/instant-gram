@@ -2,6 +2,7 @@ package com.example.iknownothing.instantgram;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -114,6 +115,18 @@ public class SetupActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == GalleryPic && requestCode == RESULT_OK && data != null)
+        {
+            Uri ImageUri = data.getData();
+        }
+
+    }
+
     private void SendUserToMainActivity() {
         Intent homeIntent = new Intent(SetupActivity.this, MainActivity.class);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

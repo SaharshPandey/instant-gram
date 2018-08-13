@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.0.2'
