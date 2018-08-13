@@ -135,7 +135,6 @@ public class SetupActivity extends AppCompatActivity {
                     String image = dataSnapshot.child("profileImage").getValue().toString();
                     Picasso.get()
                             .load(image)
-                            .resize(50, 50)
                             .placeholder(R.drawable.profile)
                             .into(circleImage);
 
@@ -162,8 +161,8 @@ public class SetupActivity extends AppCompatActivity {
 
             //When the user Select the image he will be redirected to the Image Cropping Activity...
             CropImage.activity(ImageUri)
-                    .setAspectRatio(1,1)
-                    .setCropShape(CropImageView.CropShape.OVAL)
+                    .setAspectRatio(1, 1)
+                    .setCropShape(CropImageView.CropShape.OVAL) 
                     .start(this);
         }
             //THIS CHECKS WHETHER WE SELECT THE CROP OPTION...
