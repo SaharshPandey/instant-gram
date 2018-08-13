@@ -29,6 +29,7 @@ public class SetupActivity extends AppCompatActivity {
     private DatabaseReference UsersRef;
     private String CurrentUserId;
     private ProgressDialog loadingBar;
+    final static int GalleryPic=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +101,18 @@ public class SetupActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //Event Listener so we can redirect to our Gallery when we click on profile image...
+        circleImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent,GalleryPic);
+            }
+        });
+
     }
     private void SendUserToMainActivity() {
         Intent homeIntent = new Intent(SetupActivity.this, MainActivity.class);
