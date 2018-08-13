@@ -76,16 +76,24 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot){
                 if(dataSnapshot.exists())
                 {
-
-
+                    if(dataSnapshot.hasChild("fullname"))
+                    {
                         String fullname = dataSnapshot.child("fullname").getValue().toString();
-                        String profileImage = dataSnapshot.child("profileImage").getValue().toString();
                         ProfileUserName.setText(fullname);
+                    }
+
+                    if(dataSnapshot.hasChild("profileImage"))
+                    {
+                        String profileImage = dataSnapshot.child("profileImage").getValue().toString();
                         Picasso.get()
                                 .load(profileImage)
                                 .placeholder(R.drawable.profile)
                                 .into(NavProfileImage);
-
+                    }
+                    else
+                        {
+                        Toast.makeText(MainActivity.this,"There in no information Stored",Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 

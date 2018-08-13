@@ -132,12 +132,17 @@ public class SetupActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())
                 {
-                    String image = dataSnapshot.child("profileImage").getValue().toString();
-                    Picasso.get()
-                            .load(image)
-                            .placeholder(R.drawable.profile)
-                            .into(circleImage);
-
+                    if(dataSnapshot.hasChild("profileImage")) {
+                        String image = dataSnapshot.child("profileImage").getValue().toString();
+                        Picasso.get()
+                                .load(image)
+                                .placeholder(R.drawable.profile)
+                                .into(circleImage);
+                    }
+                }
+                else
+                {
+                    Toast.makeText(SetupActivity.this,"First Select the Image from Gallery",Toast.LENGTH_SHORT).show();
                 }
             }
 
