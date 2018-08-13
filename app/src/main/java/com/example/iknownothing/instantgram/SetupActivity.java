@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -44,7 +45,7 @@ public class SetupActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
-        
+
         CurrentUserId = mAuth.getCurrentUser().getUid();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(CurrentUserId);
         userName = findViewById(R.id.username);
@@ -111,37 +112,95 @@ public class SetupActivity extends AppCompatActivity {
             }
         });
 
-        //Event Listener so we can redirect to our Gallery when we click on profile image...
+        //This click will redirect to Gallery where you can find Images onyl...
         circleImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent galleryIntent = new Intent();
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                 galleryIntent.setType("image/*");
-                startActivityForResult(galleryIntent,GalleryPic);
+                startActivityForResult(galleryIntent,GalleryPic); //User will pick the Picture...
             }
         });
 
     }
 
+    //This method onActivityResult checks whether the image is right.....
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //this checks the checked imaged,so there should be no null image...
         if(requestCode == GalleryPic && requestCode == RESULT_OK && data != null)
         {
-            Uri ImageUri = data.getData();
+            Uri ImageUri = data.getData();             //here we getting the image.....in ImageUri
+
+            //When the user Select the image he will be redirected to the Image Cropping Activity...
             CropImage.activity()
                     .setGuidelines(CropImageView.Guidelines.ON)
                     .setAspectRatio(1,1)
                     .start(this);
+
+            //THIS CHECKS WHETHER WE SELECT THE CROP OPTION...
             if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
             {
+                //HERE WE GETTING CROPPED IMAGE...
                 CropImage.ActivityResult result= CropImage.getActivityResult(data);
-                if(requestCode == RESULT_OK)
+
+                if(resultCode == RESULT_OK) //IF CROPPING SUCCESSFULL...
                 {
-                    Uri reultUri =result.getUri();
+                    loadingBar.setTitle("Saving Information");
+                    loadingBar.setMessage("Please wait until we update your Profile Image");
+                    loadingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    loadingBar.show();
+                    loadingBar.setCanceledOnTouchOutside(true);
+
+                    //THIS OBJECTS CONTAINS THE CROPPED IMAGE....
+                    Uri resultUri =result.getUri();
+
+                    //WE STORING THE STORAGE REFERENCE AS A USERID.JPG.....
+                    StorageReference filePath = UserProfileImageRef.child(CurrentUserId + ".jpg");
+
+                    //HERE STORING THE FILE IN filePath OBJECT..
+                    filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            if(task.isSuccessful())
+                            {
+                                Toast.makeText(SetupActivity.this,"Profile Image Stored to Database Successfully",Toast.LENGTH_SHORT).show();
+
+                                //FINALLY STORING THE IMAGE IN DATABASE IN FIREBASE STORAGE...
+                                final String downloadUrl = task.getResult().getDownloadUrl().toString();
+                                UsersRef.child("profileImage").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful())
+                                        {
+                                            //REDIRECTING TO SETUP ACTIVITY FROM CROPPING ACTIVITY....
+                                            Intent selfIntent = new Intent(SetupActivity.this,SetupActivity.class);
+                                            startActivity(selfIntent);
+                                            Toast.makeText(SetupActivity.this, "Profile Image is Stored Successfully", Toast.LENGTH_SHORT).show();
+                                            loadingBar.dismiss();
+                                        }
+                                        else{
+                                                String message =task.getException().getMessage();
+                                                Toast.makeText(SetupActivity.this, "Error Occurred :" +message, Toast.LENGTH_SHORT).show();
+                                                loadingBar.dismiss();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+
                 }
+
+                else{
+                    //IF THE IMAGE IS UNABLE TO CROP...
+                    Toast.makeText(SetupActivity.this, "Error Occurred : Image can't be Cropped,Try Again." , Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
+                }
+
             }
         }
 
