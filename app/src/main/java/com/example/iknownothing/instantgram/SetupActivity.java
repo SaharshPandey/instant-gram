@@ -128,19 +128,19 @@ public class SetupActivity extends AppCompatActivity {
     //This method onActivityResult checks whether the image is right.....
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
 
         //this checks the checked imaged,so there should be no null image...
-        if(requestCode == GalleryPic && requestCode == RESULT_OK && data != null)
-        {
+        if(requestCode== GalleryPic && resultCode == RESULT_OK && data != null) {
             Uri ImageUri = data.getData();             //here we getting the image.....in ImageUri
 
             //When the user Select the image he will be redirected to the Image Cropping Activity...
             CropImage.activity()
                     .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1)
+                    .setAspectRatio(1, 1)
                     .start(this);
-
+        }
             //THIS CHECKS WHETHER WE SELECT THE CROP OPTION...
             if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
             {
@@ -204,7 +204,7 @@ public class SetupActivity extends AppCompatActivity {
             }
         }
 
-    }
+
 
     private void SendUserToMainActivity() {
         Intent homeIntent = new Intent(SetupActivity.this, MainActivity.class);
