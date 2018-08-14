@@ -60,7 +60,12 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Home");
 
         AddNewPostButton = findViewById(R.id.add_new_post_button);
-        
+        AddNewPostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendUserToPostActivity();
+            }
+        });
 
         drawerLayout = findViewById(R.id.drawable_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this,drawerLayout,R.string.drawer_open,R.string.drawer_close);
@@ -119,6 +124,11 @@ public class MainActivity extends AppCompatActivity {
             private void UserItemSelector(MenuItem item) {
                 switch (item.getItemId())
                 {
+                    case R.id.nav_post:
+                        SendUserToPostActivity();
+                        Toast.makeText(MainActivity.this,"Profile",Toast.LENGTH_SHORT).show();
+                        break;
+
                     case R.id.nav_profile:
                         Toast.makeText(MainActivity.this,"Profile",Toast.LENGTH_SHORT).show();
                         break;
@@ -152,7 +162,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-//onStart method is used for checking that user is LoggedIn or not?......
+
+    private void SendUserToPostActivity() {
+        Intent postIntent = new Intent(MainActivity.this,PostActivity.class);
+        startActivity(postIntent);
+    }
+
+    //onStart method is used for checking that user is LoggedIn or not?......
     @Override
     protected void onStart()
     {
