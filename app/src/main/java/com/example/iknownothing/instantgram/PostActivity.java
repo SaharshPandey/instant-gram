@@ -5,14 +5,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 public class PostActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
+    private ImageButton SelectPostImage;
+    private EditText SelectCaption;
+    private Button PostImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
+        
+
 
         mToolbar =  findViewById(R.id.update_post_page_toolbar);
         setSupportActionBar(mToolbar);

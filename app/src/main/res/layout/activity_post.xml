@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,4 +12,42 @@
         >
 
     </include>
-</android.support.constraint.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/selectPostImage"
+        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/select_image"
+        android:layout_below="@+id/update_post_page_toolbar"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentStart="true"
+        />
+
+    <EditText
+        android:id="@+id/selectCaption"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:padding="15dp"
+        android:layout_below="@+id/selectPostImage"
+        android:layout_marginTop="10dp"
+        android:hint=" Add Caption for Your Post...."
+        android:background="@drawable/input"
+
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/postImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/selectCaption"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button"
+        android:text="Upload Post" />
+
+
+</RelativeLayout>
