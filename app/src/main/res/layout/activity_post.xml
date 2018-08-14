@@ -6,4 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".PostActivity">
 
+    <include
+        android:id="@+id/update_post_page_toolbar"
+        layout="@layout/app_bar_layout"
+        >
+
+    </include>
 </android.support.constraint.ConstraintLayout>
