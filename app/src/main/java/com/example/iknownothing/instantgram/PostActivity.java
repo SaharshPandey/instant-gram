@@ -16,12 +16,23 @@ public class PostActivity extends AppCompatActivity {
     private ImageButton SelectPostImage;
     private EditText SelectCaption;
     private Button PostImage;
+    private static final int GalleryPic =1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        
+        SelectPostImage = findViewById(R.id.selectPostImage);
+        SelectCaption = findViewById(R.id.selectCaption);
+        PostImage = findViewById(R.id.postImage);
+
+        SelectPostImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                OpenGallery();
+            }
+        });
 
 
         mToolbar =  findViewById(R.id.update_post_page_toolbar);
@@ -29,6 +40,13 @@ public class PostActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Update Post");
+    }
+
+    private void OpenGallery() {
+        Intent galleryIntent = new Intent();
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        startActivityForResult(galleryIntent,GalleryPic); //User will pick the Picture..
     }
 
     @Override

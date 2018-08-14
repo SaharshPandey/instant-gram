@@ -46,7 +46,8 @@
         android:layout_marginTop="20dp"
         android:layout_below="@+id/selectCaption"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/button"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/button_color"
         android:text="Upload Post" />
 
 
