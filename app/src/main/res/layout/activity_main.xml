@@ -17,20 +17,38 @@
 
 
             </include>
+       <ImageButton
+           android:id="@+id/add_new_post_button"
+           android:layout_marginTop="8dp"
+           android:layout_width="40dp"
+           android:layout_height="40dp"
+           android:layout_alignParentEnd="true"
+           android:src="@drawable/add_post_high"
+           android:scaleType="centerCrop"
+           android:layout_marginRight="12dp"
+           android:background="@color/colorPrimaryDark"
+           android:focusableInTouchMode="false"
+           android:baselineAlignBottom="false"
 
+           >
+       </ImageButton>
        <FrameLayout
            android:id="@+id/main_container"
            android:layout_width="match_parent"
            android:layout_height="512dp"
            android:layout_alignParentStart="true"
            android:layout_alignParentTop="true"
-           android:layout_marginTop="55dp">
+           android:layout_below="@+id/add_new_post_button"
+           android:layout_marginTop="55dp"
+           >
 
            <android.support.v7.widget.RecyclerView
                android:id="@+id/all_users_post_list"
                android:layout_width="match_parent"
                android:layout_height="522dp" />
        </FrameLayout>
+
+
    </RelativeLayout>
 
     <android.support.design.widget.NavigationView
