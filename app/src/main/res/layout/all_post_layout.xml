@@ -107,7 +107,7 @@
             android:layout_height="200dp"
             android:layout_margin="3dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             />
     </LinearLayout>
 </RelativeLayout>
