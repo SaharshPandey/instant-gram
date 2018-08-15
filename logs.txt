@@ -1,0 +1,295 @@
+commit e24c1a3b45e7f2c9e997fbd1e1eb3abdb0e4ae43
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Wed Aug 15 18:03:30 2018 +0530
+
+    Added RecyclerView in MainActivity
+
+commit 15a0a4832e81b64489e71c1876acd054c40a25b8
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Wed Aug 15 14:20:46 2018 +0530
+
+    Post Activity and fixed bugs of Firebase
+
+commit 317969394da2d339d5d9985fe65fba762c586d60
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Wed Aug 15 11:25:15 2018 +0530
+
+    Added node in Firebase which contains all the Data about Post
+
+commit 44f31fc695961af1cbe2a72c0cc91190ca5e22c5
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Wed Aug 15 10:23:18 2018 +0530
+
+    Post images can now be added to Database by DateTime Name
+
+commit 1219d3d1b3bbaa0e13b5b95041bfeed59fe5bb04
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Wed Aug 15 00:59:05 2018 +0530
+
+    UI Additions(colors changed)
+
+commit 23226812569d1047ea16679b9827941addf293b9
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Wed Aug 15 00:33:58 2018 +0530
+
+    Added UI  postActvity
+
+commit 5726331a36a78f87b244c247a9bb8c7f727bf05c
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Tue Aug 14 23:57:44 2018 +0530
+
+    Added Toolabr to postActvity
+
+commit a807623a8d902e5f7f710795f39de5703c628606
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Tue Aug 14 23:09:41 2018 +0530
+
+    Added method : SendUserToPostActivity
+
+commit 37a41d52085c44642776e5a0da6a13c9f87bb79b
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Tue Aug 14 22:58:10 2018 +0530
+
+    Added PostActivity
+
+commit 19aac544534091e52f002cec0297354ec3096573
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Tue Aug 14 22:52:44 2018 +0530
+
+    Added PostButton to mainActivity
+
+commit 01de4140c6e33f4843dfe43d37c07ded905b7353
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Tue Aug 14 02:27:14 2018 +0530
+
+    Added Validations
+
+commit 10346510aad2be4e56c5cf1395bd86e12c42836b
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Tue Aug 14 02:06:24 2018 +0530
+
+    Added Profile Image and FullName from Database to NavigationBar
+
+commit e81d3ceeaa9e19d749a36cf377123b7d23233e73
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Tue Aug 14 01:08:51 2018 +0530
+
+    Fix Oval Cropping
+
+commit 8ef2bef5ec673a71611bddfb949fe091bca08d97
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Tue Aug 14 01:01:37 2018 +0530
+
+    Added Oval Cropping Shape to Image
+
+commit 69ca1955b5bac6ab05b32ca5587bcb2dde9e58e7
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Tue Aug 14 00:29:41 2018 +0530
+
+    Added Picaso Dependency
+
+commit 3647be1e56b315c2cd6d3a0e320195f606956d20
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Tue Aug 14 00:17:09 2018 +0530
+
+    Fixed Future Error:Execution failed for task ':app:transformDexArchiveWithExternalLibsDexMergerForDebug'
+
+commit e3cd714bb78684a79854b4c097b337dbd6caf0e8
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Mon Aug 13 22:56:01 2018 +0530
+
+    Now asking for profile picture again
+
+commit 3650493fcba52536e9559ad7b9d50b25af805a7c
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Mon Aug 13 15:04:54 2018 +0530
+
+    Fixed Bugs
+
+commit ae835c9e93259523ad4266c68278efa10cd379f8
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Mon Aug 13 14:26:21 2018 +0530
+
+    Added IMAGE CROPPING Activity
+
+commit 9701caffbb0a4b0b8edf3b97d0353518c2994549
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Mon Aug 13 13:50:11 2018 +0530
+
+    Added Firebase Storage Reference to add Crop Images
+
+commit 0542771103232c7b6ad0bbfbb9c1353b5c03076b
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Mon Aug 13 13:29:41 2018 +0530
+
+    Added Cropping Dependency by ArthurHub and added onActivityResult for UriImage
+
+commit 1fb68a39968c20e1cbfd8f14ea5c6b25d7635d55
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Mon Aug 13 13:15:10 2018 +0530
+
+    Adding onClickListener on Profile Image in Setup Activity
+
+commit 5d113a46c1b2fc2d4097d9cc7684b710e87d773d
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sun Aug 12 16:07:34 2018 +0530
+
+    Few bug
+
+commit c7077e08fab29580e82737653505b0a610f2c849
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sun Aug 12 15:18:55 2018 +0530
+
+    Added Hash data into Database in SetUp Activity
+
+commit 81bfb4ff0fb48e5338f6c9b18f4dfeb8021954af
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sun Aug 12 14:10:21 2018 +0530
+
+    Added two Step Authentication
+
+commit c2d8fd666f915226845c4d2884199c09b4092e62
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sun Aug 12 02:16:03 2018 +0530
+
+    Added few Comments in MainActivity
+
+commit 2cfcb253472aaf3e543aa748c26f479fd8762249
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sun Aug 12 02:13:02 2018 +0530
+
+    Added few Comments in MainActivity
+
+commit 234538c3ba2b51f8b05e669aa111ce09c6810e67
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sun Aug 12 02:11:49 2018 +0530
+
+    Added few Comments in MainActivity
+
+commit 868ef874b8e2aab094a83be6ecdbb11433da8983
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sun Aug 12 02:05:33 2018 +0530
+
+    Fixed small Bug from RegisterActivity
+
+commit 14b4dc47dce85bb7012ccfbd17dacd0588fc6116
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sun Aug 12 02:00:43 2018 +0530
+
+    Added logIn functionality and ProgressDialog
+
+commit 73358f65fbb2db0b0fc2281fc66ebbb4d64f41ee
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sun Aug 12 01:27:37 2018 +0530
+
+    Added logOut Functionality
+
+commit b2375b2a65d7d8344da500a83b7b2164785e15de
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sun Aug 12 00:05:36 2018 +0530
+
+    Added Firebase Auth to Register Activity
+
+commit 0232ecc01565200adf40296ab5389a31ab0dab9c
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sat Aug 11 18:13:59 2018 +0530
+
+    Few Colors and Backgrounds Added and Changed
+
+commit 99dce1032c14c10ba7b249478424f6199765dfbf
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sat Aug 11 17:46:45 2018 +0530
+
+    Added Intents
+
+commit 667eb129ddb13d33b0f008a874f814e07cdcca33
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sat Aug 11 17:23:00 2018 +0530
+
+    Created & Designed LoginActivity XML and RegisterActivity XML
+
+commit 6dff9637e6316998c901e8a60ad19991baf60a1a
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sat Aug 11 16:15:09 2018 +0530
+
+    Created button.xml,input.xml and Resiter Activity
+
+commit d9193744d0e0568d07875bf43825777a388f159f
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sat Aug 11 16:00:29 2018 +0530
+
+    Added DrawableLayout,NavigationBar & Toolbar
+
+commit ff8e4710b6ae7d425df3253acc5455a7c529ede7
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sat Aug 11 02:35:28 2018 +0530
+
+    Added menu in Main Activity
+
+commit ca24eb6cf78c3ef5ca2467738cf5a1913746397a
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sat Aug 11 00:40:59 2018 +0530
+
+    Added Menu res Directory and navigation_menu.xml file
+
+commit 88e6d42cd828a819370007076bf75eda8371ea8e
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Sat Aug 11 00:14:56 2018 +0530
+
+    Added Firebase RealTime Database and Storage to the Application
+
+commit b689a5c61437348d5c95312908912b06b00b03cf
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Fri Aug 10 23:11:02 2018 +0530
+
+    Added Firebase RealTime Database to the Application
+
+commit e92093d26b2858c2eb93bc4874b399de1dfac080
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Fri Aug 10 21:40:51 2018 +0530
+
+    Added Firebase Authentication to the Application
+
+commit fe3fb868f1d4519f1bfbf6cbd02456a34668c8cf
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Fri Aug 10 17:35:29 2018 +0530
+
+    instantgram
+
+commit d70da1bcff4e92ce11c9855defb81d41a3d15087
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Fri Aug 10 17:34:48 2018 +0530
+
+    instantgram
+
+commit 6885d24f783bc31867b235c5673664ca26708f14
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Fri Aug 10 17:33:51 2018 +0530
+
+    instantgram
+
+commit 095e38d062a047c1d00ef9e1e73fe7e61fd251cb
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Fri Aug 10 17:32:26 2018 +0530
+
+    instantgram
+
+commit d45158f455cd2f915b8b9084c9f724e4f38e6fb4
+Merge: 2b213b0 a6a9119
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Fri Aug 10 17:18:43 2018 +0530
+
+    Merge branch 'master' of https://github.com/SaharshPandey/instant-gram
+    first commit
+
+commit 2b213b0265df0bd6509eb010bc4ebc0370caaa2d
+Author: saharsh <saharshpandeybolt@gmail.com>
+Date:   Fri Aug 10 17:18:09 2018 +0530
+
+    instantgram
+
+commit a6a9119a558fb1be049ff6b2a75a430bb9c6b692
+Author: Saharsh Pandey <saharshpandeybolt@gmail.com>
+Date:   Fri Aug 10 17:16:23 2018 +0530
+
+    Initial commit
