@@ -14,13 +14,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -31,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView google_signin;
     private static final int RC_SIGN_IN=1;
     private GoogleApiClient mGoogleSignInClient;
+    private static final String TAG="LoginActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         LoginButton = findViewById(R.id.login_account);
         UserEmail = findViewById(R.id.login_email);
         UserPassword = findViewById(R.id.login_password);
-
+        google_signin =findViewById(R.id.google_signin_button);
 
         //Signup Button Listener that redirects to SendUserToRegisterAccount() method......
         SignUp.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         google_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                signIn();
             }
         });
 
@@ -73,6 +79,18 @@ public class LoginActivity extends AppCompatActivity {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+        mGoogleSignInClient = new GoogleApiClient.Builder(this).enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
+            @Override
+            public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+                Toast.makeText(LoginActivity.this,"Connection to Google Login Failed....",Toast.LENGTH_LONG).show();
+
+            }
+        })
+        .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+                .build();
+        {
+        }
+
     }
 
 
@@ -80,6 +98,60 @@ public class LoginActivity extends AppCompatActivity {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleSignInClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            loadingBar.setTitle("Google Sign In");
+            loadingBar.setMessage("Please wait until we login through your Google Account");
+            loadingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            loadingBar.show();
+            loadingBar.setCanceledOnTouchOutside(true);
+
+            GoogleSignInResult result=Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if(result.isSuccess())
+            {
+                GoogleSignInAccount account = result.getSignInAccount();
+                firebaseAuthWithGoogle(account);
+                Toast.makeText(this,"Signing you Google Account..",Toast.LENGTH_LONG).show();
+
+            }
+            else { Toast.makeText(this,"Signing Failed",Toast.LENGTH_LONG).show();
+            loadingBar.dismiss();
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            SendUserToMainActivity();
+                            loadingBar.dismiss();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            String message = task.getException().toString();
+                            SendUserToLoginActivity();
+                            loadingBar.dismiss();
+                            Toast.makeText(LoginActivity.this,"Google Signin Failed.. :" +message,Toast.LENGTH_LONG).show();
+
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -131,6 +203,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private void SendUserToMainActivity() {
         Intent homeIntent = new Intent(LoginActivity.this,MainActivity.class);
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homeIntent);
+        finish();
+
+    }
+    private void SendUserToLoginActivity() {
+        Intent homeIntent = new Intent(LoginActivity.this,LoginActivity.class);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(homeIntent);
         finish();

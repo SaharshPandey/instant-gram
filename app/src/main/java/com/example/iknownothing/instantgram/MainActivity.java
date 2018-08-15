@@ -191,17 +191,28 @@ public class MainActivity extends AppCompatActivity {
                         .build();
 
         firebaseRecyclerAdapter
-                =new FirebaseRecyclerAdapter<Posts, PostViewHolder>(options) {
+                =new FirebaseRecyclerAdapter<Posts, PostViewHolder>(options)
+        {
             @Override
             protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull Posts model) {
             // Bind the Chat object to the ChatHolder
                 // ...
+                final String PostKey = getRef(position).getKey();
                 holder.setFullname(model.fullname);
                 holder.setProfileImage(getApplicationContext(),model.profileImage);
                 holder.setDate(model.date);
                 holder.setTime(model.time);
                 holder.setDescription(model.description);
                 holder.setPostimage(getApplicationContext(),model.postimage);
+
+                holder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent clickPostIntent =new Intent(MainActivity.this,OpenPostActivity.class);
+                        clickPostIntent.putExtra("PostKey",PostKey);
+                        startActivity(clickPostIntent);
+                    }
+                });
             }
 
             @NonNull
