@@ -38,7 +38,7 @@ public class OpenPostActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String description = dataSnapshot.child("description").getValue().toString();
-                String postimage = dataSnapshot.child("postImage").getValue().toString();
+                String postimage = dataSnapshot.child("postimage").getValue().toString();
 
                 description_clicked.setText(description);
                 Picasso.get().load(postimage).into(image_clicked);
