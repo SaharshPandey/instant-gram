@@ -56,7 +56,7 @@ public class PostActivity extends AppCompatActivity {
         Current_User_Id = mAuth.getCurrentUser().getUid();
         PostsImageReference = FirebaseStorage.getInstance().getReference();
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        PostRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         SelectPostImage = findViewById(R.id.selectPostImage);
         SelectCaption = findViewById(R.id.selectCaption);
         PostImage = findViewById(R.id.postImage);
@@ -146,24 +146,23 @@ public class PostActivity extends AppCompatActivity {
         UserRef.child(Current_User_Id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists())
-                {
-                    Toast.makeText(PostActivity.this, "User Not Found",Toast.LENGTH_SHORT).show();
+                if(dataSnapshot.exists()) {
+
                     String userFullname = dataSnapshot.child("fullname").getValue().toString();
-                    String profileImage =dataSnapshot.child("profileimage").getValue().toString();
+                    String profileImage = dataSnapshot.child("profileImage").getValue().toString();
 
                     //Making data for node to store in firebase.....
-                    HashMap postMap =new HashMap();
-                    postMap.put("uid",Current_User_Id);
-                    postMap.put("date",CurrentDAte);
-                    postMap.put("time",CurrentTime);
-                    postMap.put("description",description);
-                    postMap.put("postimage",DownloadUrl);
-                    postMap.put("profileimage",profileImage);
-                    postMap.put("fullname",userFullname);
+                    HashMap postMap = new HashMap();
+                    postMap.put("uid", Current_User_Id);
+                    postMap.put("date", CurrentDAte);
+                    postMap.put("time", CurrentTime);
+                    postMap.put("description", description);
+                    postMap.put("postimage", DownloadUrl);
+                    postMap.put("profileImage", profileImage);
+                    postMap.put("fullname", userFullname);
 
                     //making new node in database....
-                    PostRef.child(Current_User_Id +" : " +PostRandomName).updateChildren(postMap)
+                    PostRef.child(Current_User_Id +PostRandomName).updateChildren(postMap)
                             .addOnCompleteListener(new OnCompleteListener() {
                         @Override
                         public void onComplete(@NonNull Task task) {
@@ -171,8 +170,8 @@ public class PostActivity extends AppCompatActivity {
                             if(task.isSuccessful())
                             {
                                 loadingBar.dismiss();
-                                SendUserToMainActivity();
                                 Toast.makeText(PostActivity.this,"Post is Updated Successfully",Toast.LENGTH_SHORT).show();
+                                SendUserToMainActivity();
                             }
 
                             else
