@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,7 +18,7 @@ import com.squareup.picasso.Picasso;
 public class OpenPostActivity extends AppCompatActivity {
 
     private ImageView image_clicked;
-    private EditText description_clicked;
+    TextView description_clicked;
     private Button edit_clicked,delete_clicked;
     private String PostKey;
     private DatabaseReference ClickPostRef;

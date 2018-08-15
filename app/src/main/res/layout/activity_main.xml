@@ -35,7 +35,7 @@
        <FrameLayout
            android:id="@+id/main_container"
            android:layout_width="match_parent"
-           android:layout_height="512dp"
+           android:layout_height="match_parent"
            android:layout_alignParentStart="true"
            android:layout_alignParentTop="true"
            android:layout_below="@+id/add_new_post_button"
@@ -45,7 +45,7 @@
            <android.support.v7.widget.RecyclerView
                android:id="@+id/all_users_post_list"
                android:layout_width="match_parent"
-               android:layout_height="522dp" />
+               android:layout_height="match_parent" />
        </FrameLayout>
 
 
