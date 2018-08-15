@@ -1,5 +1,6 @@
 package com.example.iknownothing.instantgram;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -15,29 +16,47 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class PostActivity extends AppCompatActivity {
 
     private StorageReference PostsImageReference;
+    private FirebaseAuth mAuth;
+    private DatabaseReference UserRef , PostRef;
     private Toolbar mToolbar;
     private ImageButton SelectPostImage;
     private EditText SelectCaption;
     private Button PostImage;
     private Uri ImageUri;
     private String CurrentDAte,CurrentTime,PostRandomName;
+    private String DownloadUrl;
+    private String Current_User_Id;
+    private String description;
     private static final int GalleryPic =1;
+    private ProgressDialog loadingBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
+        mAuth = FirebaseAuth.getInstance();
+        loadingBar = new ProgressDialog(this);
+        Current_User_Id = mAuth.getCurrentUser().getUid();
         PostsImageReference = FirebaseStorage.getInstance().getReference();
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        PostRef = FirebaseDatabase.getInstance().getReference().child("Users");
         SelectPostImage = findViewById(R.id.selectPostImage);
         SelectCaption = findViewById(R.id.selectCaption);
         PostImage = findViewById(R.id.postImage);
@@ -66,19 +85,24 @@ public class PostActivity extends AppCompatActivity {
 
     private void ValidatePostInfo() {
 
-        String description = SelectCaption.getText().toString();
+        description = SelectCaption.getText().toString();
         if(ImageUri == null)
         {
             Toast.makeText(PostActivity.this,"Please select the Image",Toast.LENGTH_SHORT).show();
         }
 
-        else if(SelectCaption == null)
+        else if(description == null)
         {
             Toast.makeText(PostActivity.this,"Please Enter the Caption",Toast.LENGTH_SHORT).show();
         }
 
         else
         {
+            loadingBar.setTitle("Updating Post");
+            loadingBar.setMessage("Please wait while we update your post");
+            loadingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            loadingBar.show();
+            loadingBar.setCanceledOnTouchOutside(true);
             StoringImageToFirebaseStorage();
         }
     }
@@ -91,7 +115,7 @@ public class PostActivity extends AppCompatActivity {
         CurrentDAte = currentDate.format(calForDAte.getTime());
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
-        CurrentTime = currentDate.format(calForDAte.getTime());
+        CurrentTime = currentTime.format(calForDAte.getTime());
 
         PostRandomName = CurrentDAte+CurrentTime;
 
@@ -101,16 +125,72 @@ public class PostActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                 if(task.isSuccessful())
                     {
+                        DownloadUrl  = task.getResult().getDownloadUrl().toString();
                         Toast.makeText(PostActivity.this,"Image Uploaded Successfully",Toast.LENGTH_SHORT).show();
+                        SavingPostInformationToDatabase();
                     }
                 else
                     {
+                        loadingBar.dismiss();
                         String message = task.getException().getMessage();
                         Toast.makeText(PostActivity.this,message,Toast.LENGTH_SHORT).show();
                     }
             }
         });
 
+
+    }
+
+    private void SavingPostInformationToDatabase()
+    {
+        UserRef.child(Current_User_Id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists())
+                {
+                    Toast.makeText(PostActivity.this, "User Not Found",Toast.LENGTH_SHORT).show();
+                    String userFullname = dataSnapshot.child("fullname").getValue().toString();
+                    String profileImage =dataSnapshot.child("profileimage").getValue().toString();
+
+                    //Making data for node to store in firebase.....
+                    HashMap postMap =new HashMap();
+                    postMap.put("uid",Current_User_Id);
+                    postMap.put("date",CurrentDAte);
+                    postMap.put("time",CurrentTime);
+                    postMap.put("description",description);
+                    postMap.put("postimage",DownloadUrl);
+                    postMap.put("profileimage",profileImage);
+                    postMap.put("fullname",userFullname);
+
+                    //making new node in database....
+                    PostRef.child(Current_User_Id +" : " +PostRandomName).updateChildren(postMap)
+                            .addOnCompleteListener(new OnCompleteListener() {
+                        @Override
+                        public void onComplete(@NonNull Task task) {
+
+                            if(task.isSuccessful())
+                            {
+                                loadingBar.dismiss();
+                                SendUserToMainActivity();
+                                Toast.makeText(PostActivity.this,"Post is Updated Successfully",Toast.LENGTH_SHORT).show();
+                            }
+
+                            else
+                            {
+                                loadingBar.dismiss();
+                                Toast.makeText(PostActivity.this,"Error Occurred while Updating the Post,Try Again...",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
