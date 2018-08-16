@@ -44,6 +44,8 @@ public class PostActivity extends AppCompatActivity {
     private String DownloadUrl;
     private String Current_User_Id;
     private String description;
+    private String ts;
+
     private static final int GalleryPic =1;
     private ProgressDialog loadingBar;
     @Override
@@ -111,6 +113,9 @@ public class PostActivity extends AppCompatActivity {
     {
         Calendar  calForDAte =Calendar.getInstance();
 
+        Long tsLong = System.currentTimeMillis()/1000;
+        ts = tsLong.toString();
+
         SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
         CurrentDAte = currentDate.format(calForDAte.getTime());
 
@@ -160,6 +165,7 @@ public class PostActivity extends AppCompatActivity {
                     postMap.put("postimage", DownloadUrl);
                     postMap.put("profileImage", profileImage);
                     postMap.put("fullname", userFullname);
+                    postMap.put("timestamp",ts);
 
                     //making new node in database....
                     PostRef.child(Current_User_Id +PostRandomName).updateChildren(postMap)

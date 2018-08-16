@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<Posts> options =
                 new FirebaseRecyclerOptions.Builder<Posts>()
-                        .setQuery(PostRef, Posts.class)
+                        .setQuery(PostRef.orderByChild("timestamp"), Posts.class)
                         .build();
 
         firebaseRecyclerAdapter
