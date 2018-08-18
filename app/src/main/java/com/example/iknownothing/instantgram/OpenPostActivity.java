@@ -50,34 +50,35 @@ public class OpenPostActivity extends AppCompatActivity {
         ClickPostRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 if (dataSnapshot.exists()) {
                     description = dataSnapshot.child("description").getValue().toString();
                     postimage = dataSnapshot.child("postimage").getValue().toString();
                     Database_User_Id = dataSnapshot.child("uid").getValue().toString();
                     description_clicked.setText(description);
 
-                    if(postimage.equals("none"))
-                    {
-                     image_clicked.setVisibility(View.INVISIBLE);
-                     description_clicked.setTextSize(25);
-
-                    }
-                    else{
                     Picasso.get().load(postimage).into(image_clicked);
 
                     if (Current_User_Id.equals(Database_User_Id)) {
                         edit_clicked.setVisibility(View.VISIBLE);
                         delete_clicked.setVisibility(View.VISIBLE);
 
-                        if(postimage.equals("none"))
+                        if(!postimage.equals("none"))
                         {
                             image_clicked.setVisibility(View.INVISIBLE);
                             description_clicked.setTextSize(25);
                             edit_clicked.setVisibility(View.VISIBLE);
                             delete_clicked.setVisibility(View.VISIBLE);
 
+                            }
+
+                        if(postimage.equals("none"))
+                        {
+                            image_clicked.setVisibility(View.INVISIBLE);
+                            description_clicked.setTextSize(25);
+
                         }
-                    }
+
                     }
                 }
 

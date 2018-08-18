@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigation_view);
 
         text_post = findViewById(R.id.text_post);
-        description = text_post.getText().toString();
+
         postList = findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
         //this will arrange posts by time
@@ -126,6 +126,10 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot){
                 if(dataSnapshot.exists())
                 {
+                    if(dataSnapshot.hasChild("description"))
+                    {
+                        description = text_post.getText().toString();
+                    }
                     if(dataSnapshot.hasChild("fullname"))
                     {
                         String fullname = dataSnapshot.child("fullname").getValue().toString();
@@ -293,8 +297,19 @@ public class MainActivity extends AppCompatActivity {
             if(postimage.equals("none"))
             {
                 TextView postdes= mView.findViewById(R.id.post_description);
-                postdes.setTextSize(30);
-                postdes.setPadding(5,20,5,0);
+                if(postdes.getText().toString().length() <= 10) {
+                    postdes.setTextSize(35);
+                    postdes.setPadding(5, 30, 5, 0);
+                    postdes.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                }
+                else if( postdes.getText().toString().length() > 10 && postdes.getText().toString().length() <= 25 ) {
+                    postdes.setTextSize(20);
+                    postdes.setPadding(5, 30, 5, 0);
+                }
+                else if(postdes.getText().toString().length() > 25) {
+                    postdes.setTextSize(15);
+                    postdes.setPadding(5, 30, 5, 0);
+                }
                 Picasso.get().load(postimage).into(post_image);
 
             }
@@ -385,6 +400,12 @@ return super.onOptionsItemSelected(item);
 
     private void SavingPostInformationToDatabase()
     {
+        loadingBar.setTitle("Updating Post");
+        loadingBar.setMessage("Please wait while we update your post");
+        loadingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        loadingBar.show();
+        loadingBar.setCanceledOnTouchOutside(true);
+
         UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -447,7 +468,7 @@ return super.onOptionsItemSelected(item);
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                loadingBar.dismiss();
             }
         });
 
