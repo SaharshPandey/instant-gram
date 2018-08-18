@@ -76,6 +76,15 @@ public class OpenPostActivity extends AppCompatActivity {
             }
         });
 
+        delete_clicked.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                ClickPostRef.removeValue();
+                SendUserToMainActivity();
+            }
+        });
     }
     private void SendUserToMainActivity() {
 
