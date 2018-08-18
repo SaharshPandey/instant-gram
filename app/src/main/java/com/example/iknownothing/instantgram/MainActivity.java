@@ -3,6 +3,7 @@ package com.example.iknownothing.instantgram;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -25,6 +26,8 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +36,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -54,6 +61,12 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton AddNewPostButton;
     FirebaseRecyclerAdapter<Posts,PostViewHolder> firebaseRecyclerAdapter;
     CardView cardView;
+    private Uri ImageUri;
+    private String CurrentDAte,CurrentTime,PostRandomName;
+    private String DownloadUrl;
+
+    private String description;
+    private String ts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         AddNewPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SendUserToPostActivity();
+                SavingPostInformationToDatabase();
             }
         });
 
@@ -268,6 +281,8 @@ public class MainActivity extends AppCompatActivity {
         public void setDescription(String description)
         {
             TextView postdescription= mView.findViewById(R.id.post_description);
+            postdescription.setPadding(3,3,3,3);
+            postdescription.setTextSize(14);
             postdescription.setText(description);
         }
 
@@ -279,6 +294,7 @@ public class MainActivity extends AppCompatActivity {
                 postdes.setTextSize(30);
                 postdes.setPadding(5,20,5,0);
                 Picasso.get().load(postimage).into(post_image);
+
             }
             else{
             Picasso.get().load(postimage).placeholder(R.drawable.loading).into(post_image);
@@ -363,4 +379,76 @@ public boolean onOptionsItemSelected(MenuItem item)
     {return true;}
 return super.onOptionsItemSelected(item);
 }
+
+
+    private void SavingPostInformationToDatabase()
+    {
+        UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+
+
+                    if(ImageUri == null)//checking whether this image is not selected..
+                    {
+                        Calendar calForDAte =Calendar.getInstance();
+
+                        Long tsLong = System.currentTimeMillis()/1000;
+                        ts = tsLong.toString();
+
+                        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
+                        CurrentDAte = currentDate.format(calForDAte.getTime());
+
+                        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
+                        CurrentTime = currentTime.format(calForDAte.getTime());
+
+                        PostRandomName = CurrentDAte+CurrentTime;
+                        DownloadUrl="none";
+                    }
+                    String userFullname = dataSnapshot.child("fullname").getValue().toString();
+                    String profileImage = dataSnapshot.child("profileImage").getValue().toString();
+
+                    //Making data for node to store in firebase.....
+                    HashMap postMap = new HashMap();
+                    postMap.put("uid", CurrentUserId);
+                    postMap.put("date", CurrentDAte);
+                    postMap.put("time", CurrentTime);
+                    postMap.put("description", description);
+                    postMap.put("postimage", DownloadUrl);
+                    postMap.put("profileImage", profileImage);
+                    postMap.put("fullname", userFullname);
+                    postMap.put("timestamp",ts);
+
+                    //making new node in database....
+                    PostRef.child(CurrentUserId +PostRandomName).updateChildren(postMap)
+                            .addOnCompleteListener(new OnCompleteListener() {
+                                @Override
+                                public void onComplete(@NonNull Task task) {
+
+                                    if(task.isSuccessful())
+                                    {
+                                        loadingBar.dismiss();
+                                        //Toast.makeText(PostActivity.this,"Post is Updated Successfully",Toast.LENGTH_SHORT).show();
+
+                                    }
+
+                                    else
+                                    {
+                                        loadingBar.dismiss();
+                                        Toast.makeText(MainActivity.this,"Error Occurred while Updating the Post,Try Again...",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
 }

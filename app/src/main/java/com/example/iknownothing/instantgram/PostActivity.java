@@ -96,7 +96,7 @@ public class PostActivity extends AppCompatActivity {
         description = SelectCaption.getText().toString();
         if(ImageUri == null)
         {
-            Toast.makeText(PostActivity.this,"Please select the Image",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(PostActivity.this,"Please select the Image",Toast.LENGTH_SHORT).show();
 
             SavingPostInformationToDatabase();
         }
