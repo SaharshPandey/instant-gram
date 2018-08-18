@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="4dp"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginBottom="4dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+
         android:layout_marginTop="10dp"
-        android:background="@drawable/post_border"
+
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:text="Date"
                     android:textSize="13sp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/darker_gray"
 
                     />
                 <TextView
@@ -80,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:text="Time"
                     android:textSize="13sp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/darker_gray"
 
 
                     />
@@ -104,10 +109,10 @@
         <ImageView
             android:id="@+id/post_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+
             />
     </LinearLayout>
-</RelativeLayout>
+</android.support.v7.widget.CardView>
