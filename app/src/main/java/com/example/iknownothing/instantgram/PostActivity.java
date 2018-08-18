@@ -2,7 +2,9 @@ package com.example.iknownothing.instantgram;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,10 +27,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostActivity extends AppCompatActivity {
 
@@ -91,6 +97,8 @@ public class PostActivity extends AppCompatActivity {
         if(ImageUri == null)
         {
             Toast.makeText(PostActivity.this,"Please select the Image",Toast.LENGTH_SHORT).show();
+
+
         }
 
         else if(description == null)
@@ -111,16 +119,16 @@ public class PostActivity extends AppCompatActivity {
 
     private void StoringImageToFirebaseStorage()
     {
-       // Calendar  calForDAte =Calendar.getInstance();
+       Calendar  calForDAte =Calendar.getInstance();
 
         Long tsLong = System.currentTimeMillis()/1000;
         ts = tsLong.toString();
 
-       // SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
-        //CurrentDAte = currentDate.format(calForDAte.getTime());
+       SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
+        CurrentDAte = currentDate.format(calForDAte.getTime());
 
-       // SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
-       // CurrentTime = currentTime.format(calForDAte.getTime());
+       SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
+       CurrentTime = currentTime.format(calForDAte.getTime());
 
         PostRandomName = CurrentDAte+CurrentTime;
 
@@ -153,6 +161,23 @@ public class PostActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
 
+
+                    if(ImageUri == null)//checking whether this image is not selected..
+                    {
+                        Calendar  calForDAte =Calendar.getInstance();
+
+                        Long tsLong = System.currentTimeMillis()/1000;
+                        ts = tsLong.toString();
+
+                        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
+                        CurrentDAte = currentDate.format(calForDAte.getTime());
+
+                        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
+                        CurrentTime = currentTime.format(calForDAte.getTime());
+
+                        PostRandomName = CurrentDAte+CurrentTime;
+                        DownloadUrl="none";
+                    }
                     String userFullname = dataSnapshot.child("fullname").getValue().toString();
                     String profileImage = dataSnapshot.child("profileImage").getValue().toString();
 
@@ -228,10 +253,27 @@ public class PostActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
         if(requestCode == GalleryPic && resultCode == RESULT_OK && data !=null)
         {
             ImageUri = data.getData();
-            SelectPostImage.setImageURI(ImageUri);
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), ImageUri);
+                int width = bitmap.getWidth();
+                int height = bitmap.getHeight();
+                if(height>=3000 && width<2000) {
+
+                    //When the user Select the image he will be redirected to the Image Cropping Activity...
+                    CropImage.activity(ImageUri)
+                            .setAspectRatio(1, 2)
+                            .setCropShape(CropImageView.CropShape.RECTANGLE)
+                            .start(this);
+
+                    }}catch (Exception e)
+            {
+                e.printStackTrace();
+               }
+                SelectPostImage.setImageURI(ImageUri);
 
         }
     }

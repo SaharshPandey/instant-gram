@@ -166,7 +166,7 @@ public class SetupActivity extends AppCompatActivity {
 
             //When the user Select the image he will be redirected to the Image Cropping Activity...
             CropImage.activity(ImageUri)
-                    .setAspectRatio(1, 1)
+                    .setAspectRatio(1,1)
                     .setCropShape(CropImageView.CropShape.OVAL)
                     .start(this);
         }

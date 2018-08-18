@@ -27,8 +27,7 @@
            app:cardUseCompatPadding="true"
            app:cardElevation="4dp"
            app:cardCornerRadius="4dp"
-           android:paddingTop="20dp"
-           android:paddingBottom="20dp"
+
 
            xmlns:app="http://schemas.android.com/apk/res-auto"
 
@@ -37,19 +36,26 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:orientation="horizontal"
+               android:padding="5dp"
+
                >
         <EditText
             android:id="@+id/text_post"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:hint="What's in your mind?"
             android:layout_weight="1"
             android:layout_gravity="center"
             android:inputType="textMultiLine"
-            android:maxLines="9"
+            android:maxLines="5"
             android:background="@android:color/transparent"
             android:textSize="14sp"
-            android:padding="15dp"
+            android:textColor="@android:color/black"
+            android:scrollbars="vertical"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginRight="10dp"
+
 
             />
            <ImageButton
@@ -72,7 +78,6 @@
            android:id="@+id/main_container"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-
            android:layout_below="@+id/posting"
 
 

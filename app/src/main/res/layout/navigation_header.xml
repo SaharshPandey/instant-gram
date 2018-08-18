@@ -23,7 +23,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="11dp"
-        android:layout_marginStart="63dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="10dp"
         android:text="username"
         android:textAlignment="center"
