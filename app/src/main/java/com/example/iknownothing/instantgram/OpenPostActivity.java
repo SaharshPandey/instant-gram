@@ -68,6 +68,15 @@ public class OpenPostActivity extends AppCompatActivity {
                     if (Current_User_Id.equals(Database_User_Id)) {
                         edit_clicked.setVisibility(View.VISIBLE);
                         delete_clicked.setVisibility(View.VISIBLE);
+
+                        if(postimage.equals("none"))
+                        {
+                            image_clicked.setVisibility(View.INVISIBLE);
+                            description_clicked.setTextSize(25);
+                            edit_clicked.setVisibility(View.VISIBLE);
+                            delete_clicked.setVisibility(View.VISIBLE);
+
+                        }
                     }
                     }
                 }

@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     private Uri ImageUri;
     private String CurrentDAte,CurrentTime,PostRandomName;
     private String DownloadUrl;
-
+    private EditText text_post;
     private String description;
     private String ts;
 
@@ -104,7 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView = findViewById(R.id.navigation_view);
 
-
+        text_post = findViewById(R.id.text_post);
+        description = text_post.getText().toString();
         postList = findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
         //this will arrange posts by time
