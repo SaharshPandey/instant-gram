@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:adjustViewBounds="true"
-            android:background="@drawable/loading"
+
 
             />
     </LinearLayout>

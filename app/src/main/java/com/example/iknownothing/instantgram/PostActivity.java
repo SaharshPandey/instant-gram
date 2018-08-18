@@ -98,13 +98,10 @@ public class PostActivity extends AppCompatActivity {
         {
             Toast.makeText(PostActivity.this,"Please select the Image",Toast.LENGTH_SHORT).show();
 
-
+            SavingPostInformationToDatabase();
         }
 
-        else if(description == null)
-        {
-            Toast.makeText(PostActivity.this,"Please Enter the Caption",Toast.LENGTH_SHORT).show();
-        }
+
 
         else
         {

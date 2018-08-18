@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 holder.setDate(model.date);
                 holder.setTime(model.time);
                 holder.setDescription(model.description);
-                holder.setPostimage(getApplicationContext(),model.postimage);
+                holder.setPostimage(getApplicationContext(), model.postimage);
 
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -273,7 +273,16 @@ public class MainActivity extends AppCompatActivity {
 
         public void setPostimage(Context ctx,String postimage) {
             ImageView post_image=mView.findViewById(R.id.post_image);
-            Picasso.get().load(postimage).into(post_image);
+            if(postimage.equals("none"))
+            {
+                TextView postdes= mView.findViewById(R.id.post_description);
+                postdes.setTextSize(30);
+                postdes.setPadding(5,20,5,0);
+                Picasso.get().load(postimage).into(post_image);
+            }
+            else{
+            Picasso.get().load(postimage).placeholder(R.drawable.loading).into(post_image);
+        }
         }
     }
 
