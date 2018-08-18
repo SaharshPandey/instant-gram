@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginBottom="4dp"
-
         android:layout_marginTop="10dp"
 
         >
@@ -30,7 +29,6 @@
                 android:id="@+id/post_profile_image"
                 android:scaleType="centerCrop"
                 android:layout_marginLeft="4dp"
-
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/profile"
@@ -99,7 +97,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Post Description"
-    android:layout_marginLeft="3dp"
+    android:layout_marginLeft="5dp"
     android:layout_marginRight="3dp"
     android:layout_marginTop="6dp"
     android:padding="3dp"
@@ -108,10 +106,12 @@
     />
         <ImageView
             android:id="@+id/post_image"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:adjustViewBounds="true"
+            android:background="@drawable/loading"
 
             />
     </LinearLayout>

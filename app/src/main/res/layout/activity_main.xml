@@ -17,29 +17,64 @@
 
 
             </include>
-       <ImageButton
-           android:id="@+id/add_new_post_button"
-           android:layout_marginTop="8dp"
-           android:layout_width="40dp"
-           android:layout_height="40dp"
-           android:layout_alignParentEnd="true"
-           android:src="@drawable/add_post_high"
-           android:scaleType="centerCrop"
-           android:layout_marginRight="12dp"
-           android:background="@color/colorPrimaryDark"
-           android:focusableInTouchMode="false"
-           android:baselineAlignBottom="false"
+
+
+       <android.support.v7.widget.CardView
+           android:id="@+id/posting"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/main_page_toolbar"
+           app:cardUseCompatPadding="true"
+           app:cardElevation="4dp"
+           app:cardCornerRadius="4dp"
+           android:paddingTop="20dp"
+           android:paddingBottom="20dp"
+
+           xmlns:app="http://schemas.android.com/apk/res-auto"
 
            >
-       </ImageButton>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               >
+        <EditText
+            android:id="@+id/text_post"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="What's in your mind?"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:inputType="textMultiLine"
+            android:maxLines="9"
+            android:background="@android:color/transparent"
+            android:textSize="14sp"
+            android:padding="15dp"
+
+            />
+           <ImageButton
+               android:id="@+id/add_new_post_button"
+               android:layout_width="25dp"
+               android:layout_height="40dp"
+               android:layout_gravity="center"
+               android:src="@drawable/posting"
+               android:layout_marginRight="15dp"
+               android:scaleType="fitCenter"
+               android:background="@android:color/white"
+               android:focusableInTouchMode="false"
+               android:baselineAlignBottom="false"
+
+               >
+           </ImageButton>
+           </LinearLayout>
+       </android.support.v7.widget.CardView>
        <FrameLayout
            android:id="@+id/main_container"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:layout_alignParentStart="true"
-           android:layout_alignParentTop="true"
-           android:layout_below="@+id/add_new_post_button"
-           android:layout_marginTop="55dp"
+
+           android:layout_below="@+id/posting"
+
 
            >
 
@@ -53,7 +88,7 @@
 
 
 
-      
+
    </RelativeLayout>
 
     <android.support.design.widget.NavigationView
