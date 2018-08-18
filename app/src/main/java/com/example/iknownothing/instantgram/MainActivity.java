@@ -281,8 +281,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart()
     {
         super.onStart();
+
         firebaseRecyclerAdapter.startListening();
+
         FirebaseUser currentuser =mAuth.getCurrentUser();
+
         if(currentuser ==null)
         {
             SendUserToLoginActivity();
@@ -297,11 +300,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+
         firebaseRecyclerAdapter.stopListening();
     }
 
     private void ChechUserExistence() {
         final String Current_User_Id=mAuth.getCurrentUser().getUid();
+
         UserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
