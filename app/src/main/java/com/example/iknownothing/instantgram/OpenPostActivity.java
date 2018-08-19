@@ -52,10 +52,10 @@ public class OpenPostActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
-                    description = dataSnapshot.child("description").getValue().toString();
+
                     postimage = dataSnapshot.child("postimage").getValue().toString();
                     Database_User_Id = dataSnapshot.child("uid").getValue().toString();
-                    description_clicked.setText(description);
+
 
                     Picasso.get().load(postimage).into(image_clicked);
 
@@ -65,8 +65,7 @@ public class OpenPostActivity extends AppCompatActivity {
 
                         if(!postimage.equals("none"))
                         {
-                            image_clicked.setVisibility(View.INVISIBLE);
-                            description_clicked.setTextSize(25);
+
                             edit_clicked.setVisibility(View.VISIBLE);
                             delete_clicked.setVisibility(View.VISIBLE);
 

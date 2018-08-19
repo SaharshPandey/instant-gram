@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private String CurrentDAte,CurrentTime,PostRandomName;
     private String DownloadUrl;
     private EditText text_post;
-    private String description;
+
     private String ts;
 
     @Override
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         navigationView = findViewById(R.id.navigation_view);
-
+        cardView = findViewById(R.id.posting);
         text_post = findViewById(R.id.text_post);
 
         postList = findViewById(R.id.all_users_post_list);
@@ -126,10 +126,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot){
                 if(dataSnapshot.exists())
                 {
-                    if(dataSnapshot.hasChild("description"))
-                    {
-                        description = text_post.getText().toString();
-                    }
+
                     if(dataSnapshot.hasChild("fullname"))
                     {
                         String fullname = dataSnapshot.child("fullname").getValue().toString();
@@ -206,6 +203,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         DisplayAllUsersPost();
+        if(postList.getVerticalScrollbarPosition()>1)
+        {
+            cardView.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void DisplayAllUsersPost() {
@@ -300,13 +301,13 @@ public class MainActivity extends AppCompatActivity {
                 if(postdes.getText().toString().length() <= 10) {
                     postdes.setTextSize(35);
                     postdes.setPadding(5, 30, 5, 0);
-                    postdes.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                    postdes.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 }
-                else if( postdes.getText().toString().length() > 10 && postdes.getText().toString().length() <= 25 ) {
+                else if( postdes.getText().toString().length() > 10 && postdes.getText().toString().length() <= 30 ) {
                     postdes.setTextSize(20);
                     postdes.setPadding(5, 30, 5, 0);
                 }
-                else if(postdes.getText().toString().length() > 25) {
+                else if(postdes.getText().toString().length() > 30) {
                     postdes.setTextSize(15);
                     postdes.setPadding(5, 30, 5, 0);
                 }
@@ -431,6 +432,9 @@ return super.onOptionsItemSelected(item);
                     String userFullname = dataSnapshot.child("fullname").getValue().toString();
                     String profileImage = dataSnapshot.child("profileImage").getValue().toString();
 
+                    String description = text_post.getText().toString();
+                    text_post.setText(description);
+
                     //Making data for node to store in firebase.....
                     HashMap postMap = new HashMap();
                     postMap.put("uid", CurrentUserId);
@@ -450,7 +454,10 @@ return super.onOptionsItemSelected(item);
 
                                     if(task.isSuccessful())
                                     {
+                                        //scrolling to top of recycler view
+                                        postList.smoothScrollToPosition(0);
                                         loadingBar.dismiss();
+
                                         //Toast.makeText(PostActivity.this,"Post is Updated Successfully",Toast.LENGTH_SHORT).show();
 
                                     }
