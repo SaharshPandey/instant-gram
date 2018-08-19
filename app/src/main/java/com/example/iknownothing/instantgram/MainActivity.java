@@ -62,14 +62,14 @@ public class MainActivity extends AppCompatActivity {
     private CircleImageView NavProfileImage;
     private TextView ProfileUserName;
     String CurrentUserId;
-    private ImageButton AddNewPostButton;
+    private ImageButton AddNewPostButton,PostPicture;
     FirebaseRecyclerAdapter<Posts,PostViewHolder> firebaseRecyclerAdapter;
     CardView cardView;
     private Uri ImageUri;
     private String CurrentDAte,CurrentTime,PostRandomName;
     private String DownloadUrl;
     private EditText text_post;
-
+    private static int GalleryPic =1;
     private String ts;
 
     @Override
@@ -108,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+
+
 
         drawerLayout = findViewById(R.id.drawable_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this,drawerLayout,R.string.drawer_open,R.string.drawer_close);
@@ -490,6 +492,13 @@ return super.onOptionsItemSelected(item);
             }
         });
 
+    }
+
+    private void OpenGallery() {
+        Intent galleryIntent = new Intent();
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        startActivityForResult(galleryIntent,GalleryPic); //User will pick the Picture..
     }
 
     //animation that has been added into bindViewHolder method............
