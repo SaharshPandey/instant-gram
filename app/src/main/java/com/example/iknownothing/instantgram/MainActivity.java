@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -41,6 +43,7 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.IllegalFormatCodePointException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -92,8 +95,18 @@ public class MainActivity extends AppCompatActivity {
         AddNewPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SavingPostInformationToDatabase();
-            }
+                if(text_post.getText().toString().trim() != null && !text_post.getText().toString().trim().equals(""))
+                {
+                    SavingPostInformationToDatabase();
+                }
+                else
+                {
+                    Toast.makeText(MainActivity.this,"Nothing in mind",Toast.LENGTH_SHORT).show();
+                }
+        }
+
+
+
         });
 
         drawerLayout = findViewById(R.id.drawable_layout);
@@ -203,10 +216,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         DisplayAllUsersPost();
-        if(postList.getVerticalScrollbarPosition()>1)
-        {
-            cardView.setVisibility(View.INVISIBLE);
-        }
+
     }
 
     private void DisplayAllUsersPost() {
@@ -230,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
                 holder.setTime(model.time);
                 holder.setDescription(model.description);
                 holder.setPostimage(getApplicationContext(), model.postimage);
+                setScaleAnimation(holder.itemView);
 
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -291,6 +302,7 @@ public class MainActivity extends AppCompatActivity {
             postdescription.setPadding(3,3,3,3);
             postdescription.setTextSize(14);
             postdescription.setText(description);
+            postdescription.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         }
 
         public void setPostimage(Context ctx,String postimage) {
@@ -455,7 +467,7 @@ return super.onOptionsItemSelected(item);
                                     if(task.isSuccessful())
                                     {
                                         //scrolling to top of recycler view
-                                        postList.smoothScrollToPosition(0);
+                                        postList.smoothScrollToPosition(postList.getAdapter().getItemCount()-1);
                                         loadingBar.dismiss();
 
                                         //Toast.makeText(PostActivity.this,"Post is Updated Successfully",Toast.LENGTH_SHORT).show();
@@ -481,4 +493,11 @@ return super.onOptionsItemSelected(item);
 
     }
 
+    //animation that has been added into bindViewHolder method............
+    private void setScaleAnimation(View view) {
+        ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim.setDuration(1000);
+        view.startAnimation(anim);
+    }
 }
