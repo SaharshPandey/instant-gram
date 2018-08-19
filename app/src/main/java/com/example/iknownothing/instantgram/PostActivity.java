@@ -88,7 +88,7 @@ public class PostActivity extends AppCompatActivity {
         });
 
         //Deleted Toolbar.....
-        
+
         /*mToolbar =  findViewById(R.id.update_post_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
