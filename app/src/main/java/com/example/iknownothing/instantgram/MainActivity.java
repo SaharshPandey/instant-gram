@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private String DownloadUrl;
     private EditText text_post;
     private static int GalleryPic =1;
-    private CircleImageView post_image_main;
+    private ImageView post_image_main;
     private ImageButton add_new_upload_button;
     private String ts;
 
@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
                 holder.setTime(model.time);
                 holder.setDescription(model.description);
                 holder.setPostimage(getApplicationContext(), model.postimage);
-                setScaleAnimation(holder.itemView);
+                //setScaleAnimation(holder.itemView);
 
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -528,7 +528,7 @@ return super.onOptionsItemSelected(item);
 
                     //When the user Select the image he will be redirected to the Image Cropping Activity...
                     CropImage.activity(ImageUri)
-                            .setAspectRatio(1, 1)
+                            .setAspectRatio(1, 2)
                             .setCropShape(CropImageView.CropShape.RECTANGLE)
                             .start(this);
 
@@ -538,10 +538,10 @@ return super.onOptionsItemSelected(item);
     }
 
     //animation that has been added into bindViewHolder method............
-    private void setScaleAnimation(View view) {
+    /*private void setScaleAnimation(View view) {
         ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         anim.setDuration(1000);
         view.startAnimation(anim);
-    }
+    }*/
 }
