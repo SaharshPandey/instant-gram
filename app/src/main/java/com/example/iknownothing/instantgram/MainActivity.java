@@ -3,8 +3,10 @@ package com.example.iknownothing.instantgram;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -39,6 +41,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -70,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
     private String DownloadUrl;
     private EditText text_post;
     private static int GalleryPic =1;
+    private CircleImageView post_image_main;
+    private ImageButton add_new_upload_button;
     private String ts;
 
     @Override
@@ -90,6 +96,16 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
+
+        //Initialising image buttons.......
+        post_image_main = findViewById(R.id.post_image_main);
+        add_new_upload_button =findViewById(R.id.add_new_upload_button);
+        add_new_upload_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenGallery();
+            }
+        });
 
         AddNewPostButton = findViewById(R.id.add_new_post_button);
         AddNewPostButton.setOnClickListener(new View.OnClickListener() {
@@ -499,6 +515,26 @@ return super.onOptionsItemSelected(item);
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent,GalleryPic); //User will pick the Picture..
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        if(requestCode == GalleryPic && resultCode == RESULT_OK && data !=null)
+        {
+            ImageUri = data.getData();
+
+                    //When the user Select the image he will be redirected to the Image Cropping Activity...
+                    CropImage.activity(ImageUri)
+                            .setAspectRatio(1, 1)
+                            .setCropShape(CropImageView.CropShape.RECTANGLE)
+                            .start(this);
+
+            post_image_main.setImageURI(ImageUri);
+
+        }
     }
 
     //animation that has been added into bindViewHolder method............

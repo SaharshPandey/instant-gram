@@ -260,22 +260,11 @@ public class PostActivity extends AppCompatActivity {
         if(requestCode == GalleryPic && resultCode == RESULT_OK && data !=null)
         {
             ImageUri = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), ImageUri);
-                int width = bitmap.getWidth();
-                int height = bitmap.getHeight();
-                if(height>=3000 && width<2000) {
 
                     //When the user Select the image he will be redirected to the Image Cropping Activity...
                     CropImage.activity(ImageUri)
                             .setAspectRatio(1, 2)
-                            .setCropShape(CropImageView.CropShape.RECTANGLE)
-                            .start(this);
-
-                    }}catch (Exception e)
-            {
-                e.printStackTrace();
-               }
+                            .setCropShape(CropImageView.CropShape.RECTANGLE);
                 SelectPostImage.setImageURI(ImageUri);
 
         }
