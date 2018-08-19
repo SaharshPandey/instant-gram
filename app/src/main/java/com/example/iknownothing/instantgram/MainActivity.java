@@ -528,11 +528,12 @@ return super.onOptionsItemSelected(item);
 
                     //When the user Select the image he will be redirected to the Image Cropping Activity...
                     CropImage.activity(ImageUri)
-                            .setAspectRatio(1, 2)
+                            .setAspectRatio(2, 3)
                             .setCropShape(CropImageView.CropShape.RECTANGLE)
                             .start(this);
 
             post_image_main.setImageURI(ImageUri);
+
 
         }
     }
