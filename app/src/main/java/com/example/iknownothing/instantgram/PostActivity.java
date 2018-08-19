@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,9 +43,9 @@ public class PostActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference UserRef , PostRef;
     private Toolbar mToolbar;
-    private ImageButton SelectPostImage;
+    private ImageView SelectPostImage;
     private EditText SelectCaption;
-    private Button PostImage;
+    private ImageButton PostImage;
     private Uri ImageUri;
     private String CurrentDAte,CurrentTime,PostRandomName;
     private String DownloadUrl;
@@ -59,6 +60,8 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
+        OpenGallery();
+
         mAuth = FirebaseAuth.getInstance();
         loadingBar = new ProgressDialog(this);
         Current_User_Id = mAuth.getCurrentUser().getUid();
@@ -66,17 +69,17 @@ public class PostActivity extends AppCompatActivity {
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         SelectPostImage = findViewById(R.id.selectPostImage);
-        SelectCaption = findViewById(R.id.selectCaption);
-        PostImage = findViewById(R.id.postImage);
+        SelectCaption = findViewById(R.id.text_post);
+        PostImage = findViewById(R.id.add_new_post_button);
 
-        SelectPostImage.setOnClickListener(new View.OnClickListener() {
+       /* SelectPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 OpenGallery();
             }
         });
-
+*/
         PostImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,11 +87,13 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
-        mToolbar =  findViewById(R.id.update_post_page_toolbar);
+        //Deleted Toolbar.....
+        
+        /*mToolbar =  findViewById(R.id.update_post_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Update Post");
+        getSupportActionBar().setTitle("Update Post");*/
     }
 
     @Override
@@ -263,7 +268,7 @@ public class PostActivity extends AppCompatActivity {
 
                     //When the user Select the image he will be redirected to the Image Cropping Activity...
                     CropImage.activity(ImageUri)
-                            .setAspectRatio(1, 2)
+                            .setAspectRatio(2, 3)
                             .setCropShape(CropImageView.CropShape.RECTANGLE);
                 SelectPostImage.setImageURI(ImageUri);
 

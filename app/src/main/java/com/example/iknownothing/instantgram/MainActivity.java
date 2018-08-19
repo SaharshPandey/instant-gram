@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         add_new_upload_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OpenGallery();
+                SendUserToPostActivity();
             }
         });
 
@@ -510,33 +510,8 @@ return super.onOptionsItemSelected(item);
 
     }
 
-    private void OpenGallery() {
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent,GalleryPic); //User will pick the Picture..
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
 
-        if(requestCode == GalleryPic && resultCode == RESULT_OK && data !=null)
-        {
-            ImageUri = data.getData();
-
-                    //When the user Select the image he will be redirected to the Image Cropping Activity...
-                    CropImage.activity(ImageUri)
-                            .setAspectRatio(1, 1)
-                            .setCropShape(CropImageView.CropShape.RECTANGLE)
-                            .start(this);
-
-            post_image_main.setImageURI(ImageUri);
-
-
-        }
-    }
 
     //animation that has been added into bindViewHolder method............
     /*private void setScaleAnimation(View view) {
