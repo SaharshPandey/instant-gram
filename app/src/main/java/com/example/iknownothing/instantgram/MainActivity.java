@@ -342,7 +342,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart()
     {
         super.onStart();
-
         firebaseRecyclerAdapter.startListening();
 
         FirebaseUser currentuser =mAuth.getCurrentUser();

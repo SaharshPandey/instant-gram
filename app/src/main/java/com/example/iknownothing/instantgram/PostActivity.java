@@ -91,6 +91,12 @@ public class PostActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Update Post");
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
     private void ValidatePostInfo() {
 
         description = SelectCaption.getText().toString();

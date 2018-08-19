@@ -154,6 +154,11 @@ public class SetupActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
     //This method onActivityResult checks whether the image is right.....
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

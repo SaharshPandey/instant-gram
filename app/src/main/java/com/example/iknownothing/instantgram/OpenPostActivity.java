@@ -105,6 +105,12 @@ public class OpenPostActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
     private void SendUserToMainActivity() {
 
         Intent homeIntent =new Intent(OpenPostActivity.this, MainActivity.class);
