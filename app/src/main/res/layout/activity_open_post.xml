@@ -30,6 +30,7 @@
     android:layout_marginTop="20dp"
     android:layout_below="@id/relative_post"
     android:text="this is hint given to you..."
+    android:textColor="@android:color/black"
     android:textSize="14sp"
     android:padding="15dp"
     android:layout_centerHorizontal="true"
@@ -54,19 +55,22 @@
             android:layout_height="wrap_content"
             android:text="Edit"
             android:layout_below="@id/description_clicked"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_marginEnd="100dp"
             android:padding="10dp"
-            android:background="@android:color/darker_gray"
+            android:background="@color/colorPrimaryDark"
             />
+
         <Button
             android:id="@+id/delete_clicked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Delete"
             android:layout_below="@id/description_clicked"
-
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:padding="10dp"
-            android:background="@android:color/holo_red_dark"
+            android:background="@color/colorPrimaryDark"
+
             />
     </LinearLayout>
 

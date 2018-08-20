@@ -4,9 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PostActivity">
+    tools:context=".PostActivity"
 
+    >
 
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/post_bar_included"
+    android:background="@android:color/black"
+    >
     <ImageView
         android:id="@+id/selectPostImage"
         android:layout_height="match_parent"
@@ -14,11 +21,15 @@
         android:layout_marginTop="10dp"
         android:layout_alignParentStart="true"
         android:scaleType="centerCrop"
-        android:layout_above="@+id/post_bar_included"
-        />
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
 
+
+        />
+</RelativeLayout>
     <include
         android:id="@+id/post_bar_included"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/post_bar_layout"
