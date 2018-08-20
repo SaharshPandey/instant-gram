@@ -11,16 +11,15 @@
 >
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="400dp"
+    android:layout_height="420dp"
     android:id="@+id/relative_post"
     android:background="@android:color/black"
     >
 <ImageView
     android:id="@+id/image_clicked"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
-    android:padding="5dp"
-    android:scaleType="fitCenter"
+    android:layout_height="420dp"
+    android:scaleType="centerCrop"
     />
 </RelativeLayout>
 <TextView
