@@ -36,6 +36,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 
 public class PostActivity extends AppCompatActivity {
 
@@ -52,6 +53,7 @@ public class PostActivity extends AppCompatActivity {
     private String Current_User_Id;
     private String description;
     private String ts;
+    private Compressor compressedImageFile;
 
     private static final int GalleryPic =1;
     private ProgressDialog loadingBar;
@@ -139,6 +141,8 @@ public class PostActivity extends AppCompatActivity {
        CurrentTime = currentTime.format(calForDAte.getTime());
 
         PostRandomName = CurrentDAte+CurrentTime;
+
+
 
         StorageReference filePath = PostsImageReference.child("Post Images").child(ImageUri.getLastPathSegment() + PostRandomName + ".jpg");
         filePath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -264,6 +268,7 @@ public class PostActivity extends AppCompatActivity {
 
         if(requestCode == GalleryPic && resultCode == RESULT_OK && data !=null)
         {
+
             ImageUri = data.getData();
 
                     //When the user Select the image he will be redirected to the Image Cropping Activity...

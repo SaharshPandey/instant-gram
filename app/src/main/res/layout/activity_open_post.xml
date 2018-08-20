@@ -7,22 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".OpenPostActivity"
 
->
 
+>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:id="@+id/relative_post"
+    android:background="@android:color/black"
+    >
 <ImageView
     android:id="@+id/image_clicked"
     android:layout_width="match_parent"
     android:layout_height="400dp"
-    android:layout_marginTop="5dp"
+    android:padding="5dp"
     android:scaleType="fitCenter"
-
     />
+</RelativeLayout>
 <TextView
     android:id="@+id/description_clicked"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="20dp"
-    android:layout_below="@id/image_clicked"
+    android:layout_below="@id/relative_post"
     android:text="this is hint given to you..."
     android:textSize="14sp"
     android:padding="15dp"
