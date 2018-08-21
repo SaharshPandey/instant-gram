@@ -133,13 +133,7 @@ public class MainActivity extends AppCompatActivity {
         text_post = findViewById(R.id.text_post);
 
 
-        popup = findViewById(R.id.popup_button);
-        popup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopup();
-            }
-        });
+
 
         postList = findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
@@ -295,6 +289,13 @@ public class MainActivity extends AppCompatActivity {
         };
 
         postList.setAdapter(firebaseRecyclerAdapter);
+        popup = findViewById(R.id.popup_button);
+        popup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopup();
+            }
+        });
     }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder
