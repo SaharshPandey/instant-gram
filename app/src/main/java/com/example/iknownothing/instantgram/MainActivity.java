@@ -133,7 +133,13 @@ public class MainActivity extends AppCompatActivity {
         text_post = findViewById(R.id.text_post);
 
 
-       
+        popup = findViewById(R.id.popup);
+        popup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopup();
+            }
+        });
 
         postList = findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
