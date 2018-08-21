@@ -3,10 +3,8 @@ package com.example.iknownothing.instantgram;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -17,18 +15,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,13 +38,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.IllegalFormatCodePointException;
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -75,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText text_post;
     private static int GalleryPic =1;
     private ImageView post_image_main;
-    private ImageButton add_new_upload_button;
+    private ImageButton add_new_upload_button,popup;
     private String ts;
 
     @Override
@@ -137,6 +131,9 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigation_view);
         cardView = findViewById(R.id.posting);
         text_post = findViewById(R.id.text_post);
+
+
+       
 
         postList = findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
@@ -236,6 +233,9 @@ public class MainActivity extends AppCompatActivity {
         DisplayAllUsersPost();
 
     }
+
+
+
 
     private void DisplayAllUsersPost() {
 
