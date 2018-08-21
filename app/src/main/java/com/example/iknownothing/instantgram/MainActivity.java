@@ -23,6 +23,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView post_image_main;
     private ImageButton add_new_upload_button,popup_button;
     private String ts;
+    LinearLayout popup_button_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
+
 
         //Initialising image buttons.......
         post_image_main = findViewById(R.id.post_image_main);
@@ -265,8 +268,16 @@ public class MainActivity extends AppCompatActivity {
                 holder.setDescription(model.description);
                 holder.setPostimage(getApplicationContext(), model.postimage);
                 //Adding popup button functionality...
+                popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
                 popup_button=holder.mView.findViewById(R.id.popup_button);
                 popup_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showPopup(v);
+                    }
+                });
+
+                popup_button_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         showPopup(v);
