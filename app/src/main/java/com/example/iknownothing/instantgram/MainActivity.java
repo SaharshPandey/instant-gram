@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         text_post = findViewById(R.id.text_post);
 
 
-        popup = findViewById(R.id.popup);
+        popup = findViewById(R.id.popup_button);
         popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showPopup(){
-        PopupMenu popupMenu = new PopupMenu(this);
+        PopupMenu popupMenu = new PopupMenu(this,popup);
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
     }

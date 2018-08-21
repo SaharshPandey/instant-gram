@@ -11,7 +11,7 @@
     <item
         android:id="@+id/nav_Delete"
         android:title="Delete"
-        android:icon="@drawable/delete-button"
+        android:icon="@drawable/delete"
         >
     </item>
 </menu>

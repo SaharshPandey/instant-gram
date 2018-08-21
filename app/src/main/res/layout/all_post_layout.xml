@@ -63,7 +63,7 @@
                 />
 
                 <ImageButton
-                    android:id="@+id/popup"
+                    android:id="@+id/popup_button"
                     android:layout_width="20dp"
                     android:layout_height="18dp"
                     android:background="@drawable/menu"
