@@ -240,6 +240,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void showPopup(){
+        PopupMenu popupMenu = new PopupMenu(this);
+        MenuInflater menuInflater = popupMenu.getMenuInflater();
+        menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
+    }
 
 
 
