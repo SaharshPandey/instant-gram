@@ -13,24 +13,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginBottom="4dp"
         android:layout_marginTop="10dp"
+        android:orientation="vertical"
 
         >
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:padding="5dp"
             android:orientation="horizontal"
+            android:padding="5dp"
+
+
+
+
             >
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/post_profile_image"
-                android:scaleType="centerCrop"
-                android:layout_marginLeft="4dp"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:layout_marginLeft="4dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/profile"
 
                 />
@@ -39,97 +45,102 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginEnd="60dp"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/post_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="8dp"
+                        android:text="user name"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:orientation="horizontal"
-                    >
+                    android:padding="2dp">
+
+                    <TextView
+                        android:id="@+id/text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="has been updated a post"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/post_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="12sp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/post_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Time"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="12sp"
 
 
-            <TextView
-                android:id="@+id/post_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="user name"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="8dp"
-                android:textAlignment="textStart"
-                android:layout_weight="1"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/popup_button"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/menu"
+                android:scaleType="fitCenter"
+
+
+
                 />
 
-                <ImageButton
-                    android:id="@+id/popup_button"
-                    android:layout_width="20dp"
-                    android:layout_height="18dp"
-                    android:background="@drawable/menu"
-                    android:scaleType="fitCenter"
-                   android:layout_marginTop="10dp"
-
-
-                    />
-                </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="5dp"
-                android:padding="2dp"
-                >
-                <TextView
-                    android:id="@+id/text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="has been updated a post"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:id="@+id/post_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Date"
-                    android:textSize="13sp"
-                    android:textColor="@android:color/darker_gray"
-
-                    />
-                <TextView
-                    android:id="@+id/post_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Time"
-                    android:textSize="13sp"
-                    android:textColor="@android:color/darker_gray"
-
-
-                    />
-            </LinearLayout>
-
-            </LinearLayout>
-
         </LinearLayout>
-<TextView
-    android:id="@+id/post_description"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Post Description"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="3dp"
-    android:layout_marginTop="6dp"
-    android:padding="3dp"
-    android:textSize="14sp"
-    android:textColor="@android:color/black"
-    />
+
+        <TextView
+            android:id="@+id/post_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="6dp"
+            android:padding="3dp"
+            android:text="Post Description"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
         <ImageView
             android:id="@+id/post_image"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="3dp"
             android:adjustViewBounds="true"
 

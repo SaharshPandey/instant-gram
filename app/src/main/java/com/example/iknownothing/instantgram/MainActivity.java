@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText text_post;
     private static int GalleryPic =1;
     private ImageView post_image_main;
-    private ImageButton add_new_upload_button,popup;
+    private ImageButton add_new_upload_button,popup_button;
     private String ts;
 
     @Override
@@ -234,10 +234,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void showPopup(){
-        PopupMenu popupMenu = new PopupMenu(this,popup);
+    public void showPopup(View v){
+        PopupMenu popupMenu = new PopupMenu(this,v);
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
+        popupMenu.show();
     }
 
 
@@ -264,15 +265,14 @@ public class MainActivity extends AppCompatActivity {
                 holder.setDescription(model.description);
                 holder.setPostimage(getApplicationContext(), model.postimage);
                 //Adding popup button functionality...
-                popup=holder.mView.findViewById(R.id.popup_button);
-                popup.setOnClickListener(new View.OnClickListener() {
+                popup_button=holder.mView.findViewById(R.id.popup_button);
+                popup_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showPopup();
+                        showPopup(v);
                     }
                 });
-
-                holder.mView.setOnClickListener(new View.OnClickListener() {
+               holder.mView.findViewById(R.id.post_image).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent clickPostIntent =new Intent(MainActivity.this,OpenPostActivity.class);
