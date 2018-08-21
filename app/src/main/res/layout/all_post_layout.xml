@@ -46,7 +46,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginEnd="60dp"
+                android:layout_marginRight="10dp"
+
+
                 >
 
                 <LinearLayout
@@ -83,7 +85,7 @@
                         android:layout_height="wrap_content"
                         android:text="has been updated a post"
                         android:textColor="@android:color/darker_gray"
-                        android:textSize="13sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -92,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:text="Date"
                         android:textColor="@android:color/darker_gray"
-                        android:textSize="12sp"
+                        android:textSize="11sp"
 
                         />
 
@@ -102,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:text="Time"
                         android:textColor="@android:color/darker_gray"
-                        android:textSize="12sp"
+                        android:textSize="11sp"
 
 
                         />
@@ -115,8 +117,10 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginTop="14dp"
+
                 android:background="@drawable/menu"
                 android:scaleType="fitCenter"
+                android:padding="5dp"
 
 
 
