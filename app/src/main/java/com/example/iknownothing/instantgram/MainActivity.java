@@ -263,7 +263,14 @@ public class MainActivity extends AppCompatActivity {
                 holder.setTime(model.time);
                 holder.setDescription(model.description);
                 holder.setPostimage(getApplicationContext(), model.postimage);
-                //setScaleAnimation(holder.itemView);
+                //Adding popup button functionality...
+                popup=holder.mView.findViewById(R.id.popup_button);
+                popup.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showPopup();
+                    }
+                });
 
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -273,6 +280,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(clickPostIntent);
                     }
                 });
+
+
             }
 
             @NonNull
@@ -289,13 +298,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         postList.setAdapter(firebaseRecyclerAdapter);
-        popup = findViewById(R.id.popup_button);
-        popup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopup();
-            }
-        });
+
     }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder
