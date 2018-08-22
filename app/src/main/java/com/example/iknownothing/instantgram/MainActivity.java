@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
                         final EditText inputfield = new EditText(MainActivity.this);
                         //STYLING
 
-                        inputfield.setPadding(10,10,10,10);
+                        inputfield.setPadding(10,50,10,10);
                         inputfield.setMaxLines(8);
                         inputfield.setText(description);
                         inputfield.setHint("Put your Caption here ");
