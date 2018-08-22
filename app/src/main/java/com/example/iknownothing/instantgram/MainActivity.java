@@ -278,7 +278,6 @@ public class MainActivity extends AppCompatActivity {
                         final EditText inputfield = new EditText(MainActivity.this);
                         //STYLING
                         inputfield.setPadding(10,10,10,10);
-                        inputfield.setTextSize(14);
                         inputfield.setText(description);
                         builder.setView(inputfield);
 
