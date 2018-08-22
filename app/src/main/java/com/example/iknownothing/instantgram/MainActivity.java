@@ -245,18 +245,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void showPopup(View v,final String PostKey){
         ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
-        ClickPostRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                description = dataSnapshot.child("description").getValue().toString();
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
         PopupMenu popupMenu = new PopupMenu(this,v);
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
@@ -268,10 +257,24 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.nav_Edit:
 
+                        ClickPostRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                description = dataSnapshot.child("description").getValue().toString();
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
                         //EDITING THE POST...
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setTitle("Edit Post:");
                         final EditText inputfield = new EditText(MainActivity.this);
+                       
                         inputfield.setText(description);
                         builder.setView(inputfield);
 
@@ -290,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
-                        
+                        //Creating Dialog Box...
                         Dialog dialog = builder.create();
                         dialog.show();
                         dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
