@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton add_new_upload_button,popup_button;
     private String ts;
     LinearLayout popup_button_layout;
-
+    private DatabaseReference ClickPostRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -237,10 +237,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void showPopup(View v){
+    public void showPopup(View v,final String PostKey){
         PopupMenu popupMenu = new PopupMenu(this,v);
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.nav_Edit:
+                        
+                        break;
+                    case R.id.nav_Delete:
+                        ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
+                        ClickPostRef.removeValue();
+                        break;
+
+                }
+                return true;
+            }
+        });
+
         popupMenu.show();
     }
 
@@ -268,19 +286,20 @@ public class MainActivity extends AppCompatActivity {
                 holder.setDescription(model.description);
                 holder.setPostimage(getApplicationContext(), model.postimage);
                 //Adding popup button functionality...
+
                 popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
                 popup_button=holder.mView.findViewById(R.id.popup_button);
                 popup_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showPopup(v);
+                        showPopup(v,PostKey);
                     }
                 });
 
                 popup_button_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showPopup(v);
+                        showPopup(v,PostKey);
                     }
                 });
                holder.mView.findViewById(R.id.post_image).setOnClickListener(new View.OnClickListener() {
