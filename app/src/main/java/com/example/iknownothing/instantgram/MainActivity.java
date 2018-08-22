@@ -276,6 +276,22 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
 
+
+        //GETTING REFERENCE FOR THE POST....
+        ClickPostRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                description = dataSnapshot.child("description").getValue().toString();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
         //SETTING ONCLICK LISTENER FOR THE POPUP MENU.....
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
@@ -286,21 +302,6 @@ public class MainActivity extends AppCompatActivity {
 
                     //WHEN EDIT BUTTON IS CLICKED...
                     case R.id.nav_Edit:
-
-                        //GETTING REFERENCE FOR THE POST....
-                        ClickPostRef.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                description = dataSnapshot.child("description").getValue().toString();
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-
 
                         //EDITING THE POST...
                         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(MainActivity.this, R.style.AlertDialogCustom));
