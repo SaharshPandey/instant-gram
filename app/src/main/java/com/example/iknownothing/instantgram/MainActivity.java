@@ -277,8 +277,11 @@ public class MainActivity extends AppCompatActivity {
                         //ADDING INPUT FIELD...
                         final EditText inputfield = new EditText(MainActivity.this);
                         //STYLING
+
                         inputfield.setPadding(10,10,10,10);
+                        inputfield.setMaxLines(8);
                         inputfield.setText(description);
+                        
                         builder.setView(inputfield);
 
                         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
@@ -300,6 +303,7 @@ public class MainActivity extends AppCompatActivity {
                         Dialog dialog = builder.create();
 
                         dialog.show();
+                        dialog.getWindow().setLayout(600, 400);
                         dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
                         break;
 
