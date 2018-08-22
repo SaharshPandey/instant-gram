@@ -17,6 +17,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Size;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -68,22 +69,25 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton AddNewPostButton,PostPicture;
     FirebaseRecyclerAdapter<Posts,PostViewHolder> firebaseRecyclerAdapter;
     CardView cardView;
-    private Uri ImageUri;
     private String CurrentDAte,CurrentTime,PostRandomName;
     private String DownloadUrl;
     private EditText text_post;
     private static int GalleryPic =1;
     private ImageView post_image_main;
+    private ImageView ImageUri;
     private ImageButton add_new_upload_button,popup_button;
     private String ts;
     private LinearLayout popup_button_layout;
     private DatabaseReference ClickPostRef;
     private String description;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //THIS METHOD DONT OPEN THE KEYBOARD IN STARTUP....
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
@@ -102,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
         //Initialising image buttons.......
         post_image_main = findViewById(R.id.post_image_main);
         add_new_upload_button =findViewById(R.id.add_new_upload_button);
+
+        //SENDING TO ADD PHOTOS ACTIVITY....
         add_new_upload_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,7 +151,8 @@ public class MainActivity extends AppCompatActivity {
 
         postList = findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
-        //this will arrange posts by time
+
+        //ADDING MANAGER TO THE RECYCLER VIEW...
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
@@ -157,6 +164,9 @@ public class MainActivity extends AppCompatActivity {
         NavProfileImage = view.findViewById(R.id.nav_profile_image);
         ProfileUserName = view.findViewById(R.id.nav_user_full_name);
 
+
+
+        //REFERENCE TO THE USERS OF FIREBASE....
         UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot){
@@ -190,19 +200,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+
+        //LISTENER FOR THE NAVIGATION MENU.....
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                UserItemSelector(item);
-                return false;
-            }
-            //Checking when the menu item has been clicked..
-            private void UserItemSelector(MenuItem item) {
+
+                //Checking when the menu item has been clicked..
                 switch (item.getItemId())
                 {
                     case R.id.nav_post:
-                        SendUserToPostActivity();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                        SendUserToPostActivity();
                         Toast.makeText(MainActivity.this,"Profile",Toast.LENGTH_SHORT).show();
                         break;
 
@@ -235,29 +247,47 @@ public class MainActivity extends AppCompatActivity {
                         SendUserToLoginActivity();
                         break;
                 }
+
+                return true;
             }
+
+
         });
 
+
+        //THIS METHOD SHOWING THE RECYCLER VIEW ITEMS.....
         DisplayAllUsersPost();
+
 
     }
 
 
 
+
+   //METHOD TO SHOW POPUP WHEN USER TAP POPUP MENU...
     public void showPopup(View v,final String PostKey){
+
+
+        //REFERENCE FOR THE POST....
         ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
 
+        //CREATING POPUP MENU AND ADDING MENU XML INTO IT...
         PopupMenu popupMenu = new PopupMenu(this,v);
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
+
+        //SETTING ONCLICK LISTENER FOR THE POPUP MENU.....
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
                 switch (item.getItemId()){
 
+                    //WHEN EDIT BUTTON IS CLICKED...
                     case R.id.nav_Edit:
 
+                        //GETTING REFERENCE FOR THE POST....
                         ClickPostRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -271,19 +301,24 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
+
                         //EDITING THE POST...
                         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(MainActivity.this, R.style.AlertDialogCustom));
                         builder.setTitle("Edit Post:");
+
+
                         //ADDING INPUT FIELD...
                         final EditText inputfield = new EditText(MainActivity.this);
-                        //STYLING
 
+
+                        //STYLING
                         inputfield.setPadding(10,80,10,10);
                         inputfield.setMaxLines(8);
                         inputfield.setText(description);
 
                         builder.setView(inputfield);
 
+                       //ADDING BUTTONS -> POSITIVE AND NEGATIVE.....
                         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -299,14 +334,15 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
+
+
                         //Creating Dialog Box...
                         Dialog dialog = builder.create();
-
                         dialog.show();
-                        dialog.getWindow().setLayout(600, 400);
                         dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
                         break;
 
+                    //DELETE POSTS WHEN USER TAP TO IT...
                     case R.id.nav_Delete:
 
                         //DELETING THE POST........
@@ -317,26 +353,30 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
+    //DISPLAYING POPUP MENU IN EVERY POST...
         popupMenu.show();
     }
 
 
-
+//THIS MEHTOD IS RESPONSIBLE TO ADD DAT INTO RECYCLER VIEW.....
     private void DisplayAllUsersPost() {
 
+        //QUERY FOR FIREBASE RECYCLER ADAPTER....
         FirebaseRecyclerOptions<Posts> options =
                 new FirebaseRecyclerOptions.Builder<Posts>()
                         .setQuery(PostRef.orderByChild("timestamp"), Posts.class)
                         .build();
 
+        //INITIALISING FIREBASE RECYCLER VIEW...
         firebaseRecyclerAdapter
                 =new FirebaseRecyclerAdapter<Posts, PostViewHolder>(options)
         {
             @Override
             protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull Posts model) {
-            // Bind the Chat object to the ChatHolder
-                // ...
+
+                // Bind the Chat object to the ChatHolder
+
+                // GETTING REFERENCE FOR EACH POST THAT HAS BEEN TAPPED...
                 final String PostKey = getRef(position).getKey();
                 holder.setFullname(model.fullname);
                 holder.setProfileImage(getApplicationContext(),model.profileImage);
@@ -344,10 +384,13 @@ public class MainActivity extends AppCompatActivity {
                 holder.setTime(model.time);
                 holder.setDescription(model.description);
                 holder.setPostimage(getApplicationContext(), model.postimage);
+
                 //Adding popup button functionality...
 
                 popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
                 popup_button=holder.mView.findViewById(R.id.popup_button);
+
+                //POPUP BUTTON EVENT LISTENER...
                 popup_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -355,12 +398,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                //POPUP LINEAR LAYOUT EVENT LISTENER...
                 popup_button_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         showPopup(v,PostKey);
                     }
                 });
+
+                //SHOW IMAGE WHEN USER TAP INTO IMAGE....
                holder.mView.findViewById(R.id.post_image).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -386,13 +432,18 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        //SETTING ADAPTER INTO RECYCLER VIEW...
         postList.setAdapter(firebaseRecyclerAdapter);
 
     }
 
+    //CLASS THAT EXTENDS VIEW HOLDER CLASS....
     public static class PostViewHolder extends RecyclerView.ViewHolder
     {
         View mView;
+
+
+        // USING GETTER SETTERS METHODS FROM POSTS CLASS.....
         public PostViewHolder(View itemView)
         {
             super(itemView);
@@ -428,6 +479,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void setPostimage(Context ctx,String postimage) {
+
             ImageView post_image=mView.findViewById(R.id.post_image);
             if(postimage.equals("none"))
             {
@@ -454,10 +506,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    //SENDING USER TO POST ACTIVITY...
     private void SendUserToPostActivity() {
         Intent postIntent = new Intent(MainActivity.this,PostActivity.class);
         startActivity(postIntent);
     }
+
+
 
     //onStart method is used for checking that user is LoggedIn or not?......
     @Override
@@ -479,6 +535,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //ON STOP CALLS FIREBASE TO HOLD...
     @Override
     protected void onStop() {
         super.onStop();
@@ -486,6 +543,7 @@ public class MainActivity extends AppCompatActivity {
         firebaseRecyclerAdapter.stopListening();
     }
 
+    //CHECKING WHETHER THE USER HAS COMPLETED HIS DATA ENTRY AFTER CREATING NEW ACCOUNT...
     private void ChechUserExistence() {
         final String Current_User_Id=mAuth.getCurrentUser().getUid();
 
@@ -505,7 +563,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    //SENDING USER TO SETUP ACTIVITY...
     private void SendUserToSetupActivity() {
         Intent setupIntent =new Intent(MainActivity.this,SetupActivity.class);
         setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -522,6 +580,7 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+
     //Menu Item Selection ....
     @Override
 public boolean onOptionsItemSelected(MenuItem item)
@@ -531,15 +590,17 @@ public boolean onOptionsItemSelected(MenuItem item)
 return super.onOptionsItemSelected(item);
 }
 
-
+//SAVING DATA WHEN USER UPDATE NEW POSTS....
     private void SavingPostInformationToDatabase()
     {
+        //SETTING LOADING BAR...
         loadingBar.setTitle("Updating Post");
         loadingBar.setMessage("Please wait while we update your post");
         loadingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         loadingBar.show();
         loadingBar.setCanceledOnTouchOutside(true);
 
+        //LISTENER FOR THE USER REFERENCE...
         UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
