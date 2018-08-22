@@ -17,6 +17,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -271,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
                         });
 
                         //EDITING THE POST...
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(MainActivity.this, R.style.AlertDialogCustom));
                         builder.setTitle("Edit Post:");
                         final EditText inputfield = new EditText(MainActivity.this);
                         inputfield.setPadding(10,10,10,10);
@@ -296,6 +297,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //Creating Dialog Box...
                         Dialog dialog = builder.create();
+
                         dialog.show();
                         dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
                         break;
