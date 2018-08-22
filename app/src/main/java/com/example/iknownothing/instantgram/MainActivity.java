@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
                         inputfield.setPadding(10,10,10,10);
                         inputfield.setMaxLines(8);
                         inputfield.setText(description);
-                        
+                        inputfield.setHint("Put your Caption here ");
                         builder.setView(inputfield);
 
                         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
