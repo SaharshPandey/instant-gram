@@ -281,8 +281,9 @@ public class MainActivity extends AppCompatActivity {
         ClickPostRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                description = dataSnapshot.child("description").getValue().toString();
-
+                if(description!=null) {
+                    description = dataSnapshot.child("description").getValue().toString();
+                }
             }
 
             @Override
