@@ -274,7 +274,8 @@ public class MainActivity extends AppCompatActivity {
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setTitle("Edit Post:");
                         final EditText inputfield = new EditText(MainActivity.this);
-                       
+                        inputfield.setPadding(10,10,10,10);
+                        inputfield.setTextSize(14);
                         inputfield.setText(description);
                         builder.setView(inputfield);
 
