@@ -1,7 +1,10 @@
 package com.example.iknownothing.instantgram;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -72,8 +75,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView post_image_main;
     private ImageButton add_new_upload_button,popup_button;
     private String ts;
-    LinearLayout popup_button_layout;
+    private LinearLayout popup_button_layout;
     private DatabaseReference ClickPostRef;
+    private String description;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -237,7 +241,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     public void showPopup(View v,final String PostKey){
+        ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
+        ClickPostRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                description = dataSnapshot.child("description").getValue().toString();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         PopupMenu popupMenu = new PopupMenu(this,v);
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
@@ -246,11 +265,40 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
 
                 switch (item.getItemId()){
+
                     case R.id.nav_Edit:
+
+                        //EDITING THE POST...
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setTitle("Edit Post:");
+                        final EditText inputfield = new EditText(MainActivity.this);
+                        inputfield.setText(description);
+                        builder.setView(inputfield);
+
+                        builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ClickPostRef.child("description").setValue(inputfield.getText().toString());
+                                Toast.makeText(MainActivity.this,"Updated Successfully",Toast.LENGTH_SHORT);
+                            }
+                        });
+
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+
                         
+                        Dialog dialog = builder.create();
+                        dialog.show();
+                        dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
                         break;
+
                     case R.id.nav_Delete:
-                        ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
+
+                        //DELETING THE POST........
                         ClickPostRef.removeValue();
                         break;
 
