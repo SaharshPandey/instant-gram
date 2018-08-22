@@ -274,7 +274,9 @@ public class MainActivity extends AppCompatActivity {
                         //EDITING THE POST...
                         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(MainActivity.this, R.style.AlertDialogCustom));
                         builder.setTitle("Edit Post:");
+                        //ADDING INPUT FIELD...
                         final EditText inputfield = new EditText(MainActivity.this);
+                        //STYLING
                         inputfield.setPadding(10,10,10,10);
                         inputfield.setTextSize(14);
                         inputfield.setText(description);
