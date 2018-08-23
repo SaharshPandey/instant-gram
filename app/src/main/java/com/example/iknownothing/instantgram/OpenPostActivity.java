@@ -6,6 +6,8 @@ import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,8 +36,16 @@ public class OpenPostActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //MAKING IT FULL SCREEN......
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        //SHOWING LAYOUT...
         setContentView(R.layout.activity_open_post);
 
+        //Initialising Variables.....
         mAuth = FirebaseAuth.getInstance();
         Current_User_Id = mAuth.getCurrentUser().getUid();
         PostKey = getIntent().getExtras().getString("PostKey");
@@ -59,10 +69,10 @@ public class OpenPostActivity extends AppCompatActivity {
                     Database_User_Id = dataSnapshot.child("uid").getValue().toString();
                     description = dataSnapshot.child("description").getValue().toString();
 
-
+                    //Adding Image from Picasso....
                     Picasso.get().load(postimage).placeholder(R.drawable.loading).into(image_clicked);
                     description_clicked.setText(description);
-                    description_clicked.setTextSize(25);
+                    description_clicked.setTextSize(14);
 
                     if (Current_User_Id.equals(Database_User_Id)) {
                         //edit_clicked.setVisibility(View.VISIBLE);

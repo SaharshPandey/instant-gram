@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,27 +16,38 @@
     >
 <ImageView
     android:id="@+id/image_clicked"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     />
 </RelativeLayout>
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/relative_post"
 
+    android:background="#80000000"
+    >
     <TextView
         android:id="@+id/description_clicked"
         android:layout_width="match_parent"
-        android:layout_height="86dp"
-
-        android:layout_alignBottom="@+id/relative_post"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:ems="10"
+        android:maxLines="10"
+        android:minLines="2"
         android:inputType="textMultiLine"
-        android:padding="15dp"
-        android:text="this is hint given to you..."
-        android:textColor="@android:color/black"
-        android:textSize="14sp" />
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:text="It has no caption"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:gravity="bottom"
+        android:textSize="13sp" />
+</RelativeLayout>
 
-    />
 
 
 

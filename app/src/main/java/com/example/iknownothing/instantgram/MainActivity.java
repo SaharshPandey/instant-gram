@@ -30,6 +30,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -43,6 +44,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout popup_button_layout;
     private DatabaseReference ClickPostRef;
     private String description;
+    ProgressBar post_progress;
 
 
     @Override
@@ -106,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         //Initialising image buttons.......
         post_image_main = findViewById(R.id.post_image_main);
         add_new_upload_button =findViewById(R.id.add_new_upload_button);
+
 
         //SENDING TO ADD PHOTOS ACTIVITY....
         add_new_upload_button.setOnClickListener(new View.OnClickListener() {
@@ -163,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
         View view =navigationView.inflateHeaderView(R.layout.navigation_header);
         NavProfileImage = view.findViewById(R.id.nav_profile_image);
         ProfileUserName = view.findViewById(R.id.nav_user_full_name);
-
 
 
         //REFERENCE TO THE USERS OF FIREBASE....
@@ -262,24 +265,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-   //METHOD TO SHOW POPUP WHEN USER TAP POPUP MENU...
-    public void showPopup(View v,final String PostKey){
-
-
-        //REFERENCE FOR THE POST....
+    public void CheckingFirebaseData(String PostKey)
+    {
         ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
-
-        //CREATING POPUP MENU AND ADDING MENU XML INTO IT...
-        final PopupMenu popupMenu = new PopupMenu(this,v);
-        MenuInflater menuInflater = popupMenu.getMenuInflater();
-        menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
 
         //GETTING REFERENCE FOR THE POST....
         ClickPostRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+
 
                 if(dataSnapshot.exists()) {
 
@@ -287,14 +282,15 @@ public class MainActivity extends AppCompatActivity {
                     description = dataSnapshot.child("description").getValue().toString();
 
                     //Checking whether the post is of the CurrentUser ....
-                    if(CurrentUserId.equals(Database_User_Id))
-                    {
+                    if (CurrentUserId.equals(Database_User_Id)) {
                         popup_button_layout.setVisibility(View.VISIBLE);
                         //popup_button.setVisibility(View.VISIBLE);
                     }
+
                 }
+
                 else{
-                    Toast.makeText(MainActivity.this,"Deleted",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"Data not Exists ! ",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -303,6 +299,22 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+   //METHOD TO SHOW POPUP WHEN USER TAP POPUP MENU...
+    public void showPopup(View v,final String PostKey){
+
+
+        //REFERENCE FOR THE POST....
+
+
+        //CREATING POPUP MENU AND ADDING MENU XML INTO IT...
+        final PopupMenu popupMenu = new PopupMenu(this,v);
+        MenuInflater menuInflater = popupMenu.getMenuInflater();
+        menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
+
+        CheckingFirebaseData(PostKey);
+
 
 
         //SETTING ONCLICK LISTENER FOR THE POPUP MENU.....
@@ -434,35 +446,10 @@ public class MainActivity extends AppCompatActivity {
                 popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
                 popup_button=holder.mView.findViewById(R.id.popup_button);
                 popup_button_layout.setVisibility(View.INVISIBLE);
-                ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
 
-                //GETTING REFERENCE FOR THE POST....
-                ClickPostRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        if(dataSnapshot.exists()) {
 
-                            Database_User_Id = dataSnapshot.child("uid").getValue().toString();
-                            description = dataSnapshot.child("description").getValue().toString();
-
-                            //Checking whether the post is of the CurrentUser ....
-                            if(CurrentUserId.equals(Database_User_Id))
-                            {
-                                popup_button_layout.setVisibility(View.VISIBLE);
-                                //popup_button.setVisibility(View.VISIBLE);
-                            }
-                        }
-                        else{
-                            Toast.makeText(MainActivity.this,"Deleted",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+                CheckingFirebaseData(PostKey);
 
 
                 //POPUP LINEAR LAYOUT EVENT LISTENER...
@@ -472,6 +459,13 @@ public class MainActivity extends AppCompatActivity {
                         showPopup(v,PostKey);
                     }
                 });
+                popup_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showPopup(v,PostKey);
+                    }
+                });
+
 
 
                 //SHOW IMAGE WHEN USER TAP INTO IMAGE....
@@ -508,7 +502,9 @@ public class MainActivity extends AppCompatActivity {
     //CLASS THAT EXTENDS VIEW HOLDER CLASS....
     public static class PostViewHolder extends RecyclerView.ViewHolder
     {
+
         View mView;
+        ProgressBar post_progress=mView.findViewById(R.id.post_progress);
 
 
         // USING GETTER SETTERS METHODS FROM POSTS CLASS.....
@@ -569,7 +565,19 @@ public class MainActivity extends AppCompatActivity {
 
             }
             else{
-            Picasso.get().load(postimage).placeholder(R.drawable.loading).into(post_image);
+
+            Picasso.get().load(postimage).into(post_image, new Callback() {
+                @Override
+                public void onSuccess() {
+
+                    post_progress.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onError(Exception e) {
+
+                }
+            });
         }
         }
     }
