@@ -282,19 +282,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    if(dataSnapshot.exists()) {
-                        Database_User_Id = dataSnapshot.child("uid").getValue().toString();
-                        description = dataSnapshot.child("description").getValue().toString();
+                if(dataSnapshot.exists()) {
 
-                        //Checking whether the post is of the CurrentUser ....
-                        if(!CurrentUserId.equals(Database_User_Id))
-                        {
-                            popup_button.setVisibility(View.INVISIBLE);
-                        }
+                    Database_User_Id = dataSnapshot.child("uid").getValue().toString();
+                    description = dataSnapshot.child("description").getValue().toString();
+
+                    //Checking whether the post is of the CurrentUser ....
+                    if(!CurrentUserId.equals(Database_User_Id))
+                    {
+                        popup_button_layout.setVisibility(View.VISIBLE);
+                        //popup_button.setVisibility(View.VISIBLE);
                     }
-                    else{
-                        Toast.makeText(MainActivity.this,"Deleted",Toast.LENGTH_SHORT).show();
-                    }
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"Deleted",Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -430,7 +432,7 @@ public class MainActivity extends AppCompatActivity {
 
                 popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
                 popup_button=holder.mView.findViewById(R.id.popup_button);
-
+                popup_button_layout.setVisibility(View.INVISIBLE);
                 //POPUP BUTTON EVENT LISTENER...
                 popup_button.setOnClickListener(new View.OnClickListener() {
                     @Override
