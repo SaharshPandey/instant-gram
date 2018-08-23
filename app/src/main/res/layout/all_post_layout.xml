@@ -141,7 +141,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="3dp"
             android:layout_marginTop="6dp"
-            android:padding="3dp"
+            android:padding="5dp"
+            android:inputType="textMultiLine"
+            android:maxLines="10"
             android:text="Post Description"
             android:textColor="@android:color/black"
             android:textSize="14sp" />
@@ -160,8 +162,9 @@
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:progressDrawable="@drawable/custom_progrees_bar"
+            android:indeterminate="true"
+            style="?android:attr/progressBarStyleInverse"
+
 
             />
 
