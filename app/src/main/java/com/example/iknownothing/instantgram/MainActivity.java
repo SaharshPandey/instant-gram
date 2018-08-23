@@ -360,7 +360,7 @@ public class MainActivity extends AppCompatActivity {
                                 ClickPostRef.child("description").setValue(inputfield.getText().toString());
                                 Toast.makeText(MainActivity.this,"Updated Successfully",Toast.LENGTH_SHORT);
                             }
-                        });
+                            });
                         //Negative Button...
                         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
