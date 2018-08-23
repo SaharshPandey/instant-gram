@@ -504,7 +504,7 @@ public class MainActivity extends AppCompatActivity {
     {
 
         View mView;
-        ProgressBar post_progress=mView.findViewById(R.id.post_progress);
+
 
 
         // USING GETTER SETTERS METHODS FROM POSTS CLASS.....
@@ -565,11 +565,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
             else{
-
+    //Adding Image from Picasso and calling callback Listener who hides the progressbar when image is loaded....
             Picasso.get().load(postimage).into(post_image, new Callback() {
                 @Override
                 public void onSuccess() {
-
+                    ProgressBar post_progress=mView.findViewById(R.id.post_progress);
                     post_progress.setVisibility(View.GONE);
                 }
 

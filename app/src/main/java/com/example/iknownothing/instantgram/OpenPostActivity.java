@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 
@@ -27,11 +29,11 @@ public class OpenPostActivity extends AppCompatActivity {
 
     private ImageView image_clicked;
     TextView description_clicked;
-    private Button edit_clicked,delete_clicked;
+    //private Button edit_clicked,delete_clicked;
     private String PostKey,Current_User_Id,Database_User_Id,description,postimage;
     private DatabaseReference ClickPostRef;
     private FirebaseAuth mAuth;
-
+    private ProgressBar post_progress_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +71,19 @@ public class OpenPostActivity extends AppCompatActivity {
                     Database_User_Id = dataSnapshot.child("uid").getValue().toString();
                     description = dataSnapshot.child("description").getValue().toString();
 
-                    //Adding Image from Picasso....
-                    Picasso.get().load(postimage).placeholder(R.drawable.loading).into(image_clicked);
+                    //Adding Image from Picasso and calling callback Listener who hides the progressbar when image is loaded....
+                    Picasso.get().load(postimage).into(image_clicked, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            post_progress_bar = findViewById(R.id.open_post_progress);
+                            post_progress_bar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
                     description_clicked.setText(description);
                     description_clicked.setTextSize(14);
 
