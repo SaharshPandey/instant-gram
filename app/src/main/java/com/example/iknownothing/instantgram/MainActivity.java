@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog loadingBar;
     private CircleImageView NavProfileImage;
     private TextView ProfileUserName;
-    String CurrentUserId;
+    private String CurrentUserId,Database_User_Id;
     private ImageButton AddNewPostButton,PostPicture;
     FirebaseRecyclerAdapter<Posts,PostViewHolder> firebaseRecyclerAdapter;
     CardView cardView;
@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
         ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
 
         //CREATING POPUP MENU AND ADDING MENU XML INTO IT...
-        PopupMenu popupMenu = new PopupMenu(this,v);
+        final PopupMenu popupMenu = new PopupMenu(this,v);
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
 
@@ -283,7 +283,14 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                     if(dataSnapshot.exists()) {
+                        Database_User_Id = dataSnapshot.child("uid").getValue().toString();
                         description = dataSnapshot.child("description").getValue().toString();
+
+                        //Checking whether the post is of the CurrentUser ....
+                        if(!CurrentUserId.equals(Database_User_Id))
+                        {
+                            popup_button.setVisibility(View.INVISIBLE);
+                        }
                     }
                     else{
                         Toast.makeText(MainActivity.this,"Deleted",Toast.LENGTH_SHORT).show();
