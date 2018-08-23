@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        
+
 
         //THIS METHOD DONT OPEN THE KEYBOARD IN STARTUP....
         getWindow().setSoftInputMode(
