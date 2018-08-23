@@ -282,6 +282,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+
                     description = dataSnapshot.child("description").getValue().toString();
 
             }

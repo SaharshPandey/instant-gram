@@ -58,7 +58,9 @@ public class OpenPostActivity extends AppCompatActivity {
                     description = dataSnapshot.child("description").getValue().toString();
 
 
-                    Picasso.get().load(postimage).into(image_clicked);
+                    Picasso.get().load(postimage).placeholder(R.drawable.loading).into(image_clicked);
+                    description_clicked.setText(description);
+                    description_clicked.setTextSize(25);
 
                     if (Current_User_Id.equals(Database_User_Id)) {
                         edit_clicked.setVisibility(View.VISIBLE);
