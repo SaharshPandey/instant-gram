@@ -29,6 +29,8 @@ public class OpenPostActivity extends AppCompatActivity {
     private String PostKey,Current_User_Id,Database_User_Id,description,postimage;
     private DatabaseReference ClickPostRef;
     private FirebaseAuth mAuth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +88,7 @@ public class OpenPostActivity extends AppCompatActivity {
                 }
 
                 else{
-                    Toast.makeText(OpenPostActivity.this,"Nothing to Delete",Toast.LENGTH_SHORT);
+                    Toast.makeText(OpenPostActivity.this,"Nothing to Delete",Toast.LENGTH_SHORT).show();
                 }
             }
 

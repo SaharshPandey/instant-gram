@@ -282,9 +282,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
-                    description = dataSnapshot.child("description").getValue().toString();
-
+                    if(dataSnapshot.exists()) {
+                        description = dataSnapshot.child("description").getValue().toString();
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this,"Deleted",Toast.LENGTH_SHORT).show();
+                    }
             }
 
             @Override
@@ -307,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //EDITING THE POST...
                         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(MainActivity.this, R.style.AlertDialogCustom));
-                        builder.setTitle("Edit Post:");
+                        builder.setTitle("Change your Caption?");
 
 
                         //ADDING INPUT FIELD...
@@ -321,7 +324,9 @@ public class MainActivity extends AppCompatActivity {
 
                         builder.setView(inputfield);
 
-                       //ADDING BUTTONS -> POSITIVE AND NEGATIVE.....
+             //ADDING BUTTONS -> POSITIVE AND NEGATIVE.....
+
+                        //Positive Button...
                         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -329,7 +334,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this,"Updated Successfully",Toast.LENGTH_SHORT);
                             }
                         });
-
+                        //Negative Button...
                         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -345,11 +350,37 @@ public class MainActivity extends AppCompatActivity {
                         dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
                         break;
 
+
                     //DELETE POSTS WHEN USER TAP TO IT...
                     case R.id.nav_Delete:
 
                         //DELETING THE POST........
-                        ClickPostRef.removeValue();
+
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(new ContextThemeWrapper(MainActivity.this,R.style.AlertDialogCustom));
+                        builder1.setMessage("Do you really want to Delete?");
+
+         //ADDING BUTTONS -> POSITIVE AND NEGATIVE.....
+
+                        //Positive Button....
+                        builder1.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ClickPostRef.removeValue();
+                            }
+                        });
+                        //Negative Button...
+                        builder1.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+
+                        //Showing Dialog
+                        Dialog dialog1 =builder1.create();
+                        dialog1.show();
+                        dialog1.getWindow().setBackgroundDrawableResource(android.R.color.white);
+
                         break;
 
                 }
