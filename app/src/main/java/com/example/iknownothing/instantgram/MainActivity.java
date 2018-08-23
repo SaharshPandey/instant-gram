@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                         //STYLING
-                        inputfield.setPadding(10,80,10,10);
+                        inputfield.setPadding(20,100,20,20);
                         inputfield.setMaxLines(8);
                         inputfield.setText(description);
 
