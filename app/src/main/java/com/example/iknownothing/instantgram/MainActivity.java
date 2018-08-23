@@ -276,7 +276,6 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
 
-
         //GETTING REFERENCE FOR THE POST....
         ClickPostRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -288,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
                     description = dataSnapshot.child("description").getValue().toString();
 
                     //Checking whether the post is of the CurrentUser ....
-                    if(!CurrentUserId.equals(Database_User_Id))
+                    if(CurrentUserId.equals(Database_User_Id))
                     {
                         popup_button_layout.setVisibility(View.VISIBLE);
                         //popup_button.setVisibility(View.VISIBLE);
@@ -421,6 +420,8 @@ public class MainActivity extends AppCompatActivity {
 
                 // GETTING REFERENCE FOR EACH POST THAT HAS BEEN TAPPED...
                 final String PostKey = getRef(position).getKey();
+
+
                 holder.setFullname(model.fullname);
                 holder.setProfileImage(getApplicationContext(),model.profileImage);
                 holder.setDate(model.date);
@@ -433,13 +434,36 @@ public class MainActivity extends AppCompatActivity {
                 popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
                 popup_button=holder.mView.findViewById(R.id.popup_button);
                 popup_button_layout.setVisibility(View.INVISIBLE);
-                //POPUP BUTTON EVENT LISTENER...
-                popup_button.setOnClickListener(new View.OnClickListener() {
+                ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
+
+                //GETTING REFERENCE FOR THE POST....
+                ClickPostRef.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onClick(View v) {
-                        showPopup(v,PostKey);
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        if(dataSnapshot.exists()) {
+
+                            Database_User_Id = dataSnapshot.child("uid").getValue().toString();
+                            description = dataSnapshot.child("description").getValue().toString();
+
+                            //Checking whether the post is of the CurrentUser ....
+                            if(CurrentUserId.equals(Database_User_Id))
+                            {
+                                popup_button_layout.setVisibility(View.VISIBLE);
+                                //popup_button.setVisibility(View.VISIBLE);
+                            }
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this,"Deleted",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
                     }
                 });
+
 
                 //POPUP LINEAR LAYOUT EVENT LISTENER...
                 popup_button_layout.setOnClickListener(new View.OnClickListener() {
@@ -448,6 +472,7 @@ public class MainActivity extends AppCompatActivity {
                         showPopup(v,PostKey);
                     }
                 });
+
 
                 //SHOW IMAGE WHEN USER TAP INTO IMAGE....
                holder.mView.findViewById(R.id.post_image).setOnClickListener(new View.OnClickListener() {

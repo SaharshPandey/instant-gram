@@ -43,11 +43,11 @@ public class OpenPostActivity extends AppCompatActivity {
 
         image_clicked = findViewById(R.id.image_clicked);
         description_clicked = findViewById(R.id.description_clicked);
-        edit_clicked = findViewById(R.id.edit_clicked);
-        delete_clicked = findViewById(R.id.delete_clicked);
+        //edit_clicked = findViewById(R.id.edit_clicked);
+        //delete_clicked = findViewById(R.id.delete_clicked);
 
-        edit_clicked.setVisibility(View.INVISIBLE);
-        delete_clicked.setVisibility(View.INVISIBLE);
+        //edit_clicked.setVisibility(View.INVISIBLE);
+        //delete_clicked.setVisibility(View.INVISIBLE);
 
         ClickPostRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -65,14 +65,14 @@ public class OpenPostActivity extends AppCompatActivity {
                     description_clicked.setTextSize(25);
 
                     if (Current_User_Id.equals(Database_User_Id)) {
-                        edit_clicked.setVisibility(View.VISIBLE);
-                        delete_clicked.setVisibility(View.VISIBLE);
+                        //edit_clicked.setVisibility(View.VISIBLE);
+                        //delete_clicked.setVisibility(View.VISIBLE);
 
                         if(!postimage.equals("none"))
                         {
 
-                            edit_clicked.setVisibility(View.VISIBLE);
-                            delete_clicked.setVisibility(View.VISIBLE);
+                          //  edit_clicked.setVisibility(View.VISIBLE);
+                            //delete_clicked.setVisibility(View.VISIBLE);
 
                             }
 
@@ -99,7 +99,7 @@ public class OpenPostActivity extends AppCompatActivity {
             }
         });
 
-        delete_clicked.setOnClickListener(new View.OnClickListener(){
+       /* delete_clicked.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v)
@@ -108,6 +108,7 @@ public class OpenPostActivity extends AppCompatActivity {
                 SendUserToMainActivity();
             }
         });
+        */
     }
 
     @Override

@@ -11,7 +11,7 @@
 >
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="420dp"
+    android:layout_height="match_parent"
     android:id="@+id/relative_post"
     android:background="@android:color/black"
     >
@@ -19,59 +19,26 @@
     android:id="@+id/image_clicked"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:scaleType="centerCrop"
+
     />
 </RelativeLayout>
-<TextView
-    android:id="@+id/description_clicked"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_below="@id/relative_post"
-    android:text="this is hint given to you..."
-    android:textColor="@android:color/black"
-    android:textSize="14sp"
-    android:padding="15dp"
-    android:layout_centerHorizontal="true"
-    android:ems="10"
-    android:inputType="textMultiLine" />
+
+    <TextView
+        android:id="@+id/description_clicked"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+
+        android:layout_alignBottom="@+id/relative_post"
+        android:layout_alignParentStart="true"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:padding="15dp"
+        android:text="this is hint given to you..."
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
     />
-    <LinearLayout
-        android:id="@+id/button_container"
-        android:layout_below="@id/description_clicked"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
 
-        android:gravity="center"
-        >
-
-        <Button
-            android:id="@+id/edit_clicked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit"
-            android:layout_below="@id/description_clicked"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_marginEnd="100dp"
-            android:padding="10dp"
-            android:background="@color/colorPrimaryDark"
-            />
-
-        <Button
-            android:id="@+id/delete_clicked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Delete"
-            android:layout_below="@id/description_clicked"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:padding="10dp"
-            android:background="@color/colorPrimaryDark"
-
-            />
-    </LinearLayout>
 
 
 </RelativeLayout>
