@@ -236,6 +236,9 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.nav_profile:
                         Toast.makeText(MainActivity.this,"Profile",Toast.LENGTH_SHORT).show();
+                        //STARTING PROFILE ACTIVITY..
+                        Intent profile =new Intent(MainActivity.this,ProfileActivity.class);
+                        startActivity(profile);
                         break;
                     case R.id.nav_home:
                         Toast.makeText(MainActivity.this,"Home",Toast.LENGTH_SHORT).show();
