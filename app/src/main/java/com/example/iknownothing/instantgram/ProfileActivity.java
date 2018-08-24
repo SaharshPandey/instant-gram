@@ -46,6 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
         profile_posts_recyclerview = findViewById(R.id.profile_posts_recyclerview);
 
 
+        //ADDING INFORMATION OF THE CURRENT USER INTO THE PROFILE ACTIVITY...
         UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
