@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -271,19 +272,22 @@ public class PostActivity extends AppCompatActivity {
         {
 
             ImageUri = data.getData();
-
+            Log.d("result",ImageUri.toString());
+            //CONVERTING URI IMAGE INTO BITMAP SO WE CAN COMPRESS THE IMAGE....
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),ImageUri);
+                Log.d("result",bitmap.toString());
             }
 
             catch (IOException e) {
                 e.printStackTrace();
             }
             //When the user Select the image he will be redirected to the Image Cropping Activity...
-                    CropImage.activity(ImageUri)
+
+             CropImage.activity(ImageUri)
                             .setAspectRatio(2, 3)
                             .setCropShape(CropImageView.CropShape.RECTANGLE);
-                SelectPostImage.setImageURI(ImageUri);
+             SelectPostImage.setImageURI(ImageUri);
 
         }
     }
