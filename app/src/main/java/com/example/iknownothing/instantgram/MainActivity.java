@@ -467,6 +467,7 @@ public class MainActivity extends AppCompatActivity {
                 // GETTING REFERENCE FOR EACH POST THAT HAS BEEN TAPPED...
                 final String PostKey = getRef(position).getKey();
 
+                CheckingFirebaseData(PostKey);
 
                 holder.setFullname(model.fullname);
                 holder.setProfileImage(getApplicationContext(),model.profileImage);
@@ -482,8 +483,6 @@ public class MainActivity extends AppCompatActivity {
                 popup_button_layout.setVisibility(View.INVISIBLE);
 
                 Log.d("result",String.valueOf(position));
-
-                CheckingFirebaseData(PostKey);
 
 
                 //POPUP LINEAR LAYOUT EVENT LISTENER...
@@ -554,7 +553,7 @@ public class MainActivity extends AppCompatActivity {
         }
         public void setProfileImage(Context ctx, String profileImage) {
             CircleImageView image = mView.findViewById(R.id.post_profile_image);
-            Picasso.get().load(profileImage).into(image);
+            Picasso.get().load(profileImage).stableKey(profileImage).into(image);
         }
         public void setTime(String time)
         {

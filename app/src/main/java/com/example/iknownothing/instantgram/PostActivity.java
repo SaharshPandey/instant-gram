@@ -31,6 +31,7 @@ import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -271,7 +272,14 @@ public class PostActivity extends AppCompatActivity {
 
             ImageUri = data.getData();
 
-                    //When the user Select the image he will be redirected to the Image Cropping Activity...
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),ImageUri);
+            }
+
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            //When the user Select the image he will be redirected to the Image Cropping Activity...
                     CropImage.activity(ImageUri)
                             .setAspectRatio(2, 3)
                             .setCropShape(CropImageView.CropShape.RECTANGLE);
