@@ -51,6 +51,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -317,6 +320,26 @@ public class MainActivity extends AppCompatActivity {
 
         //CREATING POPUP MENU AND ADDING MENU XML INTO IT...
         final PopupMenu popupMenu = new PopupMenu(this,v);
+        try{
+            Field[] fields =popupMenu.getClass().getDeclaredFields();
+            for(Field field : fields )
+            {
+                if("mPopup".equals(field.getName()))
+                {
+                    field.setAccessible(true);
+                    Object menuPopupHelper = field.get(popupMenu);
+                    Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
+                    Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon",boolean.class);
+                    setForceIcons.invoke(menuPopupHelper,true);
+                        break;
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
 
