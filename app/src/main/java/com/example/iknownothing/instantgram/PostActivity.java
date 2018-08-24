@@ -255,6 +255,7 @@ public class PostActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Sending User to Main Activity...
     private void SendUserToMainActivity() {
         Intent homeIntent = new Intent(PostActivity.this, MainActivity.class);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
