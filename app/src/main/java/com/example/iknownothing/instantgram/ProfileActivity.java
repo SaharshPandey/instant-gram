@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -11,6 +12,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,7 +46,45 @@ public class ProfileActivity extends AppCompatActivity {
         profile_posts_recyclerview = findViewById(R.id.profile_posts_recyclerview);
 
 
-       
+        UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists())
+                {
+                    if(dataSnapshot.hasChild("profileImage"))
+                    {
+                        String profileimage = dataSnapshot.child("profileImage").getValue().toString();
+                        Picasso.get().load(profileimage).into(profileImage);
+                    }
+
+                    if(dataSnapshot.hasChild("fullname"))
+                    {
+                        String fullname = dataSnapshot.child("fullname").getValue().toString();
+                        profile_fullname.setText(fullname);
+                    }
+
+                    if(dataSnapshot.hasChild("username"))
+                    {
+                        String username = dataSnapshot.child("username").getValue().toString();
+                        profile_username.setText(username);
+                    }
+
+                    if(dataSnapshot.hasChild("bio"))
+                    {
+                        String bio = dataSnapshot.child("bio").getValue().toString();
+                        profile_bio.setText(bio);
+                    }
+                }
+                else{
+                    Toast.makeText(ProfileActivity.this,"Please Check your Internet Connection",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(ProfileActivity.this,"Error : "+databaseError.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }
