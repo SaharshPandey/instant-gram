@@ -34,6 +34,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -90,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout popup_button_layout;
     private DatabaseReference ClickPostRef;
     private String description;
-    ProgressBar post_progress;
-
+    private ProgressBar post_progress;
+    private RelativeLayout post_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        View v =findViewById(R.id.post_bar_included);
 
         //instantiating Objects
         loadingBar = new ProgressDialog(this);
@@ -271,6 +273,10 @@ public class MainActivity extends AppCompatActivity {
         //THIS METHOD SHOWING THE RECYCLER VIEW ITEMS.....
         DisplayAllUsersPost();
 
+        if(postList.getChildAdapterPosition(postList.getChildAt(0))>0)
+        {
+            v.setVisibility(View.INVISIBLE);
+        }
 
     }
 
