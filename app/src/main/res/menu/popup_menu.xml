@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-
-    >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/nav_Edit"
         android:icon="@drawable/edit"
-        android:title="Edit"
-
-
-        >
+        android:title="Edit">
     </item>
+
     <item
         android:id="@+id/nav_Delete"
         android:checkable="false"
         android:icon="@drawable/delete"
         android:title="Delete">
-
     </item>
 </menu>
