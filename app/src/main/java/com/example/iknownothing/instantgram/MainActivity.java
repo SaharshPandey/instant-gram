@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.view.menu.MenuPopupHelper;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference ClickPostRef;
     private String description;
     private ProgressBar post_progress;
-    private RelativeLayout post_bar;
+    private View post_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,12 +101,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
+        post_bar.findViewById(R.id.post_bar_included);
         //THIS METHOD DONT OPEN THE KEYBOARD IN STARTUP....
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        View v =findViewById(R.id.post_bar_included);
+        LinearLayoutManager linearLayout =(LinearLayoutManager) postList.getLayoutManager();
+        int firstVisiblePosition = linearLayout.findFirstVisibleItemPosition();
 
         //instantiating Objects
         loadingBar = new ProgressDialog(this);
@@ -273,9 +275,9 @@ public class MainActivity extends AppCompatActivity {
         //THIS METHOD SHOWING THE RECYCLER VIEW ITEMS.....
         DisplayAllUsersPost();
 
-        if(postList.getChildAdapterPosition(postList.getChildAt(0))>0)
+    if(firstVisiblePosition<2)
         {
-            v.setVisibility(View.INVISIBLE);
+            post_bar.setVisibility(View.INVISIBLE);
         }
 
     }
