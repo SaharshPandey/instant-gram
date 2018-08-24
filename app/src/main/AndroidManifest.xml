@@ -27,7 +27,10 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity android:name=".PostActivity" />
-        <activity android:name=".OpenPostActivity"></activity>
+        <activity android:name=".OpenPostActivity" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>

@@ -20,6 +20,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.Size;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference ClickPostRef;
     private String description;
     private ProgressBar post_progress;
-    private View post_bar;
+    View post_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,13 +102,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        post_bar=new View(this);
         post_bar.findViewById(R.id.post_bar_included);
         //THIS METHOD DONT OPEN THE KEYBOARD IN STARTUP....
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-        LinearLayoutManager linearLayout =(LinearLayoutManager) postList.getLayoutManager();
-        int firstVisiblePosition = linearLayout.findFirstVisibleItemPosition();
 
         //instantiating Objects
         loadingBar = new ProgressDialog(this);
@@ -252,6 +251,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_settings:
                         Toast.makeText(MainActivity.this,"Settings",Toast.LENGTH_SHORT).show();
+                        //STARTING SETTING ACTIVITY....
+                        Intent setting = new Intent(MainActivity.this,SettingsActivity.class);
+                        startActivity(setting);
                         break;
                     case R.id.nav_Logout:
                         loadingBar.setTitle("Logging Out");
@@ -275,11 +277,6 @@ public class MainActivity extends AppCompatActivity {
         //THIS METHOD SHOWING THE RECYCLER VIEW ITEMS.....
         DisplayAllUsersPost();
 
-    if(firstVisiblePosition<2)
-        {
-            post_bar.setVisibility(View.INVISIBLE);
-        }
-
     }
 
 
@@ -291,7 +288,6 @@ public class MainActivity extends AppCompatActivity {
         ClickPostRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
 
 
                 if(dataSnapshot.exists()) {
@@ -490,7 +486,7 @@ public class MainActivity extends AppCompatActivity {
                 popup_button=holder.mView.findViewById(R.id.popup_button);
                 popup_button_layout.setVisibility(View.INVISIBLE);
 
-
+                Log.d("result",String.valueOf(position));
 
                 CheckingFirebaseData(PostKey);
 
