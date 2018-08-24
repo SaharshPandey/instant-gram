@@ -3,6 +3,9 @@ package com.example.iknownothing.instantgram;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,8 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView profile_username,profile_fullname,profile_bio;     //User Details Variables;
     private String user_posts,user_followers,user_following;            //User Numeric Information;
     private RecyclerView profile_posts_recyclerview;                    //Users Posts RecyclerView;
+    private ImageView going_back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +46,18 @@ public class ProfileActivity extends AppCompatActivity {
         profile_username = findViewById(R.id.profile_username);
         profile_fullname = findViewById(R.id.profile_fullname);
         profile_bio = findViewById(R.id.profile_bio);
+        going_back = findViewById(R.id.going_back);
 
         //Initialising RecyclerView of User Posts....
         profile_posts_recyclerview = findViewById(R.id.profile_posts_recyclerview);
 
+        //Going back to Previous Activity
+        going_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         //ADDING INFORMATION OF THE CURRENT USER INTO THE PROFILE ACTIVITY...
         UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
