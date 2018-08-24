@@ -181,6 +181,7 @@
                         android:padding="10dp"
                         android:paddingEnd="15dp"
                         android:paddingStart="15dp"
+                        android:scaleType="center"
                         android:src="@drawable/ic_arrow_drop_down" />
 
 
