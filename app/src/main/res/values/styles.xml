@@ -7,6 +7,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/myPopupMenuTextAppearanceSmall</item>
+
     </style>
 
     <style name="AlertDialogCustom" parent="@android:style/Holo.Light.ButtonBar.AlertDialog">
@@ -14,11 +17,20 @@
         <item name="android:typeface">sans</item>
         <item name="android:textSize">14sp</item>
     </style>
-    <style name="PopupMenu" parent="@android:style/Widget.Holo.PopupMenu">
+
+    <style name="PopupMenu" parent="@android:style/Widget.Holo.PopupWindow">
        <item name="android:layout_marginRight">20dp</item>
-        <item name="android:popupBackground">@android:color/white</item>
-        <item name="android:scaleType">center</item>
+        <item name="android:popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 
-
+    <style name="myPopupMenuTextAppearanceSmall" parent="@android:style/TextAppearance.DeviceDefault.Widget.PopupMenu.Small">
+        <item name="android:textColor">#545656</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="myPopupMenuTextAppearanceLarge" parent="@android:style/TextAppearance.DeviceDefault.Widget.PopupMenu.Large">
+        <item name="android:textColor">#545656</item>
+        <item name="android:textSize">25sp</item>
     </style>
 </resources>
