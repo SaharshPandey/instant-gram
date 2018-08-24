@@ -333,6 +333,7 @@ public class MainActivity extends AppCompatActivity {
                     Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
                     Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon",boolean.class);
                     setForceIcons.invoke(menuPopupHelper,true);
+
                         break;
                 }
             }

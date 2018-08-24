@@ -14,7 +14,7 @@
         <item name="android:typeface">sans</item>
         <item name="android:textSize">14sp</item>
     </style>
-    <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
-        <item name="android:popupBackground">@android:color/white</item>
+    <style name="PopupMenu" parent="@style/MyTheme">
+
     </style>
 </resources>
