@@ -21,7 +21,7 @@
 
     <style name="PopupMenu" parent="@android:style/Widget.Holo.PopupWindow">
        <item name="android:layout_marginRight">20dp</item>
-        <item name="android:popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:popupTheme">@style/Widget.AppCompat.PopupMenu</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">12sp</item>
     </style>

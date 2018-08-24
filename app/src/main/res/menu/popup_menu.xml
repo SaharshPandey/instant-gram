@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/nav_Edit"
-        android:icon="@drawable/edit"
+        android:icon="@drawable/edit1"
         android:title="Edit"
         >
 
