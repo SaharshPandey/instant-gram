@@ -320,6 +320,8 @@ public class MainActivity extends AppCompatActivity {
 
         //CREATING POPUP MENU AND ADDING MENU XML INTO IT...
         final PopupMenu popupMenu = new PopupMenu(this,v);
+
+        //METHOD TO ADD ICONS TO THE POPUP MENU
         try{
             Field[] fields =popupMenu.getClass().getDeclaredFields();
             for(Field field : fields )
@@ -339,7 +341,9 @@ public class MainActivity extends AppCompatActivity {
         {
             e.printStackTrace();
         }
+        //ICONS ADDED TO POPUP SUCCEED..
 
+        //NOW INFLATING POPUP MENU TO BUTTON...
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
 
