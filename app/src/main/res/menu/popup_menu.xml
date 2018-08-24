@@ -5,13 +5,16 @@
     <item
         android:id="@+id/nav_Edit"
         android:icon="@drawable/edit"
-        android:title="Edit">
+        android:title="Edit"
+        >
+
     </item>
 
     <item
         android:id="@+id/nav_Delete"
         android:checkable="false"
         android:icon="@drawable/delete"
-        android:title="Delete">
+        android:title="Delete"
+        >
     </item>
 </menu>
