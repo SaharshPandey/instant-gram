@@ -67,6 +67,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/user_posts"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/postno"
@@ -90,6 +91,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/user_followers"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/followersno"
@@ -113,6 +115,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/user_following"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/followingno"
@@ -211,6 +214,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/profile_bio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/fashion"
@@ -230,7 +234,7 @@
                 <!--Recycler can be used-->
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/accountrecy"
+                    android:id="@+id/profile_posts_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="256dp"
                     android:layout_marginStart="2dp"

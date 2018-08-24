@@ -2,32 +2,49 @@ package com.example.iknownothing.instantgram;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
-    private DatabaseReference UserRef,PostRef;
-    private String CurrentUserId,DatabaseUserId;
-    private CircleImageView profielImage;
-    private TextView profile_username,profile_fullname,profile_bio;
+    private FirebaseAuth mAuth;                                         //Firebase Authentication Variable;
+    private DatabaseReference UserRef,PostRef;                          //Firebase DatabaseReference Variable;
+    private String CurrentUserId,DatabaseUserId;                        //UserId Variables;
+    private CircleImageView profileImage;                               //User Profile Image;
+    private TextView profile_username,profile_fullname,profile_bio;     //User Details Variables;
+    private String user_posts,user_followers,user_following;            //User Numeric Information;
+    private RecyclerView profile_posts_recyclerview;                    //Users Posts RecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        //Instantiating Firebase Objects and getting References....
         mAuth = FirebaseAuth.getInstance();
         CurrentUserId = mAuth.getCurrentUser().getUid();
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
+        //Initialising Widgets from Profile Activity....
+        profileImage = findViewById(R.id.post_profile_image);
+        profile_username = findViewById(R.id.profile_username);
+        profile_fullname = findViewById(R.id.profile_fullname);
+        profile_bio = findViewById(R.id.profile_bio);
 
+        //Initialising RecyclerView of User Posts....
+        profile_posts_recyclerview = findViewById(R.id.profile_posts_recyclerview);
+
+
+       
     }
 
 }
