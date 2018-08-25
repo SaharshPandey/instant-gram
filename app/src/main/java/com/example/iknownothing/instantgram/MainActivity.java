@@ -160,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
         postList = findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
+        //Total items that can be reserved ...
         postList.setItemViewCacheSize(30);
         //ADDING MANAGER TO THE RECYCLER VIEW...
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
