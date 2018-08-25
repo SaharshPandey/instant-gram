@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -34,8 +35,13 @@ import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -59,10 +65,12 @@ public class PostActivity extends AppCompatActivity {
     private String description;
     private String ts;
     private File compressedImage;
-    private Uri compressedUri;
-
+    private Bitmap compressedBitmap;
+    private Bitmap bitmap;
     private static final int GalleryPic =1;
     private ProgressDialog loadingBar;
+    private ByteArrayOutputStream stream;
+    byte[] byteArray;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,7 +159,7 @@ public class PostActivity extends AppCompatActivity {
 
 
         StorageReference filePath = PostsImageReference.child("Post Images").child(ImageUri.getLastPathSegment() + PostRandomName + ".jpg");
-        filePath.putFile(compressedUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+        filePath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                 if(task.isSuccessful())
@@ -281,55 +289,36 @@ public class PostActivity extends AppCompatActivity {
 
             //Log.d("result",ImageUri.toString());
             //CONVERTING URI IMAGE INTO BITMAP SO WE CAN COMPRESS THE IMAGE....
-            try {
-                File ImageFile = new File(getRealPathFromURI(this,ImageUri));
-                Log.d("result",String.valueOf(ImageFile.getTotalSpace()));
-                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),ImageUri);
-                compressedImage = new Compressor(this).compressToFile(ImageFile);
-                compressedUri = Uri.fromFile(compressedImage);
-                Log.d("result",String.valueOf(compressedImage.getTotalSpace()));
-                //Log.d("result",bitmap.toString());
+
+
+                /*try {
+                    stream = new ByteArrayOutputStream();
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),ImageUri);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG,50,stream);
+                    byteArray = stream.toByteArray();
+                    compressedBitmap = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
+                    }
+                catch (IOException e)
+                    { e.printStackTrace();
+
+                    }
+
+                    //Log.d("result", String.valueOf(compressedBitmap.getAllocationByteCount()));
+                    //Log.d("result",bitmap.toString());
+*/
 
 
 
-            }
+        }
 
-            catch (IOException e) {
-                e.printStackTrace();
-            }
             //When the user Select the image he will be redirected to the Image Cropping Activity...
 
-             CropImage.activity(compressedUri)
+             /*CropImage.activity(ImageUri)
                             .setAspectRatio(2, 3)
                             .setCropShape(CropImageView.CropShape.RECTANGLE);
-             SelectPostImage.setImageURI(compressedUri);
+             */
+             SelectPostImage.setImageURI(ImageUri);
 
         }
-    }
 
-    //GETTING THE FILE PATH FROM THE IMAGE URI....
-    private String getRealPathFromURI(Context context, Uri contentUri){
-
-        Cursor cursor = null;
-
-        try {
-            String[] proj = { MediaStore.Images.Media.DATA };
-            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
-            if(cursor==null) {return null;}
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        }
-
-        catch (Exception e) {
-            Log.e("result", "getRealPathFromURI Exception : " + e.toString());
-            return "";
-        }
-
-        finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-    }
 }
