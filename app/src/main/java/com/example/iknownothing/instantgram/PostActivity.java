@@ -32,6 +32,7 @@ import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -55,7 +56,8 @@ public class PostActivity extends AppCompatActivity {
     private String Current_User_Id;
     private String description;
     private String ts;
-    private Compressor compressedImageFile;
+    private File compressedImage;
+    private Uri compressedUri;
 
     private static final int GalleryPic =1;
     private ProgressDialog loadingBar;
@@ -147,7 +149,7 @@ public class PostActivity extends AppCompatActivity {
 
 
         StorageReference filePath = PostsImageReference.child("Post Images").child(ImageUri.getLastPathSegment() + PostRandomName + ".jpg");
-        filePath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+        filePath.putFile(compressedUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                 if(task.isSuccessful())
@@ -273,11 +275,20 @@ public class PostActivity extends AppCompatActivity {
         {
 
             ImageUri = data.getData();
-            Log.d("result",ImageUri.toString());
+
+
+            //Log.d("result",ImageUri.toString());
             //CONVERTING URI IMAGE INTO BITMAP SO WE CAN COMPRESS THE IMAGE....
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),ImageUri);
-                Log.d("result",bitmap.toString());
+                File ImageFile = new File(ImageUri.getPath());
+                Log.d("result",String.valueOf(ImageFile.getTotalSpace()));
+                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),ImageUri);
+                compressedImage = new Compressor(this).compressToFile(ImageFile);
+                compressedUri = Uri.fromFile(compressedImage);
+                Log.d("result",String.valueOf(compressedImage.getTotalSpace()));
+                //Log.d("result",bitmap.toString());
+
+
             }
 
             catch (IOException e) {
@@ -285,10 +296,10 @@ public class PostActivity extends AppCompatActivity {
             }
             //When the user Select the image he will be redirected to the Image Cropping Activity...
 
-             CropImage.activity(ImageUri)
+             CropImage.activity(compressedUri)
                             .setAspectRatio(2, 3)
                             .setCropShape(CropImageView.CropShape.RECTANGLE);
-             SelectPostImage.setImageURI(ImageUri);
+             SelectPostImage.setImageURI(compressedUri);
 
         }
     }

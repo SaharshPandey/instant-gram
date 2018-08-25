@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    implementation 'id.zelory:compressor:2.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.facebook.shimmer:shimmer:0.3.0'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
