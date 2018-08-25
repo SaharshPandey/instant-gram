@@ -1,7 +1,9 @@
 package com.example.iknownothing.instantgram;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -280,13 +282,14 @@ public class PostActivity extends AppCompatActivity {
             //Log.d("result",ImageUri.toString());
             //CONVERTING URI IMAGE INTO BITMAP SO WE CAN COMPRESS THE IMAGE....
             try {
-                File ImageFile = new File(ImageUri.getPath());
+                File ImageFile = new File(getRealPathFromURI(this,ImageUri));
                 Log.d("result",String.valueOf(ImageFile.getTotalSpace()));
                 //Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),ImageUri);
                 compressedImage = new Compressor(this).compressToFile(ImageFile);
                 compressedUri = Uri.fromFile(compressedImage);
                 Log.d("result",String.valueOf(compressedImage.getTotalSpace()));
                 //Log.d("result",bitmap.toString());
+
 
 
             }
@@ -301,6 +304,32 @@ public class PostActivity extends AppCompatActivity {
                             .setCropShape(CropImageView.CropShape.RECTANGLE);
              SelectPostImage.setImageURI(compressedUri);
 
+        }
+    }
+
+    //GETTING THE FILE PATH FROM THE IMAGE URI....
+    private String getRealPathFromURI(Context context, Uri contentUri){
+
+        Cursor cursor = null;
+
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            if(cursor==null) {return null;}
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        }
+
+        catch (Exception e) {
+            Log.e("result", "getRealPathFromURI Exception : " + e.toString());
+            return "";
+        }
+
+        finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
     }
 }
