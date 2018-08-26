@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
-        
+
 
         //Initialising image buttons.......
         post_image_main = findViewById(R.id.post_image_main);
