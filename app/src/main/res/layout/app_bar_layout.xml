@@ -6,6 +6,8 @@
     android:layout_height="40dp"
     android:background="@android:color/white"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:titleTextColor="@android:color/black"
+    app:subtitleTextColor="@android:color/black"
     >
 
 </android.support.v7.widget.Toolbar>

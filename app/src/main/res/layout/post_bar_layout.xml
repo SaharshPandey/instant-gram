@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/main_page_toolbar"
         app:cardUseCompatPadding="true"
-        app:cardElevation="4dp"
+        app:cardElevation="2dp"
         app:cardCornerRadius="2dp"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="2dp"
+
 
             >
             <EditText
