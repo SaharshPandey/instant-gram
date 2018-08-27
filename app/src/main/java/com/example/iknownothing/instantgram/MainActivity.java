@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     private String description;
     private ProgressBar post_progress;
     private View post_bar;
+    private static Bundle mBundleRecyclerViewState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -789,7 +790,23 @@ return super.onOptionsItemSelected(item);
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mBundleRecyclerViewState =new Bundle();
+        Parcelable listState = postList.getLayoutManager().onSaveInstanceState();
+        mBundleRecyclerViewState.putParcelable("recycler_state",listState);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(mBundleRecyclerViewState != null)
+        {
+            Parcelable liststate = mBundleRecyclerViewState.getParcelable("recycler_state");
+            postList.getLayoutManager().onRestoreInstanceState(liststate);
+        }
+    }
 
     //animation that has been added into bindViewHolder method............
     /*private void setScaleAnimation(View view) {
