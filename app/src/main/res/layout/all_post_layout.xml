@@ -151,9 +151,16 @@
             android:layout_gravity="center"
             android:layout_margin="3dp"
             android:adjustViewBounds="true"
-            
-            android:background="@android:color/black"
-            />
+            android:background="@android:color/black" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        >
 
         <ProgressBar
             android:id="@+id/post_progress"
@@ -162,12 +169,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:indeterminate="true"
-            android:padding="60dp"
+            android:padding="60dp" />
 
-
-            />
-
-    </LinearLayout>
-
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>
