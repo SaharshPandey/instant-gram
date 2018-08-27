@@ -151,7 +151,9 @@
             android:layout_gravity="center"
             android:layout_margin="3dp"
             android:adjustViewBounds="true"
-            android:maxHeight="430dp" />
+            android:maxHeight="430dp"
+            android:background="@android:color/black"
+            />
 
         <ProgressBar
             android:id="@+id/post_progress"
