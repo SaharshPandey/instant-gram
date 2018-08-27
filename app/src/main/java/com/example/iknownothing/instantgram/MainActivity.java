@@ -47,10 +47,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -602,11 +600,11 @@ public class MainActivity extends AppCompatActivity {
                     postdes.setPadding(5, 30, 5, 0);
                 }
                 //Hiding the postImage visibility....
-                post_image.setVisibility(View.GONE);
+                //post_image.setVisibility(View.GONE);
 
                 //Hiding the progress bar when user upload text..
-                post_progress = mView.findViewById(R.id.post_progress);
-                post_progress.setVisibility(View.GONE);
+                //post_progress = mView.findViewById(R.id.post_progress);
+                //post_progress.setVisibility(View.GONE);
 
                 //Picasso.get().load(postimage).into(post_image);
 
