@@ -228,6 +228,7 @@ public class PostActivity extends AppCompatActivity {
                             {
                                 loadingBar.dismiss();
                                 Toast.makeText(PostActivity.this,"Post is Updated Successfully",Toast.LENGTH_SHORT).show();
+
                                 SendUserToMainActivity();
                             }
 

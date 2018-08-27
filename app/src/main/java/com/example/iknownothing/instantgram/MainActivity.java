@@ -87,9 +87,10 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout popup_button_layout;
     private DatabaseReference ClickPostRef;
     private String description;
-    private ProgressBar post_progress;
+
     private View post_bar;
     private static Bundle mBundleRecyclerViewState;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -541,7 +542,7 @@ public class MainActivity extends AppCompatActivity {
     //CLASS THAT EXTENDS VIEW HOLDER CLASS....
     public static class PostViewHolder extends RecyclerView.ViewHolder
     {
-
+        ProgressBar post_progress;
         View mView;
 
 
@@ -600,7 +601,14 @@ public class MainActivity extends AppCompatActivity {
                     postdes.setTextSize(15);
                     postdes.setPadding(5, 30, 5, 0);
                 }
-                Picasso.get().load(postimage).into(post_image);
+                //Hiding the postImage visibility....
+                post_image.setVisibility(View.GONE);
+
+                //Hiding the progress bar when user upload text..
+                post_progress = mView.findViewById(R.id.post_progress);
+                post_progress.setVisibility(View.GONE);
+
+                //Picasso.get().load(postimage).into(post_image);
 
             }
             else{
@@ -608,7 +616,7 @@ public class MainActivity extends AppCompatActivity {
             Picasso.get().load(postimage).into(post_image, new Callback() {
                 @Override
                 public void onSuccess() {
-                    ProgressBar post_progress=mView.findViewById(R.id.post_progress);
+                    post_progress = mView.findViewById(R.id.post_progress);
                     post_progress.setVisibility(View.GONE);
                 }
 
@@ -763,7 +771,7 @@ return super.onOptionsItemSelected(item);
 
                                     if(task.isSuccessful())
                                     {
-                                        //scrolling to top of recycler view
+                                        //scrolling to top of recycler view when user upload something..
                                         postList.smoothScrollToPosition(postList.getAdapter().getItemCount()-1);
                                         loadingBar.dismiss();
 
