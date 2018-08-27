@@ -301,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 else{
-                    Toast.makeText(MainActivity.this,"Data not Exists ! ",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"Data doesn't Exists ! ",Toast.LENGTH_SHORT).show();
                 }
             }
 
