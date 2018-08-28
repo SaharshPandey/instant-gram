@@ -472,6 +472,7 @@ public class MainActivity extends AppCompatActivity {
                 // GETTING REFERENCE FOR EACH POST THAT HAS BEEN TAPPED...
                 final String PostKey = getRef(position).getKey();
 
+                CheckingFirebaseData(PostKey);
 
 
                 holder.setFullname(model.fullname);
@@ -516,7 +517,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                CheckingFirebaseData(PostKey);
             }
 
             @NonNull
