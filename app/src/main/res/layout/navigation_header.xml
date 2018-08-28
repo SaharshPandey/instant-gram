@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="200dp"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/sendblue"
     >
 <LinearLayout
     android:layout_width="wrap_content"
@@ -15,7 +15,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:src="@drawable/profile"
-        app:civ_border_color="@color/colorPrimaryDark"
+        app:civ_border_color="@color/sendblue"
         app:civ_border_width="2dp" />
 
     <TextView
