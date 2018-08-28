@@ -88,6 +88,7 @@ public class PostActivity extends AppCompatActivity {
         SelectCaption = findViewById(R.id.text_post);
         PostImage = findViewById(R.id.add_new_post_button);
 
+        //Fetching caption from previous activity intent
         SelectCaption.setText(getIntent().getStringExtra("caption"));
        /* SelectPostImage.setOnClickListener(new View.OnClickListener() {
             @Override

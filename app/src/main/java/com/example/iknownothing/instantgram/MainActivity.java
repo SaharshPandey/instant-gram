@@ -632,6 +632,7 @@ public class MainActivity extends AppCompatActivity {
     //SENDING USER TO POST ACTIVITY...
     private void SendUserToPostActivity() {
         Intent postIntent = new Intent(MainActivity.this,PostActivity.class);
+        //Putting caption data in intent
         postIntent.putExtra("caption",text_post.getText().toString());
         startActivity(postIntent);
     }
