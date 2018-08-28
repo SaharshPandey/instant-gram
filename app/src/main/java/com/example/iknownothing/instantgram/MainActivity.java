@@ -276,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
 
         //THIS METHOD SHOWING THE RECYCLER VIEW ITEMS.....
         DisplayAllUsersPost();
-
+       // CheckingFirebaseData();
     }
 
 
@@ -472,7 +472,7 @@ public class MainActivity extends AppCompatActivity {
                 // GETTING REFERENCE FOR EACH POST THAT HAS BEEN TAPPED...
                 final String PostKey = getRef(position).getKey();
 
-                CheckingFirebaseData(PostKey);
+
 
                 holder.setFullname(model.fullname);
                 holder.setProfileImage(getApplicationContext(),model.profileImage);
@@ -516,7 +516,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-
+                CheckingFirebaseData(PostKey);
             }
 
             @NonNull
@@ -603,10 +603,10 @@ public class MainActivity extends AppCompatActivity {
                 //post_image.setVisibility(View.GONE);
 
                 //Hiding the progress bar when user upload text..
-                //post_progress = mView.findViewById(R.id.post_progress);
-                //post_progress.setVisibility(View.GONE);
+                Picasso.get().load(postimage).into(post_image);
+                post_progress = mView.findViewById(R.id.post_progress);
+                post_progress.setVisibility(View.GONE);
 
-                //Picasso.get().load(postimage).into(post_image);
 
             }
             else{
