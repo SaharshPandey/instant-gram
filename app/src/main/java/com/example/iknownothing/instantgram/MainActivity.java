@@ -25,6 +25,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -99,7 +100,19 @@ public class MainActivity extends AppCompatActivity {
         post_bar=new View(this);
         post_bar.findViewById(R.id.post_bar_included);
 
+
+
+        // clear FLAG_TRANSLUCENT_STATUS flag:
+        //getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        // finally change the color
+        //getWindow().setStatusBarColor(getResources().getColor(R.color.sendblue));
+
         //THIS METHOD DONT OPEN THE KEYBOARD IN STARTUP....
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
