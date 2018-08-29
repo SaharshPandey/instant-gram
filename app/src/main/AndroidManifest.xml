@@ -8,9 +8,9 @@
 
     <application
         android:allowBackup="true"
-        android:largeHeap="true"
         android:icon="@drawable/crop_image_menu_rotate_left"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@drawable/crop_image_menu_rotate_left"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -32,9 +32,8 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".ProfileActivity">
-
-        </activity>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".find_friends_activity"></activity>
     </application>
 
 </manifest>
