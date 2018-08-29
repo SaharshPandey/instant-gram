@@ -5,5 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".find_friends_activity">
+<include
+    android:id="@+id/find_friends_appbar_layout"
+    layout="@layout/app_bar_layout"
+    >
+</include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/myLayout"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/find_friends_appbar_layout"
+        >
+    </RelativeLayout>
+
 
 </RelativeLayout>
