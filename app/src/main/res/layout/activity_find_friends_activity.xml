@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".find_friends_activity">
 <include
-    android:id="@+id/find_friends_appbar_layout"
-    layout="@layout/app_bar_layout"
+    android:id="@+id/find_friends_searchbar_layout"
+    layout="@layout/search_bar"
     >
 </include>
 
@@ -15,10 +14,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/myLayout"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/find_friends_appbar_layout"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/find_friends_searchbar_layout"
         >
-    </RelativeLayout>
 
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            >
+
+
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
 
 </RelativeLayout>
