@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -23,5 +25,15 @@ public class find_friends_activity extends AppCompatActivity {
 
         SearchInputText = findViewById(R.id.search_friends);
         Back = findViewById(R.id.going_back1);
+
+        SearchInputText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                String searchBoxInput =SearchInputText.getText().toString();
+                
+                return true;
+            }
+        });
     }
 }
