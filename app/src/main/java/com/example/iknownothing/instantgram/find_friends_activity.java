@@ -31,9 +31,13 @@ public class find_friends_activity extends AppCompatActivity {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
                 String searchBoxInput =SearchInputText.getText().toString();
-                
+                SearchPeople(searchBoxInput);
                 return true;
             }
         });
+    }
+
+    private void SearchPeople(String searchBoxInput) {
+
     }
 }
