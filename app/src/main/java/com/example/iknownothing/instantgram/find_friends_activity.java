@@ -33,7 +33,7 @@ public class find_friends_activity extends AppCompatActivity {
     private String CurrentUserId;
     private FirebaseAuth mAuth;
     private ImageButton SearchFriendsButton;
-    public FirebaseRecyclerAdapter<FindFriends,FindFriendsViewHolder> firebaseRecyclerAdapter;
+    FirebaseRecyclerAdapter<FindFriends,FindFriendsViewHolder> firebaseRecyclerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +56,7 @@ public class find_friends_activity extends AppCompatActivity {
             public void onClick(View v) {
                 String searchBoxInput =SearchInputText.getText().toString();
                 SearchPeople(searchBoxInput);
+                firebaseRecyclerAdapter.startListening();
             }
         });
 
@@ -134,12 +135,12 @@ public class find_friends_activity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        firebaseRecyclerAdapter.startListening();
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        firebaseRecyclerAdapter.stopListening();
+
     }
 }
