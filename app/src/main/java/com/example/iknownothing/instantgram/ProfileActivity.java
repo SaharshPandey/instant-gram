@@ -84,7 +84,7 @@ public class ProfileActivity extends AppCompatActivity {
                        if(dataSnapshot.hasChild("username"))
                        {
                            String username = dataSnapshot.child("username").getValue().toString();
-                           profile_username.setText(username);
+                           profile_username.setText("@"+username);
                        }
 
                        if(dataSnapshot.hasChild("bio"))
@@ -123,7 +123,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                        if (dataSnapshot.hasChild("username")) {
                            String username = dataSnapshot.child("username").getValue().toString();
-                           profile_username.setText(username);
+                           profile_username.setText("@"+username);
                        }
 
                        if (dataSnapshot.hasChild("bio")) {

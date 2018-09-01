@@ -1,5 +1,6 @@
 package com.example.iknownothing.instantgram;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -56,6 +58,11 @@ public class find_friends_activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String searchBoxInput =SearchInputText.getText().toString();
+
+                //HIDING THE KEYBOARD WHEN BUTTON IS CLICKED....
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
                 SearchPeople(searchBoxInput);
 
             }
