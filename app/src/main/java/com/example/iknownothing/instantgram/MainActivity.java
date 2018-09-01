@@ -489,6 +489,9 @@ public class MainActivity extends AppCompatActivity {
 
                 CheckingFirebaseData(PostKey);
 
+                popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
+                popup_button=holder.mView.findViewById(R.id.popup_button);
+                popup_button_layout.setVisibility(View.INVISIBLE);
 
                 holder.setFullname(model.fullname);
                 holder.setProfileImage(getApplicationContext(),model.profileImage);
@@ -499,9 +502,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Adding popup button functionality...
 
-                popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
-                popup_button=holder.mView.findViewById(R.id.popup_button);
-                popup_button_layout.setVisibility(View.INVISIBLE);
+
 
                 Log.d("result",String.valueOf(position));
 

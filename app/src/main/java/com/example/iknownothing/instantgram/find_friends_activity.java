@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -71,7 +72,15 @@ public class find_friends_activity extends AppCompatActivity {
                 = new FirebaseRecyclerAdapter<FindFriends, FindFriendsViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull FindFriendsViewHolder holder, int position, @NonNull FindFriends model) {
-
+            holder.setFullname(model.fullname);
+            holder.setUsername(model.username);
+            holder.setProfileImage(model.profileImage);
+            holder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(find_friends_activity.this,"Open Profile",Toast.LENGTH_SHORT).show();
+                }
+            });
 
             }
 
