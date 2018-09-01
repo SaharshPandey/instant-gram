@@ -29,7 +29,7 @@ public class find_friends_activity extends AppCompatActivity {
     private EditText SearchInputText;
     private RecyclerView SearchList;
     private ImageButton Back;
-    private DatabaseReference UserRef;
+    private DatabaseReference AllUserRef;
     private String CurrentUserId;
     private FirebaseAuth mAuth;
 
@@ -40,7 +40,7 @@ public class find_friends_activity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         CurrentUserId = mAuth.getCurrentUser().getUid();
-        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        AllUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         SearchList = findViewById(R.id.searchlist);
         SearchList.setHasFixedSize(true);
@@ -65,17 +65,20 @@ public class find_friends_activity extends AppCompatActivity {
         //QUERY FOR FIREBASE RECYCLER ADAPTER....
         FirebaseRecyclerOptions<FindFriends> options =
                 new FirebaseRecyclerOptions.Builder<FindFriends>()
-                        .setQuery(UserRef.orderByChild("fullname"), FindFriends.class)
+                        .setQuery(AllUserRef.orderByChild("fullname").startAt(searchBoxInput).endAt(searchBoxInput+"\uf8ff"),
+                                FindFriends.class)
                         .build();
 
         FirebaseRecyclerAdapter<FindFriends,FindFriendsViewHolder> firebaseRecyclerAdapter
                 = new FirebaseRecyclerAdapter<FindFriends, FindFriendsViewHolder>(options) {
+
             @Override
             protected void onBindViewHolder(@NonNull FindFriendsViewHolder holder, int position, @NonNull FindFriends model) {
-            holder.setFullname(model.fullname);
-            holder.setUsername(model.username);
-            holder.setProfileImage(model.profileImage);
-            holder.mView.setOnClickListener(new View.OnClickListener() {
+           //Binding data to the recycler view.....
+                holder.setFullname(model.fullname);
+                holder.setUsername(model.username);
+                holder.setProfileImage(model.profileImage);
+                holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(find_friends_activity.this,"Open Profile",Toast.LENGTH_SHORT).show();

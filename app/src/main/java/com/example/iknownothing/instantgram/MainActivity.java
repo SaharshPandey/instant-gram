@@ -257,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this,"Friend List",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_find_friends:
-                        Intent search = new Intent(MainActivity.this,FindFriends.class);
+                        Intent search = new Intent(MainActivity.this,find_friends_activity.class);
                         startActivity(search);
                         Toast.makeText(MainActivity.this,"Find Firends",Toast.LENGTH_SHORT).show();
                         break;
@@ -489,9 +489,7 @@ public class MainActivity extends AppCompatActivity {
 
                 CheckingFirebaseData(PostKey);
 
-                popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
-                popup_button=holder.mView.findViewById(R.id.popup_button);
-                popup_button_layout.setVisibility(View.INVISIBLE);
+
 
                 holder.setFullname(model.fullname);
                 holder.setProfileImage(getApplicationContext(),model.profileImage);
@@ -501,7 +499,9 @@ public class MainActivity extends AppCompatActivity {
                 holder.setPostimage(getApplicationContext(), model.postimage);
 
                 //Adding popup button functionality...
-
+                popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
+                popup_button=holder.mView.findViewById(R.id.popup_button);
+                popup_button_layout.setVisibility(View.INVISIBLE);
 
 
                 Log.d("result",String.valueOf(position));
