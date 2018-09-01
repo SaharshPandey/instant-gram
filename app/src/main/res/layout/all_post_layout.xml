@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-
+                android:layout_weight="1"
 
                 >
 
@@ -125,7 +125,7 @@
                     android:id="@+id/popup_button"
                     android:layout_width="20dp"
                     android:layout_height="18dp"
-                    android:background="@drawable/menu"
+                    android:background="@drawable/ic_more_horiz"
                     android:scaleType="fitCenter" />
             </LinearLayout>
         </LinearLayout>
