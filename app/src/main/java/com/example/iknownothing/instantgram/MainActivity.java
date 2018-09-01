@@ -574,7 +574,7 @@ public class MainActivity extends AppCompatActivity {
         }
         public void setProfileImage(Context ctx, String profileImage) {
             CircleImageView image = mView.findViewById(R.id.post_profile_image);
-            Picasso.get().load(profileImage).stableKey(profileImage).into(image);
+            Picasso.get().load(profileImage).into(image);
         }
         public void setTime(String time)
         {
