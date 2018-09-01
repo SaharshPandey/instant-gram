@@ -54,7 +54,7 @@ public class find_friends_activity extends AppCompatActivity {
         SearchFriendsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseRecyclerAdapter.stopListening();
+
                 String searchBoxInput =SearchInputText.getText().toString();
                 SearchPeople(searchBoxInput);
                 firebaseRecyclerAdapter.startListening();
