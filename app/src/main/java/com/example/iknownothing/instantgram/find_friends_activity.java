@@ -1,5 +1,6 @@
 package com.example.iknownothing.instantgram;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -141,5 +142,10 @@ public class find_friends_activity extends AppCompatActivity {
 
             }
     }
+    public void SendUserToHisProfileActivity()
+            {
+                Intent sendProfile = new Intent(find_friends_activity.this,ProfileActivity.class);
+                startActivity(sendProfile);
 
+            }
 }
