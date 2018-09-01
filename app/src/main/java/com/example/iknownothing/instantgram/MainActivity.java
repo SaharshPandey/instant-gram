@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout popup_button_layout;
     private DatabaseReference ClickPostRef;
     private String description;
+    //private ImageView Like,Comment,Share,Saved;
+    //private TextView PostLikes;
 
     private View post_bar;
     private static Bundle mBundleRecyclerViewState;
@@ -483,6 +485,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull Posts model) {
 
+
                 // Bind the Chat object to the ChatHolder
 
                 // GETTING REFERENCE FOR EACH POST THAT HAS BEEN TAPPED...
@@ -503,6 +506,9 @@ public class MainActivity extends AppCompatActivity {
                 popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
                 popup_button=holder.mView.findViewById(R.id.popup_button);
                 popup_button_layout.setVisibility(View.INVISIBLE);
+
+
+
 
 
                 Log.d("result",String.valueOf(position));
@@ -567,6 +573,11 @@ public class MainActivity extends AppCompatActivity {
         {
             super(itemView);
             mView = itemView;
+
+            ImageView Like  = mView.findViewById(R.id.like);
+            ImageView Comment = mView.findViewById(R.id.comment);
+            ImageView Share = mView.findViewById(R.id.share);
+            TextView PostLikes = mView.findViewById(R.id.postlikes);
         }
         public void setFullname(String fullname) {
             TextView name= mView.findViewById(R.id.post_username);
