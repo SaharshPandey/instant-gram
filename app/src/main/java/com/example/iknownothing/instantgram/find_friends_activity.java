@@ -87,6 +87,8 @@ public class find_friends_activity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull FindFriendsViewHolder holder, int position, @NonNull FindFriends model) {
            //Binding data to the recycler view.....
+                final String UserKey = getRef(position).getKey();
+
                 holder.setFullname(model.fullname);
                 holder.setUsername("@"+model.username);
                 holder.setProfileImage(model.profileImage);
@@ -94,7 +96,8 @@ public class find_friends_activity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(find_friends_activity.this,"Open Profile",Toast.LENGTH_SHORT).show();
-                    SendUserToHisProfileActivity();
+                    SendUserToHisProfileActivity(UserKey);
+
                 }
             });
 
@@ -143,9 +146,10 @@ public class find_friends_activity extends AppCompatActivity {
 
             }
     }
-    public void SendUserToHisProfileActivity()
+    public void SendUserToHisProfileActivity(String UserKey)
             {
                 Intent sendProfile = new Intent(find_friends_activity.this,ProfileActivity.class);
+                sendProfile.putExtra("UserKey",UserKey);
                 startActivity(sendProfile);
 
             }
