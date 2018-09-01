@@ -132,7 +132,7 @@ public class find_friends_activity extends AppCompatActivity {
             public void setProfileImage(String profileImage)
             {
                 CircleImageView imageView = mView.findViewById(R.id.searched_profileimage);
-                Picasso.get().load(profileImage).into(imageView);
+                Picasso.get().load(profileImage).placeholder(R.drawable.profile).into(imageView);
             }
             public void setUsername(String username)
             {
@@ -142,15 +142,4 @@ public class find_friends_activity extends AppCompatActivity {
             }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-    }
 }
