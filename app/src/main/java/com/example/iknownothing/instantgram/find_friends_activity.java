@@ -80,14 +80,14 @@ public class find_friends_activity extends AppCompatActivity {
                                 FindFriends.class)
                         .build();
 
-        FirebaseRecyclerAdapter<FindFriends,FindFriendsViewHolder> firebaseRecyclerAdapter 
+        FirebaseRecyclerAdapter<FindFriends,FindFriendsViewHolder> firebaseRecyclerAdapter
                 = new FirebaseRecyclerAdapter<FindFriends, FindFriendsViewHolder>(options) {
 
             @Override
             protected void onBindViewHolder(@NonNull FindFriendsViewHolder holder, int position, @NonNull FindFriends model) {
            //Binding data to the recycler view.....
                 holder.setFullname(model.fullname);
-                holder.setUsername(model.username);
+                holder.setUsername("@"+model.username);
                 holder.setProfileImage(model.profileImage);
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
