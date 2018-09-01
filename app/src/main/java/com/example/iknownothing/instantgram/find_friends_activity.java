@@ -94,6 +94,7 @@ public class find_friends_activity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(find_friends_activity.this,"Open Profile",Toast.LENGTH_SHORT).show();
+                    SendUserToHisProfileActivity();
                 }
             });
 
