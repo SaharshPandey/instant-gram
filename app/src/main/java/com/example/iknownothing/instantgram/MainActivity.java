@@ -257,8 +257,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this,"Friend List",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_find_friends:
-                       // Intent search = new Intent(MainActivity.this,find_friends_activity.class);
-                        //startActivity(search);
+                        Intent search = new Intent(MainActivity.this,find_friends_activity.class);
+                        startActivity(search);
                         Toast.makeText(MainActivity.this,"Find Firends",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_messages:

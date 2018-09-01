@@ -57,7 +57,7 @@ public class find_friends_activity extends AppCompatActivity {
 
                 String searchBoxInput =SearchInputText.getText().toString();
                 SearchPeople(searchBoxInput);
-                firebaseRecyclerAdapter.startListening();
+                
             }
         });
 
@@ -112,6 +112,7 @@ public class find_friends_activity extends AppCompatActivity {
 
         //Setting Adapter into RecyclerView
         SearchList.setAdapter(firebaseRecyclerAdapter);
+        firebaseRecyclerAdapter.startListening();
     }
 
     public static class FindFriendsViewHolder extends RecyclerView.ViewHolder
