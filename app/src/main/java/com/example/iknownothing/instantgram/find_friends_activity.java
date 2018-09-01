@@ -32,7 +32,7 @@ public class find_friends_activity extends AppCompatActivity {
     private DatabaseReference AllUserRef;
     private String CurrentUserId;
     private FirebaseAuth mAuth;
-
+    private ImageButton SearchFriendsButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,16 +48,16 @@ public class find_friends_activity extends AppCompatActivity {
 
         SearchInputText = findViewById(R.id.search_friends);
         Back = findViewById(R.id.going_back1);
+        SearchFriendsButton = findViewById(R.id.search_friends_button);
 
-        SearchInputText.setOnKeyListener(new View.OnKeyListener() {
+        SearchFriendsButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
+            public void onClick(View v) {
                 String searchBoxInput =SearchInputText.getText().toString();
                 SearchPeople(searchBoxInput);
-                return true;
             }
         });
+
     }
 
     private void SearchPeople(String searchBoxInput) {
