@@ -51,16 +51,17 @@ public class find_friends_activity extends AppCompatActivity {
         Back = findViewById(R.id.going_back1);
         SearchFriendsButton = findViewById(R.id.search_friends_button);
 
-      /*  SearchFriendsButton.setOnClickListener(new View.OnClickListener() {
+        SearchFriendsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                firebaseRecyclerAdapter.stopListening();
                 String searchBoxInput =SearchInputText.getText().toString();
                 SearchPeople(searchBoxInput);
                 firebaseRecyclerAdapter.startListening();
             }
         });
-*/
-        SearchInputText.setOnKeyListener(new View.OnKeyListener() {
+
+      /*  SearchInputText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 String searchBoxInput =SearchInputText.getText().toString();
@@ -68,7 +69,7 @@ public class find_friends_activity extends AppCompatActivity {
                 firebaseRecyclerAdapter.startListening();
                 return true;
             }
-        });
+        });*/
     }
 
     private void SearchPeople(String searchBoxInput) {
