@@ -62,8 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-       if(UserKey != null && !UserKey.equals(""))
-       {
+
            UserRef.child(UserKey).addValueEventListener(new ValueEventListener() {
                @Override
                public void onDataChange(DataSnapshot dataSnapshot) {
@@ -103,44 +102,6 @@ public class ProfileActivity extends AppCompatActivity {
                    Toast.makeText(ProfileActivity.this,"Error : "+databaseError.getMessage(),Toast.LENGTH_LONG).show();
                }
            });
-       }
-
-       else {
-           //ADDING INFORMATION OF THE CURRENT USER INTO THE PROFILE ACTIVITY...
-           UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
-               @Override
-               public void onDataChange(DataSnapshot dataSnapshot) {
-                   if (dataSnapshot.exists()) {
-                       if (dataSnapshot.hasChild("profileImage")) {
-                           String profileimage = dataSnapshot.child("profileImage").getValue().toString();
-                           Picasso.get().load(profileimage).into(profileImage);
-                       }
-
-                       if (dataSnapshot.hasChild("fullname")) {
-                           String fullname = dataSnapshot.child("fullname").getValue().toString();
-                           profile_fullname.setText(fullname);
-                       }
-
-                       if (dataSnapshot.hasChild("username")) {
-                           String username = dataSnapshot.child("username").getValue().toString();
-                           profile_username.setText("@"+username);
-                       }
-
-                       if (dataSnapshot.hasChild("bio")) {
-                           String bio = dataSnapshot.child("bio").getValue().toString();
-                           profile_bio.setText(bio);
-                       }
-                   } else {
-                       Toast.makeText(ProfileActivity.this, "Please Check your Internet Connection", Toast.LENGTH_LONG).show();
-                   }
-               }
-
-               @Override
-               public void onCancelled(DatabaseError databaseError) {
-                   Toast.makeText(ProfileActivity.this, "Error : " + databaseError.getMessage(), Toast.LENGTH_LONG).show();
-               }
-           });
-       }
     }
 
 }
