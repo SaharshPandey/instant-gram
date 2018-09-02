@@ -545,7 +545,7 @@ public class MainActivity extends AppCompatActivity {
                 holder.mView.findViewById(R.id.like).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        LikeChecker = true;
+                        
                         LikesRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
