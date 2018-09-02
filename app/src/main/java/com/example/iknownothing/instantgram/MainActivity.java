@@ -556,7 +556,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 else{
                                     LikesRef.child(PostKey).child(CurrentUserId).setValue(true);
-                                    LikeChecker = false;
+                                    
                                 }
                             }
 
