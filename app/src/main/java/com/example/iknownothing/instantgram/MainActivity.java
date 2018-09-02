@@ -552,7 +552,7 @@ public class MainActivity extends AppCompatActivity {
                                 if(dataSnapshot.child(PostKey).hasChild(CurrentUserId))
                                 {
                                     LikesRef.child(PostKey).child(CurrentUserId).removeValue();
-                                    
+                                    LikeChecker = false;
                                 }
                                 else{
                                     LikesRef.child(PostKey).child(CurrentUserId).setValue(true);
