@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Private objects of FirebaseAuth, NavigationView,DrawerLayout,ToolBar,processDialog
     private FirebaseAuth mAuth;
-    private DatabaseReference UserRef,PostRef;
+    private DatabaseReference UserRef,PostRef,LikesRef;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private RecyclerView postList;
@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
     private String description;
     //private ImageView Like,Comment,Share,Saved;
     //private TextView PostLikes;
+    boolean LikeChecker= false;
 
     private View post_bar;
     private static Bundle mBundleRecyclerViewState;
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         CurrentUserId = mAuth.getCurrentUser().getUid();
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
-
+        LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
@@ -537,6 +538,33 @@ public class MainActivity extends AppCompatActivity {
                         Intent clickPostIntent =new Intent(MainActivity.this,OpenPostActivity.class);
                         clickPostIntent.putExtra("PostKey",PostKey);
                         startActivity(clickPostIntent);
+                    }
+                });
+
+               //LIKE POST WHEN USER CLICKS LIKE BUTTON...
+                holder.mView.findViewById(R.id.like).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LikeChecker = true;
+                        LikesRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.child(PostKey).hasChild(CurrentUserId))
+                                {
+                                    LikesRef.child(PostKey).child(CurrentUserId).removeValue();
+                                    LikeChecker = false;
+                                }
+                                else{
+                                    LikesRef.child(PostKey).child(CurrentUserId).setValue(true);
+                                    LikeChecker = false;
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                 });
 
