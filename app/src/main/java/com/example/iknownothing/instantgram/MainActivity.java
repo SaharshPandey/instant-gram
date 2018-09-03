@@ -614,6 +614,11 @@ public class MainActivity extends AppCompatActivity {
             LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
             currentuserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
+
+        public void setLikeButtonStatus(final String PostKey)
+        {
+
+        }
         public void setFullname(String fullname) {
             TextView name= mView.findViewById(R.id.post_username);
             name.setText(fullname);
