@@ -549,6 +549,7 @@ public class MainActivity extends AppCompatActivity {
                         LikesRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
+
                                 if(dataSnapshot.child(PostKey).hasChild(CurrentUserId))
                                 {
                                     LikesRef.child(PostKey).child(CurrentUserId).removeValue();
@@ -593,7 +594,9 @@ public class MainActivity extends AppCompatActivity {
     {
         ProgressBar post_progress;
         View mView;
-
+        int coutnlikes;
+        String currentuserId;
+        DatabaseReference LikesRef;
 
 
         // USING GETTER SETTERS METHODS FROM POSTS CLASS.....
@@ -606,6 +609,9 @@ public class MainActivity extends AppCompatActivity {
             ImageView Comment = mView.findViewById(R.id.comment);
             ImageView Share = mView.findViewById(R.id.share);
             TextView PostLikes = mView.findViewById(R.id.postlikes);
+
+            LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
+            currentuserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
         public void setFullname(String fullname) {
             TextView name= mView.findViewById(R.id.post_username);
