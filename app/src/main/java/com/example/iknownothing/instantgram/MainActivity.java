@@ -598,7 +598,10 @@ public class MainActivity extends AppCompatActivity {
         int coutnlikes;
         String currentuserId;
         DatabaseReference LikesRef;
-
+        ImageView Like;
+        ImageView Comment;
+        ImageView Share;
+        TextView PostLikes;
 
         // USING GETTER SETTERS METHODS FROM POSTS CLASS.....
         public PostViewHolder(View itemView)
@@ -606,10 +609,10 @@ public class MainActivity extends AppCompatActivity {
             super(itemView);
             mView = itemView;
 
-            ImageView Like  = mView.findViewById(R.id.like);
-            ImageView Comment = mView.findViewById(R.id.comment);
-            ImageView Share = mView.findViewById(R.id.share);
-            TextView PostLikes = mView.findViewById(R.id.postlikes);
+            Like  = mView.findViewById(R.id.like);
+            Comment = mView.findViewById(R.id.comment);
+            Share = mView.findViewById(R.id.share);
+            PostLikes = mView.findViewById(R.id.postlikes);
 
             LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
             currentuserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -623,7 +626,7 @@ public class MainActivity extends AppCompatActivity {
                     if(dataSnapshot.child(PostKey).hasChild(currentuserId))
                     {
                         coutnlikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
-                        
+
                     }
                 }
 
