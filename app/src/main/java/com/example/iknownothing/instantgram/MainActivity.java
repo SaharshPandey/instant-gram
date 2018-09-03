@@ -503,6 +503,7 @@ public class MainActivity extends AppCompatActivity {
                 holder.setDescription(model.description);
                 holder.setPostimage(getApplicationContext(), model.postimage);
 
+                holder.setLikeButtonStatus(PostKey);
                 //Adding popup button functionality...
                 popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
                 popup_button=holder.mView.findViewById(R.id.popup_button);
