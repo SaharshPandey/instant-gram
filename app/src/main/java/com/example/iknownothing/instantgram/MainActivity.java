@@ -595,7 +595,7 @@ public class MainActivity extends AppCompatActivity {
     {
         ProgressBar post_progress;
         View mView;
-        int coutnlikes;
+        int countlikes;
         String currentuserId;
         DatabaseReference LikesRef;
         ImageView Like;
@@ -625,8 +625,14 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if(dataSnapshot.child(PostKey).hasChild(currentuserId))
                     {
-                        coutnlikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
+                        countlikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
                         Like.setImageResource(R.drawable.ic_heart_black);
+                        PostLikes.setText(Integer.toString(countlikes));
+                    }
+                    else{
+                        countlikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
+                        Like.setImageResource(R.drawable.ic_heart_black);
+                        PostLikes.setText(Integer.toString(countlikes));
                     }
                 }
 
