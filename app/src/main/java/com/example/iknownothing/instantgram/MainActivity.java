@@ -617,7 +617,21 @@ public class MainActivity extends AppCompatActivity {
 
         public void setLikeButtonStatus(final String PostKey)
         {
+            LikesRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.child(PostKey).hasChild(currentuserId))
+                    {
+                        coutnlikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
 
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
         public void setFullname(String fullname) {
             TextView name= mView.findViewById(R.id.post_username);
