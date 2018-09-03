@@ -551,15 +551,18 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                if(dataSnapshot.child(PostKey).hasChild(CurrentUserId))
-                                {
-                                    LikesRef.child(PostKey).child(CurrentUserId).removeValue();
-                                    LikeChecker = false;
-                                }
-                                else{
-                                    LikesRef.child(PostKey).child(CurrentUserId).setValue(true);
-                                    LikeChecker = false;
-                                }
+                               if(LikeChecker==true)
+                               {
+                                   if(dataSnapshot.child(PostKey).hasChild(CurrentUserId))
+                                   {
+                                       LikesRef.child(PostKey).child(CurrentUserId).removeValue();
+                                       LikeChecker = false;
+                                   }
+                                   else{
+                                       LikesRef.child(PostKey).child(CurrentUserId).setValue(true);
+                                       LikeChecker = false;
+                                   }
+                               }
                             }
 
                             @Override
@@ -631,7 +634,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else{
                         countlikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
-                        Like.setImageResource(R.drawable.ic_heart_black);
+                        Like.setImageResource(R.drawable.ic_heart_outline);
                         PostLikes.setText(Integer.toString(countlikes));
                     }
                 }
