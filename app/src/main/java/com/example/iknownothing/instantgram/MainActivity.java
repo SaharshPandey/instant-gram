@@ -572,7 +572,15 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                 });
-                
+
+                holder.mView.findViewById(R.id.comment).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent commentIntent = new Intent(MainActivity.this,CommentActivity.class);
+                        commentIntent.putExtra("PostKey",PostKey);
+                        startActivity(commentIntent);
+                    }
+                });
 
             }
 
