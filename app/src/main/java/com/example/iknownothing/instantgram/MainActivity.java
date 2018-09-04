@@ -550,7 +550,7 @@ public class MainActivity extends AppCompatActivity {
                         LikesRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                                //CHECKING IF THE POST IS LIKED OR NOT.....
                                if(LikeChecker==true)
                                {
                                    if(dataSnapshot.child(PostKey).hasChild(CurrentUserId))
@@ -572,6 +572,7 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                 });
+                
 
             }
 
@@ -596,6 +597,7 @@ public class MainActivity extends AppCompatActivity {
     //CLASS THAT EXTENDS VIEW HOLDER CLASS....
     public static class PostViewHolder extends RecyclerView.ViewHolder
     {
+        //Declaring Widgets and Reference Variables....
         ProgressBar post_progress;
         View mView;
         int countlikes;
@@ -612,6 +614,7 @@ public class MainActivity extends AppCompatActivity {
             super(itemView);
             mView = itemView;
 
+            //Instantiating Like,Comment,Share widgets
             Like  = mView.findViewById(R.id.like);
             Comment = mView.findViewById(R.id.comment);
             Share = mView.findViewById(R.id.share);
@@ -621,6 +624,8 @@ public class MainActivity extends AppCompatActivity {
             currentuserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
 
+        //Method that check for the Likes when user opens the app..
+        //It will show liked or not liked image.
         public void setLikeButtonStatus(final String PostKey)
         {
             LikesRef.addValueEventListener(new ValueEventListener() {
