@@ -1,9 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CommentActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <include
+        android:id="@+id/toolbar_comment"
+        layout="@layout/toolbar_account"
+        >
+    </include>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/toolbar_comment"
+    android:id="@+id/comment_layout"
+    android:orientation="horizontal"
+    >
+
+
+    <EditText
+        android:id="@+id/write_comment"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:padding="10dp"
+        android:background="@android:color/white"
+        android:hint="Write your Comment"
+        android:maxLength="100"
+        android:maxLines="6"
+        android:layout_weight="1"
+        />
+    <ImageButton
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="3dp"
+        android:layout_gravity="center"
+        android:background="@drawable/send1"
+        android:scaleType="center"
+        />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/show_comments"
+    android:layout_marginTop="12dp"
+    android:layout_width="match_parent"
+    android:layout_below="@+id/comment_layout"
+    android:layout_height="wrap_content">
+
+</android.support.v7.widget.RecyclerView>
+</RelativeLayout>
