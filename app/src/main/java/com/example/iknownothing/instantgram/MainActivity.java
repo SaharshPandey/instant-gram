@@ -881,7 +881,7 @@ return super.onOptionsItemSelected(item);
                                     if(task.isSuccessful())
                                     {
                                         //scrolling to top of recycler view when user upload something..
-                                        postList.smoothScrollToPosition(postList.getAdapter().getItemCount()-1);
+                                        postList.smoothScrollToPosition(postList.getAdapter().getItemCount());
                                         loadingBar.dismiss();
 
                                         //Toast.makeText(PostActivity.this,"Post is Updated Successfully",Toast.LENGTH_SHORT).show();
@@ -910,6 +910,8 @@ return super.onOptionsItemSelected(item);
     @Override
     protected void onPause() {
         super.onPause();
+
+        //So that the Data should be Retained;
         mBundleRecyclerViewState =new Bundle();
         Parcelable listState = postList.getLayoutManager().onSaveInstanceState();
         mBundleRecyclerViewState.putParcelable("recycler_state",listState);
@@ -918,6 +920,8 @@ return super.onOptionsItemSelected(item);
     @Override
     protected void onResume() {
         super.onResume();
+
+        //So that the Data should be Retained;
         if(mBundleRecyclerViewState != null)
         {
             Parcelable liststate = mBundleRecyclerViewState.getParcelable("recycler_state");
