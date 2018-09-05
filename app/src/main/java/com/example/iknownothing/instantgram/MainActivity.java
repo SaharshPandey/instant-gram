@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -491,7 +492,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // GETTING REFERENCE FOR EACH POST THAT HAS BEEN TAPPED...
                 final String PostKey = getRef(position).getKey();
-
+                Log.d("result",PostKey);
                 CheckingFirebaseData(PostKey);
 
 
@@ -502,8 +503,8 @@ public class MainActivity extends AppCompatActivity {
                 holder.setTime(model.time);
                 holder.setDescription(model.description);
                 holder.setPostimage(getApplicationContext(), model.postimage);
-
                 holder.setLikeButtonStatus(PostKey);
+
                 //Adding popup button functionality...
                 popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
                 popup_button=holder.mView.findViewById(R.id.popup_button);
@@ -535,6 +536,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //STARTING PROFILE ACTIVITY..
+
+
                         Intent profile =new Intent(MainActivity.this,ProfileActivity.class);
                         profile.putExtra("UserKey",Database_User_Id);
                         startActivity(profile);
@@ -546,6 +549,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //STARTING PROFILE ACTIVITY..
+
+
                         Intent profile =new Intent(MainActivity.this,ProfileActivity.class);
                         profile.putExtra("UserKey",Database_User_Id);
                         startActivity(profile);
@@ -637,6 +642,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView Share;
         TextView PostLikes;
 
+
         // USING GETTER SETTERS METHODS FROM POSTS CLASS.....
         public PostViewHolder(View itemView)
         {
@@ -648,7 +654,8 @@ public class MainActivity extends AppCompatActivity {
             Comment = mView.findViewById(R.id.comment);
             Share = mView.findViewById(R.id.share);
             PostLikes = mView.findViewById(R.id.postlikes);
-
+            post_progress = mView.findViewById(R.id.post_progress);
+            post_progress.setVisibility(View.VISIBLE);
             LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
             currentuserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
@@ -679,6 +686,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+
         public void setFullname(String fullname) {
             TextView name= mView.findViewById(R.id.post_username);
             name.setText(fullname);
@@ -732,7 +741,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Hiding the progress bar when user upload text..
                 Picasso.get().load(postimage).into(post_image);
-                post_progress = mView.findViewById(R.id.post_progress);
+
                 post_progress.setVisibility(View.GONE);
 
 
@@ -742,7 +751,7 @@ public class MainActivity extends AppCompatActivity {
             Picasso.get().load(postimage).into(post_image, new Callback() {
                 @Override
                 public void onSuccess() {
-                    post_progress = mView.findViewById(R.id.post_progress);
+
                     post_progress.setVisibility(View.GONE);
                 }
 
