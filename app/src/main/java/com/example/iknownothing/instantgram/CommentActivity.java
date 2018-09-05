@@ -79,8 +79,8 @@ public class CommentActivity extends AppCompatActivity {
                         if(dataSnapshot.exists())
                         {
                             String userName = dataSnapshot.child("username").getValue().toString();
-                            String profileImage = dataSnapshot.child("profileImage").getValue().toString();
-                            ValidateComment(userName,profileImage);
+                            //String profileImage = dataSnapshot.child("profileImage").getValue().toString();
+                            ValidateComment(userName);
 
                         }
                     }
@@ -95,7 +95,7 @@ public class CommentActivity extends AppCompatActivity {
         });
     }
 
-    private void ValidateComment(String userName,String profileImage) {
+    private void ValidateComment(String userName) {
         String commentText = WriteComment.getText().toString();
         if(TextUtils.isEmpty(commentText))
         {
@@ -119,6 +119,7 @@ public class CommentActivity extends AppCompatActivity {
             //Making data for node to store in firebase.....
             HashMap commentMap = new HashMap();
             commentMap.put("uid", CurrentUserId);
+            commentMap.put("username",userName);
             commentMap.put("commenttext",commentText);
             commentMap.put("date", CurrentDate);
             commentMap.put("time", CurrentTime);
