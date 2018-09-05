@@ -7,6 +7,9 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:orientation="horizontal"
+         android:layout_marginStart="5dp"
+         android:layout_marginEnd="5dp"
+         android:background="@android:color/white"
          >
          <de.hdodenhof.circleimageview.CircleImageView
              android:id="@+id/comment_profile"
@@ -15,16 +18,62 @@
              android:background="@drawable/profile"
              android:layout_gravity="center"
              />
-         <TextView
+         <LinearLayout
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
+             android:orientation="vertical"
              android:layout_weight="1"
-             android:padding="10dp"
-             android:textSize="13sp"
-             android:text="this is my first comment"
-             android:inputType="textMultiLine"
-             android:maxLines="8"
-             />
+             >
+             <LinearLayout
+
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 >
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@android:color/black"
+                     android:text="saharsh"
+                     android:padding="5dp"
+                     android:textSize="13sp"
+
+                     />
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:padding="10dp"
+                     android:textSize="12sp"
+                     android:text="this is my first comment"
+                     android:inputType="textMultiLine"
+                     android:maxLines="8"
+                     />
+             </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12Aug"
+        android:textSize="10sp"
+        android:layout_marginStart="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reply"
+        android:textSize="10sp"
+        android:layout_marginStart="10dp"
+
+        />
+
+</LinearLayout>
+
+         </LinearLayout>
          <ImageButton
              android:layout_width="15dp"
              android:layout_height="15dp"
