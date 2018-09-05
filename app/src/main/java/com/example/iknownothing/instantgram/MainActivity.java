@@ -539,7 +539,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                         Intent profile =new Intent(MainActivity.this,ProfileActivity.class);
-                        profile.putExtra("UserKey",PostKey.substring(0,PostKey.indexOf('-')-1));
+                        profile.putExtra("UserKey",PostKey.substring(0,PostKey.indexOf('-')));
                         startActivity(profile);
                     }
                 });
@@ -552,7 +552,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                         Intent profile =new Intent(MainActivity.this,ProfileActivity.class);
-                        profile.putExtra("UserKey",PostKey.substring(0,PostKey.indexOf('-')-1));
+                        profile.putExtra("UserKey",PostKey.substring(0,PostKey.indexOf('-')));
+
                         startActivity(profile);
                     }
                 });
