@@ -1,5 +1,6 @@
 package com.example.iknownothing.instantgram;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,7 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -84,11 +89,49 @@ public class CommentActivity extends AppCompatActivity {
         String commentText = WriteComment.getText().toString();
         if(TextUtils.isEmpty(commentText))
         {
-            Toast.makeText(CommentActivity.this,"Enter Valid Comment",Toast.LENGTH_SHORT);
+            Toast.makeText(CommentActivity.this,"Enter Valid Comment",Toast.LENGTH_SHORT).show();
         }
         else
         {
-            
+            Calendar  calForDAte =Calendar.getInstance();
+
+            Long tsLong = System.currentTimeMillis()/1000;
+            final String ts = tsLong.toString();
+
+            SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
+            final String CurrentDate = currentDate.format(calForDAte.getTime());
+
+            SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
+            final String CurrentTime = currentTime.format(calForDAte.getTime());
+
+            final String RandomKey = CurrentUserId+CurrentDate+CurrentTime;
+
+            //Making data for node to store in firebase.....
+            HashMap commentMap = new HashMap();
+            commentMap.put("uid", CurrentUserId);
+            commentMap.put("commenttext",commentText);
+            commentMap.put("date", CurrentDate);
+            commentMap.put("time", CurrentTime);
+            commentMap.put("timestamp",ts);
+
+            PostRef.child(RandomKey).updateChildren(commentMap).addOnCompleteListener(new OnCompleteListener() {
+                @Override
+                public void onComplete(@NonNull Task task) {
+               if(task.isSuccessful())
+               {
+                   Toast.makeText(CommentActivity.this,"Comment Posted",Toast.LENGTH_SHORT).show();
+               }
+               else{
+                   Toast.makeText(CommentActivity.this,"Unable to Comment",Toast.LENGTH_SHORT).show();
+               }
+
+                }
+            });
         }
+
+
+
+
+
     }
 }
