@@ -92,7 +92,7 @@ public class SetupActivity extends AppCompatActivity {
                     userMap.put("username",username);
                     userMap.put("fullname",fullname);
                     userMap.put("country",countryname);
-                    userMap.put("status","Hey there, I am using InstantGram");
+                    userMap.put("status","Hey there, I am using Big-Inch");
                     userMap.put("gender","none");
                     userMap.put("dob","none");
                     userMap.put("realtionshipstatus","none");
