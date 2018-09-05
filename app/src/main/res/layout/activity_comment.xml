@@ -11,16 +11,24 @@
         layout="@layout/toolbar_account"
         >
     </include>
-
-    <LinearLayout
+<android.support.v7.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/toolbar_comment"
     android:id="@+id/comment_layout"
+    >
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     >
 
-
+<de.hdodenhof.circleimageview.CircleImageView
+    android:layout_gravity="center"
+    android:background="@drawable/profile"
+    android:layout_marginStart="5dp"
+    android:layout_width="35dp"
+    android:layout_height="35dp" />
     <EditText
         android:id="@+id/write_comment"
 
@@ -40,11 +48,12 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="3dp"
         android:layout_gravity="center"
-        android:background="@drawable/send1"
+        android:background="@android:color/white"
         android:scaleType="center"
+        android:src="@drawable/send"
         />
     </LinearLayout>
-
+</android.support.v7.widget.CardView>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/show_comments"
     android:layout_marginTop="12dp"
