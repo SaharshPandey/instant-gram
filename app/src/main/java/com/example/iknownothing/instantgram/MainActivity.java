@@ -536,7 +536,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         //STARTING PROFILE ACTIVITY..
                         Intent profile =new Intent(MainActivity.this,ProfileActivity.class);
-                        profile.putExtra("UserKey",CurrentUserId);
+                        profile.putExtra("UserKey",Database_User_Id);
                         startActivity(profile);
                     }
                 });
@@ -547,7 +547,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         //STARTING PROFILE ACTIVITY..
                         Intent profile =new Intent(MainActivity.this,ProfileActivity.class);
-                        profile.putExtra("UserKey",CurrentUserId);
+                        profile.putExtra("UserKey",Database_User_Id);
                         startActivity(profile);
                     }
                 });
