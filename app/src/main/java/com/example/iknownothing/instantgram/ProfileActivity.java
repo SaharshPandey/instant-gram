@@ -84,13 +84,15 @@ public class ProfileActivity extends AppCompatActivity {
                        {
                            String username = dataSnapshot.child("username").getValue().toString();
                            profile_username.setText("@"+username);
+
                        }
 
-                       if(dataSnapshot.hasChild("bio"))
+                       if(dataSnapshot.hasChild("status"))
                        {
-                           String bio = dataSnapshot.child("bio").getValue().toString();
+                           String bio = dataSnapshot.child("status").getValue().toString();
                            profile_bio.setText(bio);
                        }
+
                    }
                    else{
                        Toast.makeText(ProfileActivity.this,"Please Check your Internet Connection",Toast.LENGTH_LONG).show();

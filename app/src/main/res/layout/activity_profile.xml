@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 <RelativeLayout
+    android:layout_marginTop="5dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -27,9 +28,6 @@
                 android:layout_marginStart="15dp"
                 android:orientation="vertical">
 
-                <include
-                    android:id="@+id/toolbar_account"
-                    layout="@layout/toolbar_account" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -43,8 +41,8 @@
                         android:layout_weight="1"
                         android:text="@string/alise"
                         android:textColor="@android:color/black"
-                        android:textSize="30sp"
-                        android:textStyle="bold" />
+                        android:textSize="25sp"
+                        android:textStyle="italic" />
 
 
                     <!--Circle Image view library used-->

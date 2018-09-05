@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">InstantGram</string>
+    <string name="app_name">Big-Inch</string>
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
     <string name="title_activity_settings">Settings</string>
@@ -79,16 +79,16 @@
     <string name="story">Stories</string>
     <string name="watch">Watch All</string>
     <string name="like">Likes</string>
-    <string name="alise">alisesmith</string>
-    <string name="postno">245</string>
-    <string name="followersno">7850</string>
-    <string name="followingno">715</string>
+    <string name="alise">unkonwn</string>
+    <string name="postno">00</string>
+    <string name="followersno">00</string>
+    <string name="followingno">00</string>
     <string name="posts">posts</string>
     <string name="followers">followers</string>
     <string name="following">following</string>
     <string name="send">Send Message</string>
-    <string name="smith">Alise Smith</string>
-    <string name="fashion">Fashion-designer, London UK</string>
+    <string name="smith">unknown</string>
+    <string name="fashion">Hey,Im Using Big-Inch</string>
     <string name="one">1. Home Page</string>
     <string name="two">2. Profile Page</string>
 </resources>
