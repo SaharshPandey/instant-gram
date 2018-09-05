@@ -573,6 +573,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                //Listener to the Comments Activity......
                 holder.mView.findViewById(R.id.comment).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
