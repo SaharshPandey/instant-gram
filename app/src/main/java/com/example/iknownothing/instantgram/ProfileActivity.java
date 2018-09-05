@@ -28,7 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView profile_username,profile_fullname,profile_bio;     //User Details Variables;
     private String user_posts,user_followers,user_following;            //User Numeric Information;
     private RecyclerView profile_posts_recyclerview;                    //Users Posts RecyclerView;
-    private ImageView going_back;
+    //private ImageView going_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +49,19 @@ public class ProfileActivity extends AppCompatActivity {
         profile_username = findViewById(R.id.profile_username);
         profile_fullname = findViewById(R.id.profile_fullname);
         profile_bio = findViewById(R.id.profile_bio);
-        going_back = findViewById(R.id.going_back);
+        //going_back = findViewById(R.id.going_back);
 
         //Initialising RecyclerView of User Posts....
         profile_posts_recyclerview = findViewById(R.id.profile_posts_recyclerview);
 
-        //Going back to Previous Activity
+      /*  //Going back to Previous Activity
         going_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
+*/
 
            UserRef.child(UserKey).addValueEventListener(new ValueEventListener() {
                @Override

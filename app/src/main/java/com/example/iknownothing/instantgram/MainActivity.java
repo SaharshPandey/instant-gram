@@ -530,7 +530,27 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                //OPENING PROFILE WHEN USER CLICK THE POST PROFILE IMAGE...
+                holder.mView.findViewById(R.id.post_profile_image).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //STARTING PROFILE ACTIVITY..
+                        Intent profile =new Intent(MainActivity.this,ProfileActivity.class);
+                        profile.putExtra("UserKey",CurrentUserId);
+                        startActivity(profile);
+                    }
+                });
 
+                //OPENING PROFILE WHEN USER CLICK THE POST PROFILE IMAGE...
+                holder.mView.findViewById(R.id.post_username).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //STARTING PROFILE ACTIVITY..
+                        Intent profile =new Intent(MainActivity.this,ProfileActivity.class);
+                        profile.putExtra("UserKey",CurrentUserId);
+                        startActivity(profile);
+                    }
+                });
 
                 //SHOW IMAGE WHEN USER TAP INTO IMAGE....
                holder.mView.findViewById(R.id.post_image).setOnClickListener(new View.OnClickListener() {
