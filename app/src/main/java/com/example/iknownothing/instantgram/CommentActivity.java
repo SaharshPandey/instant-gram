@@ -144,7 +144,6 @@ public class CommentActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        
     }
 
     //Class Holder for RecyclerView...............
