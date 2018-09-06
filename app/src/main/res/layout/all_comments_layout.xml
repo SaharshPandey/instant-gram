@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    >
 
      <LinearLayout
          android:layout_width="match_parent"
@@ -10,6 +12,7 @@
          android:layout_marginStart="5dp"
          android:layout_marginEnd="5dp"
          android:background="@android:color/white"
+
          >
          <de.hdodenhof.circleimageview.CircleImageView
              android:id="@+id/comment_profile"
@@ -35,7 +38,7 @@
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:textColor="@android:color/black"
-                     android:text="saharsh"
+                     android:text="unknown"
                      android:padding="5dp"
                      android:textSize="13sp"
 

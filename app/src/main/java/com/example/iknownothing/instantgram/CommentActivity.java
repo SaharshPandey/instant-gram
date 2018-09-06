@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -48,6 +49,12 @@ public class CommentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+
+        //THIS METHOD DONT OPEN THE KEYBOARD IN STARTUP....
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
         mAuth = FirebaseAuth.getInstance();
         CurrentUserId = mAuth.getCurrentUser().getUid();
@@ -90,6 +97,9 @@ public class CommentActivity extends AppCompatActivity {
                             String userName = dataSnapshot.child("username").getValue().toString();
                             String profileImage = dataSnapshot.child("profileImage").getValue().toString();
                             ValidateComment(userName,profileImage);
+
+                            //making empty when user click on comment button...
+                            WriteComment.setText("");
 
                         }
                     }

@@ -42,6 +42,7 @@
         android:hint="Write your Comment"
         android:maxLength="100"
         android:maxLines="6"
+        android:textSize="13sp"
         android:layout_weight="1"
         />
     <ImageButton
@@ -53,13 +54,13 @@
         android:layout_gravity="center"
         android:background="@android:color/white"
         android:scaleType="center"
-        android:src="@drawable/send"
+        android:src="@drawable/ic_check"
         />
     </LinearLayout>
 </android.support.v7.widget.CardView>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/show_comments"
-    android:layout_marginTop="12dp"
+    android:layout_marginTop="3dp"
     android:layout_width="match_parent"
     android:layout_below="@+id/toolbar_comment"
     android:layout_height="wrap_content">
