@@ -34,7 +34,8 @@
             android:label="@string/title_activity_settings" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".find_friends_activity" />
-        <activity android:name=".CommentActivity"></activity>
+        <activity android:name=".CommentActivity" />
+        <activity android:name=".ForgotPassword"></activity>
     </application>
 
 </manifest>
