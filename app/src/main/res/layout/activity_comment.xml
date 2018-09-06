@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CommentActivity">
+    tools:context=".CommentActivity"
+    android:background="@android:color/white"
+    >
 
     <include
         android:id="@+id/toolbar_comment"
@@ -22,6 +24,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+        android:padding="10dp"
     >
 
 <de.hdodenhof.circleimageview.CircleImageView
