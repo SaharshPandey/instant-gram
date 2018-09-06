@@ -6,16 +6,16 @@ public class Comments {
 
     }
 
-    public Comments(String commenttext,String date,String time,String timestamp,String uid){
+    public Comments(String commenttext,String date,String time,String timestamp,String uid,String username){
         this.commenttext = commenttext;
         this.date = date;
         this.time = time;
         this.timestamp = timestamp;
         this.uid = uid;
-
+        this.username = username;
     }
 
-    String commenttext,date,time,timestamp,uid;
+    String commenttext,date,time,timestamp,uid,username;
 
     public String getCommenttext() {
         return commenttext;
@@ -39,6 +39,14 @@ public class Comments {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getTimestamp() {
