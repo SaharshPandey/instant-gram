@@ -61,9 +61,17 @@
         android:id="@+id/comment_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="12Aug"
+        android:text="23"
         android:textSize="10sp"
         android:layout_marginStart="10dp"
+        />
+    <TextView
+        android:id="@+id/comment_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12-Aug-2018"
+        android:textSize="10sp"
+        android:layout_marginStart="5dp"
         />
     <TextView
         android:id="@+id/comment_reply"

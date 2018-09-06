@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -140,16 +141,20 @@ public class CommentActivity extends AppCompatActivity {
             mView = itemView;
         }
 
-        public void setCommenttext(String commenttext) {
+        public void setusername(String username){
+            TextView comment_user = mView.findViewById(R.id.comment_user);
+        }
 
+        public void setCommenttext(String commenttext) {
+            TextView comment = mView.findViewById(R.id.comment);
         }
 
         public void setDate(String date) {
-
+            TextView comment_date = mView.findViewById(R.id.comment_date);
         }
 
         public void setTime(String time) {
-
+            TextView comment_time = mView.findViewById(R.id.comment_time);
         }
 
 
