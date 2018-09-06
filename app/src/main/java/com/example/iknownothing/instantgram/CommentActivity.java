@@ -62,11 +62,14 @@ public class CommentActivity extends AppCompatActivity {
         WriteComment = findViewById(R.id.write_comment);
         CommentButton = findViewById(R.id.postcomment);
 
+        //Setting RecyclerView with LinearLayoutManager...
         CommentList = findViewById(R.id.show_comments);
         CommentList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
+        CommentList.setLayoutManager(linearLayoutManager);
+
 
         CommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
