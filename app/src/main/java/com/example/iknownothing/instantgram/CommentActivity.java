@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -84,8 +85,8 @@ public class CommentActivity extends AppCompatActivity {
                         if(dataSnapshot.exists())
                         {
                             String userName = dataSnapshot.child("username").getValue().toString();
-                            //String profileImage = dataSnapshot.child("profileImage").getValue().toString();
-                            ValidateComment(userName);
+                            String profileImage = dataSnapshot.child("profileImage").getValue().toString();
+                            ValidateComment(userName,profileImage);
 
                         }
                     }
@@ -128,8 +129,22 @@ public class CommentActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull CommentViewHolder holder, int position, @NonNull Comments model) {
 
+                holder.setusername(model.getUsername());
+                holder.setprofileImage(model.getProfileImage());
+                holder.setCommenttext(model.getCommenttext());
+                holder.setDate(model.getDate());
+                holder.setTime(model.getTime());
             }
         };
+
+        CommentList.setAdapter(firebaseRecyclerAdapter);
+        firebaseRecyclerAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        
     }
 
     //Class Holder for RecyclerView...............
@@ -143,20 +158,28 @@ public class CommentActivity extends AppCompatActivity {
 
         public void setusername(String username){
             TextView comment_user = mView.findViewById(R.id.comment_user);
+            comment_user.setText(username);
         }
 
         public void setCommenttext(String commenttext) {
             TextView comment = mView.findViewById(R.id.comment);
+            comment.setText(commenttext);
         }
 
         public void setDate(String date) {
             TextView comment_date = mView.findViewById(R.id.comment_date);
+            comment_date.setText(date);
         }
 
         public void setTime(String time) {
             TextView comment_time = mView.findViewById(R.id.comment_time);
+            comment_time.setText(time);
         }
 
+        public void setprofileImage(String profileImage){
+            CircleImageView comment_profile = mView.findViewById(R.id.comment_profile);
+            Picasso.get().load(profileImage).into(comment_profile);
+        }
 
 
     }
@@ -171,7 +194,7 @@ public class CommentActivity extends AppCompatActivity {
 
 
 
-    private void ValidateComment(String userName) {
+    private void ValidateComment(String userName,String profileImage) {
         String commentText = WriteComment.getText().toString();
         if(TextUtils.isEmpty(commentText))
         {
@@ -200,6 +223,7 @@ public class CommentActivity extends AppCompatActivity {
             commentMap.put("date", CurrentDate);
             commentMap.put("time", CurrentTime);
             commentMap.put("timestamp",ts);
+            commentMap.put("profileImage",profileImage);
 
             PostRef.child(RandomKey).updateChildren(commentMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
