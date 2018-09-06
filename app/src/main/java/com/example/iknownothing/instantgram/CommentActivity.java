@@ -131,14 +131,28 @@ public class CommentActivity extends AppCompatActivity {
         };
     }
 
-    public static class CommentViewHolder extends RecyclerView.ViewHolder
-    {
+    //Class Holder for RecyclerView...............
+    public static class CommentViewHolder extends RecyclerView.ViewHolder {
         View mView;
-        public CommentViewHolder(View itemView)
-        {
+
+        public CommentViewHolder(View itemView) {
             super(itemView);
-            mView=itemView;
+            mView = itemView;
         }
+
+        public void setCommenttext(String commenttext) {
+
+        }
+
+        public void setDate(String date) {
+
+        }
+
+        public void setTime(String time) {
+
+        }
+
+
 
     }
 
