@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -114,7 +115,13 @@ public class CommentActivity extends AppCompatActivity {
             @NonNull
             @Override
             public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
+
+                // Create a new instance of the ViewHolder, in this case we are using a custom
+                // layout called R.layout.message for each item
+
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.all_comments_layout, parent, false);
+                return new CommentViewHolder(view);
             }
 
             @Override
