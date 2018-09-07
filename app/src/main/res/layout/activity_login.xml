@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
+    android:background="@android:color/white"
 
     >
 
@@ -96,7 +97,7 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:layout_below="@+id/register_account_link"
-       android:layout_marginTop="10dp"
+       android:layout_marginTop="30dp"
        android:text="Or login with"
        android:textColor="@color/background"
        android:textAlignment="center"
@@ -106,7 +107,7 @@
     <LinearLayout
         android:id="@+id/signin_layout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@+id/textView2"
         android:layout_marginTop="10dp"
@@ -139,9 +140,11 @@
         android:layout_below="@id/signin_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Forgot Password"
+        android:text="Forgot Password?"
+        android:layout_marginTop="20dp"
         android:textAlignment="center"
+        android:textColorLink="@android:color/holo_red_dark"
+        android:layout_alignParentBottom="true"
         android:textColor="@android:color/holo_red_dark"
         />
 </RelativeLayout>
