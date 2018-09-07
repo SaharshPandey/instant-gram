@@ -9,12 +9,13 @@
 
     >
 
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <ImageView
         android:id="@+id/login_icon"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/profile"
+        android:src="@drawable/box"
+        android:scaleType="fitCenter"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         />
@@ -141,10 +142,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Forgot Password?"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:textAlignment="center"
         android:textColorLink="@android:color/holo_red_dark"
-        android:layout_alignParentBottom="true"
         android:textColor="@android:color/holo_red_dark"
         />
 </RelativeLayout>
