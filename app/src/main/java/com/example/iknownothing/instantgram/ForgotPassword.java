@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,8 +14,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPassword extends AppCompatActivity {
@@ -46,27 +50,38 @@ public class ForgotPassword extends AppCompatActivity {
                 //Checking whether the Email Field is not Empty!
                 if(TextUtils.isEmpty(UserEmail))
                 {
-                    mAuth.sendPasswordResetEmail(UserEmail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    mAuth.sendPasswordResetEmail(UserEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
-                        public void onSuccess(Void aVoid) {
-                            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(new ContextThemeWrapper(ForgotPassword.this, R.style.AlertDialogCustom));
-                            builder.setMessage("Reset Link has been Sent to your given EmailId");
+                        public void onComplete(@NonNull Task<Void> task) {
 
-                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                            if(task.isSuccessful())
+                            {
+                                Toast.makeText(ForgotPassword.this,task.getResult().toString(),Toast.LENGTH_SHORT).show();
 
-                                    //Sending User to Login Activity...
-                                    Intent loginIntent = new Intent(ForgotPassword.this,LoginActivity.class);
-                                    startActivity(loginIntent);
-                                    dialog.cancel();
-                                }
-                            });
+                                AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ForgotPassword.this, R.style.AlertDialogCustom));
+                                builder.setTitle("");
+                                builder.setMessage("Reset Link has been Sent to your given EmailId");
 
-                            Dialog dialog = builder.create();
-                            dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
-                            dialog.show();
+                                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        //Sending User to Login Activity...
+                                        Intent loginIntent = new Intent(ForgotPassword.this,LoginActivity.class);
+                                        startActivity(loginIntent);
+                                        dialog.cancel();
+                                    }
+                                });
+
+                                Dialog dialog = builder.create();
+                                dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
+                                dialog.show();
+                            }
+                            else{
+                                Toast.makeText(ForgotPassword.this,task.getException().toString(),Toast.LENGTH_SHORT).show();
+                            }
                         }
+
                     });
 
 

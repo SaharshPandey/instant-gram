@@ -93,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         //Click Listener to The Forgot Password View..
+        ForgotPassword = findViewById(R.id.forgot_password);
         ForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
