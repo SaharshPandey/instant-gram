@@ -67,7 +67,7 @@ public class ForgotPassword extends AppCompatActivity {
                                 progressDialog.dismiss();
 
                                 //Setting Dialog Box...
-                                AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPassword.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ForgotPassword.this, R.style.AlertDialogCustom));
                                 builder.setMessage("Reset Link has been Sent to your given EmailId");
 
                                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -82,6 +82,7 @@ public class ForgotPassword extends AppCompatActivity {
                                 });
 
                                 Dialog dialog = builder.create();
+                                dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
                                 dialog.show();
                             }
                             else{
