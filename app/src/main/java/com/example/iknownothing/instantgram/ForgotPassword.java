@@ -40,7 +40,7 @@ public class ForgotPassword extends AppCompatActivity {
         ForgotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String UserEmail =ForgotEmail.getText().toString();
+                String UserEmail =ForgotEmail.getText().toString().trim();
 
                 //Hiding Keyboard when user entered forgot button.
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -48,7 +48,7 @@ public class ForgotPassword extends AppCompatActivity {
                         InputMethodManager.HIDE_NOT_ALWAYS);
 
                 //Checking whether the Email Field is not Empty!
-                if(TextUtils.isEmpty(UserEmail))
+                if(!TextUtils.isEmpty(UserEmail))
                 {
                     mAuth.sendPasswordResetEmail(UserEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -56,9 +56,9 @@ public class ForgotPassword extends AppCompatActivity {
 
                             if(task.isSuccessful())
                             {
-                                Toast.makeText(ForgotPassword.this,task.getResult().toString(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ForgotPassword.this,task.getResult().toString()+" / Success",Toast.LENGTH_SHORT).show();
 
-                                AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ForgotPassword.this, R.style.AlertDialogCustom));
+                                AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPassword.this);
                                 builder.setTitle("");
                                 builder.setMessage("Reset Link has been Sent to your given EmailId");
 
