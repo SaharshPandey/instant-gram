@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout popup_button_layout;
     private DatabaseReference ClickPostRef;
     private String description;
+
     //private ImageView Like,Comment,Share,Saved;
     //private TextView PostLikes;
     boolean LikeChecker= false;
@@ -843,14 +844,7 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    //Method to redirect User to Forgot Password Activity....
-    private void SendUserToForgotPasswordActivity() {
 
-        Intent forgotIntent =new Intent(MainActivity.this, ForgotPassword.class);
-        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(forgotIntent);
-        finish();
-    }
 
 
     //Menu Item Selection ....

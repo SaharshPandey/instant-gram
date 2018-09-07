@@ -135,6 +135,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/forgot_password"
         android:layout_below="@id/signin_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

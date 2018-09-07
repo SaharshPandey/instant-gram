@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Button LoginButton;
     private TextView UserEmail,UserPassword;
-    private TextView SignUp;
+    private TextView SignUp,ForgotPassword;
     private ProgressDialog loadingBar;
     private ImageView google_signin;
     private static final int RC_SIGN_IN=1;
@@ -213,6 +213,14 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(homeIntent);
         finish();
 
+    }
+    //Method to redirect User to Forgot Password Activity....
+    private void SendUserToForgotPasswordActivity() {
+
+        Intent forgotIntent =new Intent(LoginActivity.this, ForgotPassword.class);
+        forgotIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(forgotIntent);
+        finish();
     }
 }
 /*
