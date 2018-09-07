@@ -1,6 +1,7 @@
 package com.example.iknownothing.instantgram;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,6 +27,7 @@ public class ForgotPassword extends AppCompatActivity {
     private EditText ForgotEmail;
     private Button ForgotButton;
     FirebaseAuth mAuth;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,10 @@ public class ForgotPassword extends AppCompatActivity {
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
 
+                progressDialog = new ProgressDialog(ForgotPassword.this);
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.setMessage("Wait a second");
+                progressDialog.show();
                 //Checking whether the Email Field is not Empty!
                 if(!TextUtils.isEmpty(UserEmail))
                 {
@@ -56,10 +62,12 @@ public class ForgotPassword extends AppCompatActivity {
 
                             if(task.isSuccessful())
                             {
-                                Toast.makeText(ForgotPassword.this,task.getResult().toString()+" / Success",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ForgotPassword.this,"Success",Toast.LENGTH_SHORT).show();
 
+                                progressDialog.dismiss();
+
+                                //Setting Dialog Box...
                                 AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPassword.this);
-                                builder.setTitle("");
                                 builder.setMessage("Reset Link has been Sent to your given EmailId");
 
                                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -74,10 +82,10 @@ public class ForgotPassword extends AppCompatActivity {
                                 });
 
                                 Dialog dialog = builder.create();
-                                dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
                                 dialog.show();
                             }
                             else{
+                                progressDialog.dismiss();
                                 Toast.makeText(ForgotPassword.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                             }
                         }
