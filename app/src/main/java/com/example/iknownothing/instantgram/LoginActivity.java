@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN=1;
     private GoogleApiClient mGoogleSignInClient;
     private static final String TAG="LoginActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +91,15 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
         {
         }
+
+        //Click Listener to The Forgot Password View..
+        ForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendUserToForgotPasswordActivity();
+            }
+        });
+
 
     }
 
