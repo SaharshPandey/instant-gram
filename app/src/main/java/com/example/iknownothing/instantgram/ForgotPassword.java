@@ -78,7 +78,7 @@ public class ForgotPassword extends AppCompatActivity {
                                 dialog.show();
                             }
                             else{
-                                Toast.makeText(ForgotPassword.this,task.getException().toString(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ForgotPassword.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                             }
                         }
 
