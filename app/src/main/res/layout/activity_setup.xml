@@ -2,23 +2,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
+    android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SetupActivity">
 
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/circleimage"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/profile"
+    <android.support.constraint.ConstraintLayout
+
+        android:id="@+id/constraint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp">
 
-        />
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/circleimage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/profile"
 
+            />
 
+        <ImageButton
+            android:id="@+id/add_photo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@android:color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/plus"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="163dp"
+            tools:layout_editor_absoluteY="170dp" />
+    </android.support.constraint.ConstraintLayout>
 
     <EditText
         android:id="@+id/username"
@@ -32,7 +51,7 @@
         android:layout_centerInParent="true"
         android:ems="10"
         android:drawablePadding="10dp"
-        android:layout_below="@+id/circleimage"
+        android:layout_below="@+id/constraint"
         android:hint="Username"
         android:inputType="textMultiLine"
         android:layout_marginTop="50dp"

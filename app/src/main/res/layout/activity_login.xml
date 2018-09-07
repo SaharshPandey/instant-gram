@@ -15,7 +15,7 @@
         android:layout_height="150dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/box"
-        android:scaleType="fitCenter"
+        android:scaleType="fitCenter    "
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         />

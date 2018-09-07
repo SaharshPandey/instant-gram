@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,6 +42,7 @@ public class SetupActivity extends AppCompatActivity {
     private ProgressDialog loadingBar;
     final static int GalleryPic=1;
     private StorageReference UserProfileImageRef;
+    private ImageButton AddPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class SetupActivity extends AppCompatActivity {
         fullName = findViewById(R.id.fullname);
         countryName = findViewById(R.id.country);
         circleImage = findViewById(R.id.circleimage);
+        AddPost = findViewById(R.id.add_photo);
         setup = findViewById(R.id.setup);
         loadingBar =new ProgressDialog(this);
 
@@ -121,8 +124,44 @@ public class SetupActivity extends AppCompatActivity {
             }
         });
 
-        //This click will redirect to Gallery where you can find Images onyl...
+        //This click will redirect to Gallery where you can find Images only...
         circleImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent,GalleryPic); //User will pick the Picture...
+            }
+        });
+
+        UsersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists())
+                {
+                    if(dataSnapshot.hasChild("profileImage")) {
+                        String image = dataSnapshot.child("profileImage").getValue().toString();
+                        Picasso.get()
+                                .load(image)
+                                .placeholder(R.drawable.profile)
+                                .into(circleImage);
+                    }
+                }
+                else
+                {
+                    Toast.makeText(SetupActivity.this,"First Select the Image from Gallery",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        //This click will redirect to Gallery where you can find Images only...
+        AddPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent galleryIntent = new Intent();
