@@ -22,20 +22,19 @@
 
 
       <include
+          android:layout_alignParentBottom="true"
           android:id="@+id/post_bar_included"
           android:layout_height="wrap_content"
           android:layout_width="wrap_content"
-          android:layout_below="@id/main_page_toolbar"
           layout="@layout/post_bar_layout"
           >
-
-
       </include>
        <LinearLayout
            android:id="@+id/main_container"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:layout_below="@+id/post_bar_included"
+           android:layout_above="@+id/post_bar_included"
+           android:layout_below="@+id/main_page_toolbar"
 
 
            >
@@ -43,7 +42,9 @@
            <android.support.v7.widget.RecyclerView
                android:id="@+id/all_users_post_list"
                android:layout_width="match_parent"
-               android:layout_height="match_parent" />
+               android:layout_height="match_parent"
+
+               />
 
 
        </LinearLayout>

@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout popup_button_layout;
     private DatabaseReference ClickPostRef;
     private String description;
+    View v;
 
     //private ImageView Like,Comment,Share,Saved;
     //private TextView PostLikes;
@@ -132,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
 
+        v = findViewById(R.id.post_bar_included);
 
         //Initialising image buttons.......
         post_image_main = findViewById(R.id.post_image_main);
@@ -496,7 +498,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("result",PostKey);
                 CheckingFirebaseData(PostKey);
 
-
+               
 
                 holder.setFullname(model.fullname);
                 holder.setProfileImage(getApplicationContext(),model.profileImage);
@@ -915,7 +917,7 @@ return super.onOptionsItemSelected(item);
                                     if(task.isSuccessful())
                                     {
                                         //scrolling to top of recycler view when user upload something..
-                                        postList.smoothScrollToPosition(postList.getAdapter().getItemCount());
+                                        postList.scrollToPosition(postList.getAdapter().getItemCount()-1);
                                         loadingBar.dismiss();
 
                                         //Toast.makeText(PostActivity.this,"Post is Updated Successfully",Toast.LENGTH_SHORT).show();
