@@ -612,7 +612,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(commentIntent);
                     }
                 });
-
+                
             }
 
             @NonNull
@@ -641,6 +641,7 @@ public class MainActivity extends AppCompatActivity {
 
         //SETTING ADAPTER INTO RECYCLER VIEW...
         postList.setAdapter(firebaseRecyclerAdapter);
+
 
     }
 
