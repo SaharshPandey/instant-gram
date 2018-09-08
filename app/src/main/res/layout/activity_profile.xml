@@ -37,14 +37,14 @@
 
                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                    android:id="@+id/post_profile_image"
-                   android:layout_width="60dp"
+                   android:layout_width="100dp"
                    android:elevation="4dp"
                    android:layout_height="match_parent"
-                   android:layout_gravity="center"
+                   android:layout_gravity="start"
                    android:layout_marginEnd="7dp"
 
                    android:src="@drawable/profile"
-                   android:layout_weight="1"
+
 
                    />
             <LinearLayout
@@ -207,7 +207,7 @@
                         android:textAlignment="center"
                         android:text="Edit Profile"
                         android:textColor="@android:color/black"
-                        android:textSize="12sp" />
+                        android:textSize="11sp" />
 
 
 
