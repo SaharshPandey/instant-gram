@@ -496,10 +496,10 @@ public class MainActivity extends AppCompatActivity {
                 // GETTING REFERENCE FOR EACH POST THAT HAS BEEN TAPPED...
                 final String PostKey = getRef(position).getKey();
                 Log.d("result",PostKey);
+
                 CheckingFirebaseData(PostKey);
 
-               
-
+                //Setting data to the holder.
                 holder.setFullname(model.fullname);
                 holder.setProfileImage(getApplicationContext(),model.profileImage);
                 holder.setDate(model.date);
@@ -627,6 +627,17 @@ public class MainActivity extends AppCompatActivity {
                 return new PostViewHolder(view);
             }
         };
+
+        //Whenever Item is Inserted it would scroll to Top.
+        firebaseRecyclerAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                postList.smoothScrollToPosition(firebaseRecyclerAdapter.getItemCount());
+                Log.d("result1",String.valueOf(firebaseRecyclerAdapter.getItemCount()));
+            }
+        });
+
 
         //SETTING ADAPTER INTO RECYCLER VIEW...
         postList.setAdapter(firebaseRecyclerAdapter);
@@ -916,8 +927,6 @@ return super.onOptionsItemSelected(item);
 
                                     if(task.isSuccessful())
                                     {
-                                        //scrolling to top of recycler view when user upload something..
-                                        postList.scrollToPosition(postList.getAdapter().getItemCount()-1);
                                         loadingBar.dismiss();
 
                                         //Toast.makeText(PostActivity.this,"Post is Updated Successfully",Toast.LENGTH_SHORT).show();
