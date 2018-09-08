@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".find_friends_activity">
+    tools:context=".find_friends_activity"
+    android:background="@android:color/white"
+    >
 <include
     android:id="@+id/find_friends_searchbar_layout"
     layout="@layout/search_bar"
