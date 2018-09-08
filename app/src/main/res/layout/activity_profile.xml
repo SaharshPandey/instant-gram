@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileActivity"
-    android:background="@color/back">
+    android:background="@android:color/white">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -24,14 +24,38 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
                 android:orientation="vertical">
 
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               >
+               <!--Circle Image view library used-->
 
+               <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                   android:id="@+id/post_profile_image"
+                   android:layout_width="60dp"
+                   android:elevation="4dp"
+                   android:layout_height="match_parent"
+                   android:layout_gravity="center"
+                   android:layout_marginEnd="7dp"
+
+                   android:src="@drawable/profile"
+                   android:layout_weight="1"
+
+                   />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -43,19 +67,6 @@
                         android:textColor="@android:color/black"
                         android:textSize="25sp"
                         android:textStyle="italic" />
-
-
-                    <!--Circle Image view library used-->
-
-                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/post_profile_image"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="7dp"
-                        android:layout_marginStart="7dp"
-                        android:src="@drawable/profile" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -85,7 +96,6 @@
                             android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -134,7 +144,9 @@
 
                     </LinearLayout>
                 </LinearLayout>
+            </LinearLayout>
 
+           </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -142,22 +154,26 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:elevation="4dp"
+                        android:shadowColor="@android:color/black"
+                        android:layout_width="170dp"
+                        android:layout_height="30dp"
                         android:background="@drawable/round"
                         android:padding="6dp"
                         android:paddingEnd="60dp"
                         android:paddingStart="60dp"
-                        android:text="@string/send"
+                        android:textAlignment="center"
+                        android:text="@string/follow"
                         android:textColor="@android:color/white"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:background="@drawable/round2"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/input"
+                        android:elevation="4dp"
                         android:orientation="horizontal"
                         android:padding="8dp"
                         android:paddingEnd="25dp"
@@ -178,17 +194,21 @@
                     </LinearLayout>
 
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:background="@drawable/round2"
-                        android:padding="10dp"
-                        android:paddingEnd="15dp"
-                        android:paddingStart="15dp"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_arrow_drop_down" />
+                    <TextView
+                        android:elevation="4dp"
+
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/input"
+                        android:padding="6dp"
+                        android:layout_marginStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
+                        android:textAlignment="center"
+                        android:text="Edit Profile"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
 
 
                 </LinearLayout>
@@ -240,7 +260,8 @@
                     android:id="@+id/profile_posts_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
                     android:paddingTop="2dp" />
