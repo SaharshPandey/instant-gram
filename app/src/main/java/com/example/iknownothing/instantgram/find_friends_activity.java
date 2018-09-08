@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -41,6 +42,13 @@ public class find_friends_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_friends_activity);
 
+
+        //THIS METHOD DONT OPEN THE KEYBOARD IN STARTUP....
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+
         mAuth = FirebaseAuth.getInstance();
         CurrentUserId = mAuth.getCurrentUser().getUid();
         AllUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -52,6 +60,9 @@ public class find_friends_activity extends AppCompatActivity {
         SearchInputText = findViewById(R.id.search_friends);
         Back = findViewById(R.id.going_back1);
         SearchFriendsButton = findViewById(R.id.search_friends_button);
+
+        //Showing all the users without searching them first...
+        SearchPeople("");
 
         SearchFriendsButton.setOnClickListener(new View.OnClickListener() {
             @Override
