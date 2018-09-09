@@ -612,7 +612,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(commentIntent);
                     }
                 });
-                
+
             }
 
             @NonNull

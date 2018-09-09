@@ -28,6 +28,8 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView profile_username,profile_fullname,profile_bio;     //User Details Variables;
     private String user_posts,user_followers,user_following;            //User Numeric Information;
     private RecyclerView profile_posts_recyclerview;                    //Users Posts RecyclerView;
+    private TextView followuser;
+
     //private ImageView going_back;
 
     @Override
@@ -49,6 +51,8 @@ public class ProfileActivity extends AppCompatActivity {
         profile_username = findViewById(R.id.profile_username);
         profile_fullname = findViewById(R.id.profile_fullname);
         profile_bio = findViewById(R.id.profile_bio);
+        followuser = findViewById(R.id.follow_users);
+        
         //going_back = findViewById(R.id.going_back);
 
         //Initialising RecyclerView of User Posts....
