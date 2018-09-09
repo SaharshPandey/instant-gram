@@ -52,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
         profile_fullname = findViewById(R.id.profile_fullname);
         profile_bio = findViewById(R.id.profile_bio);
         followuser = findViewById(R.id.follow_users);
-        
+
         //going_back = findViewById(R.id.going_back);
 
         //Initialising RecyclerView of User Posts....
@@ -66,6 +66,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 */
+      if(UserKey.equals(CurrentUserId))
+      {
+          followuser.setText("EditProfile");
+          //followuser.setBackground(R.drawable.input);
+      }
 
            UserRef.child(UserKey).addValueEventListener(new ValueEventListener() {
                @Override
