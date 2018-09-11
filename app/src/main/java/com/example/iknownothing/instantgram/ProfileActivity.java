@@ -44,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         //Getting UserKey from Previous Clicked Intent...
-        String UserKey = getIntent().getExtras().getString("UserKey");
+        final String UserKey = getIntent().getExtras().getString("UserKey");
 
         //Instantiating Firebase Objects and getting References....
         mAuth = FirebaseAuth.getInstance();
@@ -111,6 +111,17 @@ public class ProfileActivity extends AppCompatActivity {
                            String bio = dataSnapshot.child("status").getValue().toString();
                            profile_bio.setText(bio);
                        }
+                       //if user already has sent friend request,then it will show unfollow option
+                       if(dataSnapshot.child("FriendRequests").hasChild(CurrentUserId))
+                       {
+                        followuser.setText("Unfollow");
+                        followuser.setBackgroundColor(R.color.colorPrimary);
+                       }
+                       if(!dataSnapshot.child("FriendRequests").hasChild(CurrentUserId))
+                       {
+                           followuser.setText("Follow");
+                           followuser.setBackgroundColor(R.color.deep_purple_500);
+                       }
 
                    }
                    else{
@@ -128,9 +139,12 @@ public class ProfileActivity extends AppCompatActivity {
       followuser.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              if(CURRENT_STATE.equals("not_friends"))
+              if(followuser.getText().equals("Follow"))
               {
                   SendFriendRequest();
+              }
+              else{
+                  CancelFriendRequest();
               }
           }
       });
@@ -142,7 +156,7 @@ public class ProfileActivity extends AppCompatActivity {
         HashMap userRequests = new HashMap();
         userRequests.put("uid",CurrentUserId);
 
-        //Adding CurrentUserKey in UsersAccount....
+        //Sending the Friend Request....
         FriendRequestReference.child(CurrentUserId).updateChildren(userRequests).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
@@ -155,5 +169,26 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
     }
+
+    public void  CancelFriendRequest()
+    {
+        //Cancelling the Friend Request....
+            FriendRequestReference.child(CurrentUserId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful())
+                    {
+                        Toast.makeText(ProfileActivity.this,"Request Cancelled",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(ProfileActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
 }

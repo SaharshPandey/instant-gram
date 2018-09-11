@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#ed4c54</color>
-    <color name="colorPrimaryDark">#007aff</color>
+    <color name="colorPrimaryDark">#673AB7</color>
     <color name="colorAccent">#e9ebee</color>
     <color name="background">#FFED6531</color>
     <color name="back">#f2f6f9</color>
-    <color name="sendblue">#007aff</color>
+    <color name="sendblue">#673AB7</color>
+    <color name="sendblue1">#007aff</color>
     <color name="icongrey">#a1a09f</color>
     <color name="apptool">#e8eff5</color>
     <color name="icons">#2e2e30</color>
     <color name="viewgrey">#DCDCDC</color>
     <color name="purple_500">#9C27B0</color>
     <color name="deep_purple_500">#673AB7</color>
+
 </resources>
