@@ -20,6 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -136,14 +138,21 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void SendFriendRequest()
     {
+
+        HashMap userRequests = new HashMap();
+        userRequests.put("uid",CurrentUserId);
+
         //Adding CurrentUserKey in UsersAccount....
-        FriendRequestReference.setValue(CurrentUserId).addOnCompleteListener(new OnCompleteListener<Void>() {
+        FriendRequestReference.child(CurrentUserId).updateChildren(userRequests).addOnCompleteListener(new OnCompleteListener() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
+            public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful())
                 {
-                    Toast.makeText(ProfileActivity.this,"FriendRequestSent",Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(ProfileActivity.this,"Request Sent",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(ProfileActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
