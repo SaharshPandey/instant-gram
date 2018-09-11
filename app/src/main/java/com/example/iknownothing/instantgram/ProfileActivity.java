@@ -115,12 +115,12 @@ public class ProfileActivity extends AppCompatActivity {
                        if(dataSnapshot.child("FriendRequests").hasChild(CurrentUserId))
                        {
                         followuser.setText("Unfollow");
-                        followuser.setBackgroundColor(R.color.colorPrimary);
+                        followuser.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                        }
                        if(!dataSnapshot.child("FriendRequests").hasChild(CurrentUserId))
                        {
                            followuser.setText("Follow");
-                           followuser.setBackgroundColor(R.color.deep_purple_500);
+                           followuser.setBackgroundColor(getResources().getColor(R.color.deep_purple_500));
                        }
 
                    }
