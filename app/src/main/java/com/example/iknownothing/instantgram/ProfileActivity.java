@@ -30,6 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     private RecyclerView profile_posts_recyclerview;                    //Users Posts RecyclerView;
     private TextView followuser;
     private String CURRENT_STATE;
+    private DatabaseReference FriendRequestReference;
     //private ImageView going_back;
 
     @Override
@@ -46,6 +47,9 @@ public class ProfileActivity extends AppCompatActivity {
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
+
+        FriendRequestReference = UserRef.child(CurrentUserId).child("FriendRequests");
+        
         //Initialising Widgets from Profile Activity....
         profileImage = findViewById(R.id.post_profile_image);
         profile_username = findViewById(R.id.profile_username);
@@ -115,6 +119,21 @@ public class ProfileActivity extends AppCompatActivity {
                    Toast.makeText(ProfileActivity.this,"Error : "+databaseError.getMessage(),Toast.LENGTH_LONG).show();
                }
            });
+
+
+      followuser.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              if(CURRENT_STATE.equals("not_friends"))
+              {
+                  SendFriendRequest();
+              }
+          }
+      });
     }
 
+    public void SendFriendRequest()
+    {
+
+    }
 }
