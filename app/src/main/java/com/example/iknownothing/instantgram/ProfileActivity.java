@@ -1,5 +1,6 @@
 package com.example.iknownothing.instantgram;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,9 +50,8 @@ public class ProfileActivity extends AppCompatActivity {
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
+        FriendRequestReference = FirebaseDatabase.getInstance().getReference().child("Users").child(UserKey).child("FriendRequests");
 
-        FriendRequestReference = UserRef.child(CurrentUserId).child("FriendRequests");
-        
         //Initialising Widgets from Profile Activity....
         profileImage = findViewById(R.id.post_profile_image);
         profile_username = findViewById(R.id.profile_username);
@@ -134,6 +136,15 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void SendFriendRequest()
     {
-
+        //Adding CurrentUserKey in UsersAccount....
+        FriendRequestReference.setValue(CurrentUserId).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(ProfileActivity.this,"FriendRequestSent",Toast.LENGTH_SHORT).show();
+                    }
+            }
+        });
     }
 }
