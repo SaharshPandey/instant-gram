@@ -29,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
     private String user_posts,user_followers,user_following;            //User Numeric Information;
     private RecyclerView profile_posts_recyclerview;                    //Users Posts RecyclerView;
     private TextView followuser;
-
+    private String CURRENT_STATE;
     //private ImageView going_back;
 
     @Override
@@ -57,6 +57,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         //Initialising RecyclerView of User Posts....
         profile_posts_recyclerview = findViewById(R.id.profile_posts_recyclerview);
+
+        CURRENT_STATE = "not_friends";
 
       /*  //Going back to Previous Activity
         going_back.setOnClickListener(new View.OnClickListener() {
