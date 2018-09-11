@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
 
         //THIS METHOD SHOWING THE RECYCLER VIEW ITEMS.....
         DisplayAllUsersPost();
-       // CheckingFirebaseData();
+
     }
 
 
@@ -375,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
 
-        CheckingFirebaseData(PostKey);
+        //CheckingFirebaseData(PostKey);
 
 
 
@@ -497,7 +497,8 @@ public class MainActivity extends AppCompatActivity {
                 final String PostKey = getRef(position).getKey();
                 Log.d("result",PostKey);
 
-                CheckingFirebaseData(PostKey);
+                //CheckingFirebaseData(PostKey);
+
 
                 //Setting data to the holder.
                 holder.setFullname(model.fullname);
@@ -515,7 +516,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+                if(PostKey.substring(0,28).equals(CurrentUserId))
+                {
+                    popup_button_layout.setVisibility(View.VISIBLE);
+                }
 
                 Log.d("result",String.valueOf(position));
 

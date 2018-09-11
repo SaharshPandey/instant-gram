@@ -80,7 +80,7 @@ public class ProfileActivity extends AppCompatActivity {
                        if(dataSnapshot.hasChild("profileImage"))
                        {
                            String profileimage = dataSnapshot.child("profileImage").getValue().toString();
-                           Picasso.get().load(profileimage).into(profileImage);
+                           Picasso.get().load(profileimage).placeholder(R.drawable.profile).into(profileImage);
                        }
 
                        if(dataSnapshot.hasChild("fullname"))
