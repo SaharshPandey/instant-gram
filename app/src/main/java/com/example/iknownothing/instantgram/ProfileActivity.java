@@ -153,8 +153,12 @@ public class ProfileActivity extends AppCompatActivity {
     public void SendFriendRequest()
     {
 
+        Long ts=System.currentTimeMillis()/1000;
+        String timestamp = ts.toString();
+
         HashMap userRequests = new HashMap();
         userRequests.put("uid",CurrentUserId);
+        userRequests.put("timestamp",timestamp);
 
         //Sending the Friend Request....
         FriendRequestReference.child(CurrentUserId).updateChildren(userRequests).addOnCompleteListener(new OnCompleteListener() {
