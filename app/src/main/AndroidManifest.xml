@@ -35,7 +35,8 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".find_friends_activity" />
         <activity android:name=".CommentActivity" />
-        <activity android:name=".ForgotPassword"></activity>
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".FriendRequestsActivity"></activity>
     </application>
 
 </manifest>
