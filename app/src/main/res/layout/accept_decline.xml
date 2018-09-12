@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        >
+
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+        <LinearLayout
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saharsh Pandey"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="saharsh"
+                android:textSize="12sp"
+                />
+        </LinearLayout>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accept"
+            android:padding="10dp"
+            android:elevation="5dp"
+            android:background="@color/sendblue"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="40dp"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Decline"
+            android:padding="10dp"
+            android:elevation="5dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="50dp"
+            android:layout_gravity="center"
+
+            />
+
+
+    </LinearLayout>
+</RelativeLayout>
