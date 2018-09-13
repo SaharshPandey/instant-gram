@@ -103,7 +103,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
                             public void onClick(View v) {
 
                                 HashMap follower_users= new HashMap();
-                                follower_users.put("uid",CurrentUserId);
+                                follower_users.put("uid",getRef(position).getKey());
 
 
                                 FollowersRef.child(getRef(position).getKey()).updateChildren(follower_users).addOnCompleteListener(new OnCompleteListener() {
@@ -120,7 +120,28 @@ public class FriendRequestsActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
-                                CancelFriendRequest(getRef(position).getKey());
+
+                                HashMap follower_users1= new HashMap();
+                                follower_users.put("uid",CurrentUserId);
+
+                                UserRef.child(getRef(position).getKey()).child("Followers").child(CurrentUserId).updateChildren(follower_users1).addOnCompleteListener(new OnCompleteListener() {
+                                    @Override
+                                    public void onComplete(@NonNull Task task) {
+                                        if(task.isSuccessful())
+                                        {
+                                            Toast.makeText(FriendRequestsActivity.this,"You're now Friends with each other",Toast.LENGTH_SHORT).show();
+
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(FriendRequestsActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                });
+
+                                CancelFriendRequest(CurrentUserId);
+                                CancelFriendRequest1(getRef(position).getKey());
                             }
                         });
 
@@ -203,5 +224,20 @@ public class FriendRequestsActivity extends AppCompatActivity {
             }
         });
     }
-
+    public void CancelFriendRequest1(String id)
+    {
+        //Cancelling the Friend Request....
+        UserRef.child(id).child("Followers").child(CurrentUserId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(FriendRequestsActivity.this,"Request Cancelled",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(FriendRequestsActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 }
