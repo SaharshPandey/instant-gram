@@ -14,6 +14,7 @@
     android:id="@+id/notifications"
     android:layout_width="30dp"
     android:layout_height= "30dp"
+    android:layout_marginStart="200dp"
     android:background="@drawable/ic_notifications_black_24dp"
 
     />

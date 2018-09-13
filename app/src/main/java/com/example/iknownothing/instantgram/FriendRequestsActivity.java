@@ -31,6 +31,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
     private DatabaseReference UserRef,PostRef,RequestRef;
     private FirebaseAuth mAuth;
     String PostKey,CurrentUserId;
+    private TextView name;
 
 
 
@@ -38,6 +39,10 @@ public class FriendRequestsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_requests);
+
+        name = findViewById(R.id.name);
+        name.setText("Friend Requests");
+
 
         mAuth  = FirebaseAuth.getInstance();
         CurrentUserId = mAuth.getCurrentUser().getUid();
@@ -81,7 +86,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull final RequestViewHolder holder, int position, @NonNull Accept_Decline model) {
                         Log.d("result1",getRef(position).getKey());
-
+                        
                         UserRef.child(model.getUid()).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
