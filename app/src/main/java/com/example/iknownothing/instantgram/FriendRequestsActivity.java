@@ -126,7 +126,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
 
         public void setprofileImage(String profileImage){
             CircleImageView comment_profile = mView.findViewById(R.id.request_profileImage);
-            Picasso.get().load(profileImage).into(comment_profile);
+            Picasso.get().load(profileImage).placeholder(R.drawable.profile).into(comment_profile);
         }
 
         public void setfullname(String fullname)
