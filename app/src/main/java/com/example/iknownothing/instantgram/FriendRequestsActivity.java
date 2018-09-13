@@ -77,7 +77,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
 
                     @Override
                     protected void onBindViewHolder(@NonNull RequestViewHolder holder, int position, @NonNull Accept_Decline model) {
-                        Log.d("result1",getRef(position).getKey()); 
+                        Log.d("result1",getRef(position).getKey());
                         holder.setusername(model.getUsername());
                         holder.setprofileImage(model.getProfileImage());
                         holder.setfullname(model.getFullname());

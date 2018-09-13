@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
+        //getSupportActionBar().setIcon(R.drawable.ic_notifications_black_24dp);
 
         v = findViewById(R.id.post_bar_included);
 
