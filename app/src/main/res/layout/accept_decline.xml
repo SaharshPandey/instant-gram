@@ -11,8 +11,9 @@
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+            android:id="@+id/request_profileImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
         >
 
     </de.hdodenhof.circleimageview.CircleImageView>
@@ -25,6 +26,7 @@
             android:layout_gravity="center"
             >
             <TextView
+                android:id="@+id/request_fullname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Saharsh Pandey"
@@ -32,9 +34,9 @@
                 android:textSize="12sp"
                 />
             <TextView
+                android:id="@+id/request_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="saharsh"
                 android:textSize="12sp"
                 />
