@@ -7,14 +7,15 @@
     tools:context=".FriendRequestsActivity">
 <include
     layout="@layout/toolbar_account"
-    android:id="@+id/friend_requests"
+    android:id="@+id/friend_requests_toolbar"
     >
 
 </include>
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/friend_requests"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/friend_requests"
+        android:layout_below="@+id/friend_requests_toolbar"
         >
 
     </android.support.v7.widget.RecyclerView>
