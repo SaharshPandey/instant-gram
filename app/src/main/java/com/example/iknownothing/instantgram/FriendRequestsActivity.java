@@ -11,9 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,6 +35,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     String PostKey,CurrentUserId;
     private TextView name;
+    private TextView accept,decline;
 
 
 
@@ -84,9 +88,40 @@ public class FriendRequestsActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    protected void onBindViewHolder(@NonNull final RequestViewHolder holder, int position, @NonNull Accept_Decline model) {
+                    protected void onBindViewHolder(@NonNull final RequestViewHolder holder, final int position, @NonNull Accept_Decline model) {
                         Log.d("result1",getRef(position).getKey());
 
+                        accept = holder.mView.findViewById(R.id.accept);
+                        decline = holder.mView.findViewById(R.id.decline);
+
+                        accept.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                    
+                            }
+                        });
+
+
+
+                        //Cancelling Incoming FriendRequests......
+                        decline.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //Cancelling the Friend Request....
+                                RequestRef.child(getRef((position)).getKey()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful())
+                                        {
+                                            Toast.makeText(FriendRequestsActivity.this,"Request Cancelled",Toast.LENGTH_SHORT).show();
+                                        }
+                                        else{
+                                            Toast.makeText(FriendRequestsActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            }
+                        });
                         UserRef.child(model.getUid()).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {

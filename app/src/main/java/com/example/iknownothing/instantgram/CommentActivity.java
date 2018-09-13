@@ -59,7 +59,7 @@ public class CommentActivity extends AppCompatActivity {
 
         name = findViewById(R.id.name);
         name.setText("Comments");
-        
+
         mAuth = FirebaseAuth.getInstance();
         CurrentUserId = mAuth.getCurrentUser().getUid();
 

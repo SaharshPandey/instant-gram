@@ -52,6 +52,7 @@
 
         <TextView
 
+            android:id="@+id/accept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Accept"
@@ -63,6 +64,7 @@
             android:layout_gravity="center"
             />
         <TextView
+            android:id="@+id/decline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Decline"
