@@ -15,8 +15,11 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -76,12 +79,29 @@ public class FriendRequestsActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    protected void onBindViewHolder(@NonNull RequestViewHolder holder, int position, @NonNull Accept_Decline model) {
+                    protected void onBindViewHolder(@NonNull final RequestViewHolder holder, int position, @NonNull Accept_Decline model) {
                         Log.d("result1",getRef(position).getKey());
-                        holder.setusername(model.getUsername());
-                        holder.setprofileImage(model.getProfileImage());
-                        holder.setfullname(model.getFullname());
-                        holder.setprofileImage(model.getProfileImage());
+
+                        UserRef.child(model.getUid()).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                if(dataSnapshot.exists())
+                                {
+                                    holder.setfullname(dataSnapshot.child("fullname").getValue().toString());
+                                    holder.setusername(dataSnapshot.child("username").getValue().toString());
+                                    holder.setprofileImage(dataSnapshot.child("profileImage").getValue().toString());
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+
                     }
                 };
 
@@ -102,6 +122,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
             TextView comment_user = mView.findViewById(R.id.request_username);
             comment_user.setText(username);
         }
+
 
         public void setprofileImage(String profileImage){
             CircleImageView comment_profile = mView.findViewById(R.id.request_profileImage);
