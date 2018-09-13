@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout popup_button_layout;
     private DatabaseReference ClickPostRef;
     private String description;
+    private ImageButton notifications;
     View v;
 
     //private ImageView Like,Comment,Share,Saved;
@@ -168,6 +169,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        notifications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,FriendRequestsActivity.class));
+            }
+        });
         drawerLayout = findViewById(R.id.drawable_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this,drawerLayout,R.string.drawer_open,R.string.drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);

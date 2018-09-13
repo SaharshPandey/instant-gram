@@ -10,5 +10,11 @@
     app:subtitleTextColor="@android:color/black"
 
     >
-
+<ImageButton
+    android:id="@+id/notifications"
+    android:layout_width="30dp"
+    android:layout_height= "30dp"
+    android:background="@drawable/ic_notifications_black_24dp"
+    android:layout_marginStart="340dp"
+    />
 </android.support.v7.widget.Toolbar>

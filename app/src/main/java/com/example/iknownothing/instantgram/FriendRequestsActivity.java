@@ -23,12 +23,6 @@ import org.w3c.dom.Text;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FriendRequestsActivity extends AppCompatActivity {
-
-    private CircleImageView profileImage;
-    private TextView accept;
-    private TextView recieve;
-    private TextView fullname;
-    private TextView username;
     private RecyclerView RequestList;
     private DatabaseReference UserRef,PostRef,RequestRef;
     private FirebaseAuth mAuth;
@@ -45,7 +39,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
         CurrentUserId = mAuth.getCurrentUser().getUid();
 
         UserRef = FirebaseDatabase.getInstance().getReference("Users");
-        RequestRef = FirebaseDatabase.getInstance().getReference("Users").child("FriendRequests");
+        RequestRef = FirebaseDatabase.getInstance().getReference("Users").child(CurrentUserId).child("FriendRequests");
 
         RequestList = findViewById(R.id.friend_requests);
         RequestList.setHasFixedSize(true);

@@ -160,6 +160,8 @@ public class ProfileActivity extends AppCompatActivity {
         userRequests.put("uid",CurrentUserId);
         userRequests.put("timestamp",timestamp);
 
+
+
         //Sending the Friend Request....
         FriendRequestReference.child(CurrentUserId).updateChildren(userRequests).addOnCompleteListener(new OnCompleteListener() {
             @Override
