@@ -146,7 +146,7 @@ public class CommentActivity extends AppCompatActivity {
                 holder.setprofileImage(model.getProfileImage());
                 holder.setCommenttext(model.getCommenttext());
                 holder.setDate(model.getDate());
-                holder.setTime(model.getTime());
+                holder.setTime(model    .getTime());
             }
         };
 
