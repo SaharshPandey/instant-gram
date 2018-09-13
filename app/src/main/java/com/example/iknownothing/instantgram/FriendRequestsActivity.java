@@ -27,11 +27,13 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.util.HashMap;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FriendRequestsActivity extends AppCompatActivity {
     private RecyclerView RequestList;
-    private DatabaseReference UserRef,PostRef,RequestRef;
+    private DatabaseReference UserRef,PostRef,RequestRef,FollowersRef;
     private FirebaseAuth mAuth;
     String PostKey,CurrentUserId;
     private TextView name;
@@ -53,6 +55,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
 
         UserRef = FirebaseDatabase.getInstance().getReference("Users");
         RequestRef = FirebaseDatabase.getInstance().getReference("Users").child(CurrentUserId).child("FriendRequests");
+        FollowersRef=UserRef.child(CurrentUserId).child("Followers");
 
         RequestList = findViewById(R.id.friend_requests);
         RequestList.setHasFixedSize(true);
@@ -94,10 +97,30 @@ public class FriendRequestsActivity extends AppCompatActivity {
                         accept = holder.mView.findViewById(R.id.accept);
                         decline = holder.mView.findViewById(R.id.decline);
 
+                        //Accepting Friend Request....
                         accept.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                    
+
+                                HashMap follower_users= new HashMap();
+                                follower_users.put("uid",CurrentUserId);
+
+
+                                FollowersRef.child(getRef(position).getKey()).updateChildren(follower_users).addOnCompleteListener(new OnCompleteListener() {
+                                    @Override
+                                    public void onComplete(@NonNull Task task) {
+                                        if(task.isSuccessful())
+                                        {
+                                            Toast.makeText(FriendRequestsActivity.this,"You're now Friends",Toast.LENGTH_SHORT).show();
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(FriendRequestsActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                });
+                                CancelFriendRequest(getRef(position).getKey());
                             }
                         });
 
@@ -107,19 +130,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
                         decline.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                //Cancelling the Friend Request....
-                                RequestRef.child(getRef((position)).getKey()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful())
-                                        {
-                                            Toast.makeText(FriendRequestsActivity.this,"Request Cancelled",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else{
-                                            Toast.makeText(FriendRequestsActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
+                                CancelFriendRequest(getRef(position).getKey());
                             }
                         });
                         UserRef.child(model.getUid()).addValueEventListener(new ValueEventListener() {
@@ -175,4 +186,22 @@ public class FriendRequestsActivity extends AppCompatActivity {
             comment_user.setText(fullname);
         }
     }
+
+    public void CancelFriendRequest(String id)
+    {
+        //Cancelling the Friend Request....
+        RequestRef.child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(FriendRequestsActivity.this,"Request Cancelled",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(FriendRequestsActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 }
