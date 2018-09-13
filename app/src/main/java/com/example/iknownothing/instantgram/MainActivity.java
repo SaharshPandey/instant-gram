@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
+        notifications = findViewById(R.id.notifications);
         notifications.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

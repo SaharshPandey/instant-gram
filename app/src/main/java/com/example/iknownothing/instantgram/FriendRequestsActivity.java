@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
 
                     @Override
                     protected void onBindViewHolder(@NonNull RequestViewHolder holder, int position, @NonNull Accept_Decline model) {
+                        Log.d("result1",getRef(position).getKey()); 
                         holder.setusername(model.getUsername());
                         holder.setprofileImage(model.getProfileImage());
                         holder.setfullname(model.getFullname());
