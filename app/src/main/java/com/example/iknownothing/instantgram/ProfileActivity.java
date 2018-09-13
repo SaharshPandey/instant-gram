@@ -1,6 +1,5 @@
 package com.example.iknownothing.instantgram;
 
-import android.os.UserHandle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     private RecyclerView profile_posts_recyclerview;                    //Users Posts RecyclerView;
     private TextView followuser;
     private String CURRENT_STATE;
-    private DatabaseReference FriendRequestReference,FollowersRef;
+    private DatabaseReference FriendRequestReference,FollowerReference;
     //private ImageView going_back;
 
     @Override
@@ -54,8 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
         PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
         FriendRequestReference = FirebaseDatabase.getInstance().getReference().child("Users").child(UserKey).child("FriendRequests");
-        FollowersRef = UserRef.child("Followers");
-
+        FollowerReference = FirebaseDatabase.getInstance().getReference().child("Users").child(UserKey).child("Followers");
         //Initialising Widgets from Profile Activity....
         profileImage = findViewById(R.id.post_profile_image);
         profile_username = findViewById(R.id.profile_username);
@@ -116,7 +114,7 @@ public class ProfileActivity extends AppCompatActivity {
                        if(dataSnapshot.child("Followers").hasChild(UserKey))
                        {
                            followuser.setText("Unfollow");
-                           followuser.setBackgroundColor(getResources().getColor(R.color.sendblue));
+                           followuser.setBackgroundColor(getResources().getColor(R.color.sendblue1));
                        }
                        //if user already has sent friend request,then it will show unfollow option
                        else if(!dataSnapshot.child("Followers").hasChild(UserKey))
@@ -156,9 +154,9 @@ public class ProfileActivity extends AppCompatActivity {
               else if(followuser.getText().equals("Cancel")){
                   CancelFriendRequest();
               }
-              else if(followuser.getText().equals("Unfollow"))
+              else
               {
-                  UnfollowUser();
+                  RemoveFriend();
               }
           }
       });
@@ -211,23 +209,24 @@ public class ProfileActivity extends AppCompatActivity {
             });
         }
 
-    public void  UnfollowUser()
-    {
-        //Cancelling the Friend Request....
-        FollowersRef.child(CurrentUserId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+        public void RemoveFriend()
+        {FollowerReference.child(CurrentUserId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())
                 {
-                    Toast.makeText(ProfileActivity.this,"Request Cancelled",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileActivity.this,"You're no Long Friends",Toast.LENGTH_SHORT).show();
+
                 }
-                else{
+                else
+                {
                     Toast.makeText(ProfileActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
 
-    }
+        }
 
 
 }
