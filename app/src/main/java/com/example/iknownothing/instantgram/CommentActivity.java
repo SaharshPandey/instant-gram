@@ -45,6 +45,7 @@ public class CommentActivity extends AppCompatActivity {
     private DatabaseReference UserRef,PostRef;
     private FirebaseAuth mAuth;
     String PostKey,CurrentUserId;
+    private TextView name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +57,9 @@ public class CommentActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 
+        name = findViewById(R.id.name);
+        name.setText("Comments");
+        
         mAuth = FirebaseAuth.getInstance();
         CurrentUserId = mAuth.getCurrentUser().getUid();
 

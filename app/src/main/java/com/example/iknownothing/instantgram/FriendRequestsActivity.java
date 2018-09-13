@@ -86,7 +86,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull final RequestViewHolder holder, int position, @NonNull Accept_Decline model) {
                         Log.d("result1",getRef(position).getKey());
-                        
+
                         UserRef.child(model.getUid()).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {

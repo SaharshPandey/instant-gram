@@ -31,6 +31,12 @@
         >
     </item>
     <item
+        android:id="@+id/nav_notifications"
+        android:title="Notifications"
+        android:icon="@drawable/find_people"
+        >
+    </item>
+    <item
         android:id="@+id/nav_messages"
         android:title="Messages"
         android:icon="@drawable/messages"
