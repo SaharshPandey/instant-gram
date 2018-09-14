@@ -1,5 +1,6 @@
 package com.example.iknownothing.instantgram;
 
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -76,11 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 */
-      if(UserKey.equals(CurrentUserId))
-      {
-          followuser.setText("EditProfile");
-          //followuser.setBackground(R.drawable.input);
-      }
+
 
            UserRef.child(UserKey).addValueEventListener(new ValueEventListener() {
                @Override
@@ -111,9 +108,16 @@ public class ProfileActivity extends AppCompatActivity {
                            String bio = dataSnapshot.child("status").getValue().toString();
                            profile_bio.setText(bio);
                        }
-                       if(dataSnapshot.child("Followers").hasChild(UserKey))
+
+                       if(UserKey.equals(CurrentUserId))
                        {
-                           followuser.setText("Unfollow");
+                           followuser.setText("Edit Profile");
+                           followuser.setBackgroundColor(getResources().getColor(R.color.sendblue1));
+
+                       }
+                       else if(dataSnapshot.child("Followers").hasChild(UserKey))
+                       {
+                           followuser.setText("Unfriend");
                            followuser.setBackgroundColor(getResources().getColor(R.color.sendblue1));
                        }
                        //if user already has sent friend request,then it will show unfollow option
@@ -126,7 +130,7 @@ public class ProfileActivity extends AppCompatActivity {
                        }
                        if(!dataSnapshot.child("FriendRequests").hasChild(CurrentUserId))
                        {
-                           followuser.setText("Follow");
+                           followuser.setText("Friend");
                            followuser.setBackgroundColor(getResources().getColor(R.color.deep_purple_500));
                        }
                        }
