@@ -144,10 +144,9 @@ public class CommentActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull CommentViewHolder holder, int position, @NonNull Comments model) {
+            protected void onBindViewHolder(@NonNull final CommentViewHolder holder, int position, @NonNull final Comments model) {
 
-                holder.setusername(model.getUsername());
-                holder.setprofileImage(model.getProfileImage());
+
                 holder.setCommenttext(model.getCommenttext());
                 holder.setDate(model.getDate());
                 holder.setTime(model.getTime());
@@ -155,6 +154,9 @@ public class CommentActivity extends AppCompatActivity {
                 UserRef.child(getRef(position).getKey()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        holder.setusername(dataSnapshot.child("username").getValue().toString());
+                        holder.setprofileImage(dataSnapshot.child("profileImage").getValue().toString());
 
                     }
 
@@ -246,12 +248,10 @@ public class CommentActivity extends AppCompatActivity {
             //Making data for node to store in firebase.....
             HashMap commentMap = new HashMap();
             commentMap.put("uid", CurrentUserId);
-            commentMap.put("username",userName);
             commentMap.put("commenttext",commentText);
             commentMap.put("date", CurrentDate);
             commentMap.put("time", CurrentTime);
             commentMap.put("timestamp",ts);
-            commentMap.put("profileImage",profileImage);
 
             PostRef.child(RandomKey).updateChildren(commentMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
