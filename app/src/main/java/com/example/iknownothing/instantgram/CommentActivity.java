@@ -151,6 +151,18 @@ public class CommentActivity extends AppCompatActivity {
                 holder.setCommenttext(model.getCommenttext());
                 holder.setDate(model.getDate());
                 holder.setTime(model.getTime());
+
+                UserRef.child(getRef(position).getKey()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         };
 

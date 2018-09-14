@@ -975,7 +975,9 @@ return super.onOptionsItemSelected(item);
         super.onPause();
 
         //So that the Data should be Retained;
+        //BUNDLE bundles the DATA;
         mBundleRecyclerViewState =new Bundle();
+        //PARCELABLE save the bundle Object...
         Parcelable listState = postList.getLayoutManager().onSaveInstanceState();
         mBundleRecyclerViewState.putParcelable("recycler_state",listState);
     }
@@ -987,6 +989,7 @@ return super.onOptionsItemSelected(item);
         //So that the Data should be Retained;
         if(mBundleRecyclerViewState != null)
         {
+            //If bundle is not null then Parcelable unbind the Data from BUNDLE object and Restores it...
             Parcelable liststate = mBundleRecyclerViewState.getParcelable("recycler_state");
             postList.getLayoutManager().onRestoreInstanceState(liststate);
         }
