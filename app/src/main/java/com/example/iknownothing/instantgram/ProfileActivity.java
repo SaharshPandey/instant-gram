@@ -151,7 +151,11 @@ public class ProfileActivity extends AppCompatActivity {
       followuser.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              if(followuser.getText().equals("Follow"))
+              if(followuser.getText().equals("Edit Profile"))
+              {
+                  EditProfile();
+              }
+              else if(followuser.getText().equals("Follow"))
               {
                   SendFriendRequest();
               }
@@ -230,6 +234,10 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        }
+        public void EditProfile()
+        {
+                
         }
 
 
