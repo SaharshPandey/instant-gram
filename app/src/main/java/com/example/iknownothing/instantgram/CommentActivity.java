@@ -208,7 +208,7 @@ public class CommentActivity extends AppCompatActivity {
 
         public void setprofileImage(String profileImage){
             CircleImageView comment_profile = mView.findViewById(R.id.comment_profile);
-            Picasso.get().load(profileImage).into(comment_profile);
+            Picasso.get().load(profileImage).placeholder(R.drawable.profile).into(comment_profile);
         }
 
 
