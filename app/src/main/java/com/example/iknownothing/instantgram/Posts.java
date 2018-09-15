@@ -12,7 +12,7 @@ public class Posts {
 
     }
 
-    public Posts(String uid, String time, String date, String postimage, String description, String profileImage, String fullname) {
+    public Posts(String uid, String time, String date, String postimage, String description, String profileImage, String fullname,String username) {
         this.uid = uid;
         this.time = time;
         this.date = date;
@@ -20,6 +20,7 @@ public class Posts {
         this.description = description;
         this.profileImage = profileImage;
         this.fullname = fullname;
+        this.username = username;
     }
 
     public String getUid() {
@@ -81,8 +82,17 @@ public class Posts {
         this.fullname = fullname;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String description;
     public String profileImage;
     public String fullname;
+    public String username;
 
 }

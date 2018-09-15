@@ -502,7 +502,7 @@ public class MainActivity extends AppCompatActivity {
                 =new FirebaseRecyclerAdapter<Posts, PostViewHolder>(options)
         {
             @Override
-            protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull Posts model) {
+            protected void onBindViewHolder(@NonNull final PostViewHolder holder, int position, @NonNull final Posts model) {
 
 
                 // Bind the Chat object to the ChatHolder
@@ -515,14 +515,29 @@ public class MainActivity extends AppCompatActivity {
 
 
                 //Setting data to the holder.
-                holder.setFullname(model.fullname);
-                holder.setProfileImage(getApplicationContext(),model.profileImage);
+
+
                 holder.setDate(model.date);
                 holder.setTime(model.time);
                 holder.setDescription(model.description);
                 holder.setPostimage(getApplicationContext(), model.postimage);
                 holder.setLikeButtonStatus(PostKey);
 
+                UserRef.child(model.getUid()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists())
+                        {
+                            holder.setUsername(dataSnapshot.child("username").getValue().toString());
+                            holder.setProfileImage(getApplicationContext(),dataSnapshot.child("profileImage").getValue().toString());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 //Adding popup button functionality...
                 popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
                 popup_button=holder.mView.findViewById(R.id.popup_button);
@@ -723,10 +738,15 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+        public void setUsername(String username)
+        {
+            TextView name = mView.findViewById(R.id.post_username);
+            name.setText(username);
+        }
 
         public void setFullname(String fullname) {
-            TextView name= mView.findViewById(R.id.post_username);
-            name.setText(fullname);
+            //TextView name= mView.findViewById(R.id.post_username);
+            //name.setText(fullname);
 
         }
         public void setProfileImage(Context ctx, String profileImage) {
@@ -922,8 +942,8 @@ return super.onOptionsItemSelected(item);
                         PostRandomName = CurrentDAte+CurrentTime;
                         DownloadUrl="none";
                     }
-                    String userFullname = dataSnapshot.child("fullname").getValue().toString();
-                    String profileImage = dataSnapshot.child("profileImage").getValue().toString();
+                    //String userFullname = dataSnapshot.child("fullname").getValue().toString();
+                    //String profileImage = dataSnapshot.child("profileImage").getValue().toString();
 
                     String description = text_post.getText().toString();
                     text_post.setText(description);
@@ -935,8 +955,8 @@ return super.onOptionsItemSelected(item);
                     postMap.put("time", CurrentTime);
                     postMap.put("description", description);
                     postMap.put("postimage", DownloadUrl);
-                    postMap.put("profileImage", profileImage);
-                    postMap.put("fullname", userFullname);
+                    //postMap.put("profileImage", profileImage);
+                    //postMap.put("fullname", userFullname);
                     postMap.put("timestamp",ts);
 
                     //making new node in database....

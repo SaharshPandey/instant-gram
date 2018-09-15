@@ -38,9 +38,6 @@
                 android:layout_marginLeft="4dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/profile"
-                app:civ_border_color="@color/sendblue1"
-                app:civ_border_width="2dp"
-
                 />
 
 
