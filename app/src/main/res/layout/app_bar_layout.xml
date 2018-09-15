@@ -4,10 +4,10 @@
     android:id="@+id/main_app_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    android:background="#2B2A28"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:titleTextColor="@android:color/black"
-    app:subtitleTextColor="@android:color/black"
+    app:titleTextColor="@android:color/white"
+    app:subtitleTextColor="@android:color/white"
 
     >
 <ImageButton
@@ -16,6 +16,7 @@
     android:layout_height= "30dp"
     android:layout_marginStart="200dp"
     android:background="@drawable/ic_notifications_black_24dp"
+
 
     />
 </android.support.v7.widget.Toolbar>
