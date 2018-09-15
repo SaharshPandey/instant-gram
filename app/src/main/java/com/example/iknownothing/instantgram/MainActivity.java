@@ -565,6 +565,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                
                 //OPENING PROFILE WHEN USER CLICK THE POST PROFILE IMAGE...
                 holder.mView.findViewById(R.id.post_username).setOnClickListener(new View.OnClickListener() {
                     @Override
