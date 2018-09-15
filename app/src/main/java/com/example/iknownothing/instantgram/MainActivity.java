@@ -706,12 +706,12 @@ public class MainActivity extends AppCompatActivity {
                     if(dataSnapshot.child(PostKey).hasChild(currentuserId))
                     {
                         countlikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
-                        Like.setImageResource(R.drawable.ic_heart_black);
+                        Like.setImageResource(R.drawable.heartfill8);
                         PostLikes.setText(Integer.toString(countlikes));
                     }
                     else{
                         countlikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
-                        Like.setImageResource(R.drawable.ic_heart_outline);
+                        Like.setImageResource(R.drawable.heartempty8);
                         PostLikes.setText(Integer.toString(countlikes));
                     }
                 }
