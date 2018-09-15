@@ -9,6 +9,7 @@
         android:layout_below="@id/main_page_toolbar"
         app:cardUseCompatPadding="true"
         app:cardElevation="1dp"
+        android:elevation="15dp"
         app:cardCornerRadius="2dp"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
