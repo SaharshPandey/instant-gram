@@ -151,7 +151,7 @@ public class CommentActivity extends AppCompatActivity {
                 holder.setDate(model.getDate());
                 holder.setTime(model.getTime());
 
-                UserRef.child(getRef(position).getKey()).addValueEventListener(new ValueEventListener() {
+                UserRef.child(model.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
