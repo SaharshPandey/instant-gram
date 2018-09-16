@@ -38,12 +38,13 @@
                 android:layout_marginLeft="4dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/profile"
+                android:layout_gravity="center"
                 />
 
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1"
 
@@ -61,17 +62,44 @@
                         android:id="@+id/post_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="3dp"
                         android:text="user name"
                         android:textAlignment="textStart"
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        />
+
 
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="horizontal"
+                    android:padding="2dp"
+                    android:layout_marginTop="2dp"
 
+
+                    >
+
+
+                    <TextView
+                        android:id="@+id/post_fullname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="unknown"
+                        android:textColor="@android:color/darker_gray"
+                        android:textStyle="bold"
+                        android:textSize="9sp"
+
+                        />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 

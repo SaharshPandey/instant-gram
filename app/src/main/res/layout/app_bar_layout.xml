@@ -7,7 +7,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:titleTextColor="@android:color/black"
     app:subtitleTextColor="@android:color/black"
-    android:elevation="15dp"
+    android:elevation="5dp"
     >
 <ImageButton
     android:id="@+id/notifications"

@@ -317,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void CheckingFirebaseData(String PostKey)
+  /*  public void CheckingFirebaseData(String PostKey)
     {
         ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
 
@@ -333,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
                     description = dataSnapshot.child("description").getValue().toString();
 
                     //Checking whether the post is of the CurrentUser ....
-                    if (CurrentUserId.equals(Database_User_Id)) {
+                     if (CurrentUserId.equals(Database_User_Id)) {
                         popup_button_layout.setVisibility(View.VISIBLE);
                         //popup_button.setVisibility(View.VISIBLE);
                     }
@@ -351,13 +351,42 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+*/
    //METHOD TO SHOW POPUP WHEN USER TAP POPUP MENU...
     public void showPopup(View v,final String PostKey){
 
-
+        ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
         //REFERENCE FOR THE POST....
 
+        //GETTING REFERENCE FOR THE POST....
+        ClickPostRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                if(dataSnapshot.exists()) {
+
+                    Database_User_Id = dataSnapshot.child("uid").getValue().toString();
+                    description = dataSnapshot.child("description").getValue().toString();
+
+                    //Checking whether the post is of the CurrentUser ....
+                    /*if (CurrentUserId.equals(Database_User_Id)) {
+                        popup_button_layout.setVisibility(View.VISIBLE);
+                        //popup_button.setVisibility(View.VISIBLE);
+                    }*/
+
+                }
+
+                else{
+                    Toast.makeText(MainActivity.this,"Data doesn't Exists ! ",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         //CREATING POPUP MENU AND ADDING MENU XML INTO IT...
         final PopupMenu popupMenu = new PopupMenu(this,v);
@@ -530,6 +559,7 @@ public class MainActivity extends AppCompatActivity {
                         {
                             holder.setUsername(dataSnapshot.child("username").getValue().toString());
                             holder.setProfileImage(getApplicationContext(),dataSnapshot.child("profileImage").getValue().toString());
+                            holder.setFullname(dataSnapshot.child("fullname").getValue().toString());
                         }
                     }
 
@@ -647,6 +677,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+            //CheckingFirebaseData(PostKey);
             }
 
             @NonNull
@@ -745,8 +776,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void setFullname(String fullname) {
-            //TextView name= mView.findViewById(R.id.post_username);
-            //name.setText(fullname);
+            TextView name= mView.findViewById(R.id.post_fullname);
+            name.setText(fullname);
 
         }
         public void setProfileImage(Context ctx, String profileImage) {
@@ -969,7 +1000,7 @@ return super.onOptionsItemSelected(item);
                                     {
                                         loadingBar.dismiss();
 
-                                        //Toast.makeText(PostActivity.this,"Post is Updated Successfully",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainActivity.this,"Post is Updated Successfully",Toast.LENGTH_SHORT).show();
 
                                     }
 
