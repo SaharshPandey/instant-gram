@@ -101,7 +101,7 @@ public class SetupActivity extends AppCompatActivity {
                     userMap.put("realtionshipstatus","none");
 
                     //ADDING TEMPORARY PROFILE TO THE USER ACCOUNT.....
-                    userMap.put("profileImage","https://firebasestorage.googleapis.com/v0/b/instantgram-5c343.appspot.com/o/Profile%20Images%2Fprofile.png?alt=media&token=360aa709-b18d-443e-96ce-e0704bf97e62");
+                    //userMap.put("profileImage","https://firebasestorage.googleapis.com/v0/b/instantgram-5c343.appspot.com/o/Profile%20Images%2Fprofile.png?alt=media&token=360aa709-b18d-443e-96ce-e0704bf97e62");
 
                     //ADDING DATA TO THE CURRENT USER ...
                     UsersRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
