@@ -60,7 +60,9 @@
                                 android:scaleType="center"
                                 tools:ignore="MissingConstraints"
                                 tools:layout_editor_absoluteX="73dp"
-                                tools:layout_editor_absoluteY="80dp" />
+                                tools:layout_editor_absoluteY="80dp"
+                                android:id="@+id/user_profile_image_button"
+                                />
 
                         </android.support.constraint.ConstraintLayout>
 

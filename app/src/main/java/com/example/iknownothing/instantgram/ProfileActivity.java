@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,8 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView followuser;
     private String CURRENT_STATE;
     private DatabaseReference FriendRequestReference,FollowerReference;
+    private EditText profile_username_edit,profile_fullname_edit,profile_bio_edit;
+    private ImageButton user_profile_image_button;
     //private ImageView going_back;
 
     @Override
@@ -55,6 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         FriendRequestReference = FirebaseDatabase.getInstance().getReference().child("Users").child(UserKey).child("FriendRequests");
         FollowerReference = FirebaseDatabase.getInstance().getReference().child("Users").child(UserKey).child("Followers");
+
         //Initialising Widgets from Profile Activity....
         profileImage = findViewById(R.id.post_profile_image);
         profile_username = findViewById(R.id.profile_username);
@@ -62,7 +67,19 @@ public class ProfileActivity extends AppCompatActivity {
         profile_bio = findViewById(R.id.profile_bio);
         followuser = findViewById(R.id.follow_users);
 
+
+        //Initialising EditText of UserProfile;
+        profile_username_edit=findViewById(R.id.profile_username_edit);
+        profile_fullname_edit = findViewById(R.id.profile_fullname_edit);
+        profile_bio_edit = findViewById(R.id.profile_bio_edit);
+        user_profile_image_button = findViewById(R.id.user_profile_image_button);
         //going_back = findViewById(R.id.going_back);
+
+        //Not Displaying until user edit his profile...
+        profile_username_edit.setVisibility(View.GONE);
+        profile_fullname_edit.setVisibility(View.GONE);
+        profile_bio_edit.setVisibility(View.GONE);
+        user_profile_image_button.setVisibility(View.GONE);
 
         //Initialising RecyclerView of User Posts....
         profile_posts_recyclerview = findViewById(R.id.profile_posts_recyclerview);
@@ -237,7 +254,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
         public void EditProfile()
         {
-
+            
         }
 
 
