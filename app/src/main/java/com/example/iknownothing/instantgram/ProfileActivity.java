@@ -254,7 +254,11 @@ public class ProfileActivity extends AppCompatActivity {
         }
         public void EditProfile()
         {
-            
+            //Not Displaying until user edit his profile...
+            profile_username_edit.setVisibility(View.VISIBLE);
+            profile_fullname_edit.setVisibility(View.VISIBLE);
+            profile_bio_edit.setVisibility(View.VISIBLE);
+            user_profile_image_button.setVisibility(View.VISIBLE);
         }
 
 
