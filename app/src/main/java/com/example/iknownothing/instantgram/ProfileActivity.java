@@ -67,7 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
         profile_bio = findViewById(R.id.profile_bio);
         followuser = findViewById(R.id.follow_users);
 
-
+/*
         //Initialising EditText of UserProfile;
         profile_username_edit=findViewById(R.id.profile_username_edit);
         profile_fullname_edit = findViewById(R.id.profile_fullname_edit);
@@ -80,6 +80,7 @@ public class ProfileActivity extends AppCompatActivity {
         profile_fullname_edit.setVisibility(View.GONE);
         profile_bio_edit.setVisibility(View.GONE);
         user_profile_image_button.setVisibility(View.GONE);
+*/
 
         //Initialising RecyclerView of User Posts....
         profile_posts_recyclerview = findViewById(R.id.profile_posts_recyclerview);
@@ -253,12 +254,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         }
         public void EditProfile()
-        {
+        {/*
             //Not Displaying until user edit his profile...
             profile_username_edit.setVisibility(View.VISIBLE);
             profile_fullname_edit.setVisibility(View.VISIBLE);
             profile_bio_edit.setVisibility(View.VISIBLE);
-            user_profile_image_button.setVisibility(View.VISIBLE);
+            user_profile_image_button.setVisibility(View.VISIBLE);*/
         }
 
 
