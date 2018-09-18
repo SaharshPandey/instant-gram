@@ -132,7 +132,8 @@ public class MainActivity extends AppCompatActivity {
         LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setTitle("     BigInch");
+        getSupportActionBar().setIcon(R.drawable.ic_whatshot);
         //getSupportActionBar().setIcon(R.drawable.ic_notifications_black_24dp);
 
         v = findViewById(R.id.post_bar_included);
