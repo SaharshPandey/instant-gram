@@ -102,11 +102,32 @@ public class FriendRequestsActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
 
-                                HashMap follower_users= new HashMap();
-                                follower_users.put("uid",CurrentUserId);
+
+                                //Adding CurrentUser to the Accepted Friend Database..
+                                HashMap follower_users1= new HashMap();
+                                follower_users1.put("uid",CurrentUserId);
 
 
-                                FollowersRef.child(getRef(position).getKey()).updateChildren(follower_users).addOnCompleteListener(new OnCompleteListener() {
+                                FollowersRef.child(getRef(position).getKey()).updateChildren(follower_users1).addOnCompleteListener(new OnCompleteListener() {
+                                    @Override
+                                    public void onComplete(@NonNull Task task) {
+                                        if(task.isSuccessful())
+                                        {
+                                            Toast.makeText(FriendRequestsActivity.this,"You're now Friends",Toast.LENGTH_SHORT).show();
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(FriendRequestsActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                });
+
+                                //Adding Accepted Friend User to the Current User Database..
+                                HashMap follower_users2= new HashMap();
+                                follower_users2.put("uid",getRef(position).getKey());
+
+                                FollowersRef.child(CurrentUserId).updateChildren(follower_users2).addOnCompleteListener(new OnCompleteListener() {
                                     @Override
                                     public void onComplete(@NonNull Task task) {
                                         if(task.isSuccessful())

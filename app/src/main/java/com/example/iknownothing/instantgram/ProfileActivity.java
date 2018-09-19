@@ -148,7 +148,7 @@ public class ProfileActivity extends AppCompatActivity {
                        }
                        if(!dataSnapshot.child("FriendRequests").hasChild(CurrentUserId))
                        {
-                           followuser.setText("Friend");
+                           followuser.setText("Follow");
                            followuser.setBackgroundColor(getResources().getColor(R.color.deep_purple_500));
                        }
                        }
