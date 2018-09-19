@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     private RecyclerView profile_posts_recyclerview;                    //Users Posts RecyclerView;
     private TextView followuser;
     private String CURRENT_STATE;
-    private DatabaseReference FriendRequestReference,FollowerReference;
+    private DatabaseReference FriendRequestReference,FollowerReference,FollowerReferenceCurrent;
     private EditText profile_username_edit,profile_fullname_edit,profile_bio_edit;
     private ImageButton user_profile_image_button;
     //private ImageView going_back;
@@ -59,6 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         FriendRequestReference = FirebaseDatabase.getInstance().getReference().child("Users").child(UserKey).child("FriendRequests");
         FollowerReference = FirebaseDatabase.getInstance().getReference().child("Users").child(UserKey).child("Followers");
+        FollowerReferenceCurrent = FirebaseDatabase.getInstance().getReference().child("Users").child(CurrentUserId).child("Followers");
 
         //Initialising Widgets from Profile Activity....
         profileImage = findViewById(R.id.post_profile_image);
@@ -135,7 +136,7 @@ public class ProfileActivity extends AppCompatActivity {
                        }
                        else if(dataSnapshot.child("Followers").hasChild(UserKey))
                        {
-                           followuser.setText("Unfriend");
+                           followuser.setText("UnFriend");
                            followuser.setBackgroundColor(getResources().getColor(R.color.sendblue1));
                        }
                        //if user already has sent friend request,then it will show unfollow option
@@ -180,9 +181,9 @@ public class ProfileActivity extends AppCompatActivity {
               else if(followuser.getText().equals("Cancel")){
                   CancelFriendRequest();
               }
-              else
+              else if(followuser.getText().equals("UnFriend"))
               {
-                  RemoveFriend();
+                  RemoveFriend(UserKey);
               }
           }
       });
@@ -235,7 +236,7 @@ public class ProfileActivity extends AppCompatActivity {
             });
         }
 
-        public void RemoveFriend()
+        public void RemoveFriend(String userkey)
         {FollowerReference.child(CurrentUserId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -251,6 +252,22 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
+            FollowerReferenceCurrent.child(userkey).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful())
+                    {
+                        Toast.makeText(ProfileActivity.this,"You're no Long Friends",Toast.LENGTH_SHORT).show();
+
+                    }
+                    else
+                    {
+                        Toast.makeText(ProfileActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            });
 
         }
         public void EditProfile()
