@@ -548,7 +548,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //CheckingFirebaseData(PostKey);
 
-
+                holder.container.stopShimmer();
 
 
                 //Setting data to the holder.
@@ -685,7 +685,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                holder.container.stopShimmer();
+
             //CheckingFirebaseData(PostKey);
             }
 
@@ -745,8 +745,8 @@ public class MainActivity extends AppCompatActivity {
             Comment = mView.findViewById(R.id.comment);
             Share = mView.findViewById(R.id.share);
             PostLikes = mView.findViewById(R.id.postlikes);
-            post_progress = mView.findViewById(R.id.post_progress);
-            post_progress.setVisibility(View.VISIBLE);
+            //      post_progress = mView.findViewById(R.id.post_progress);
+            //post_progress.setVisibility(View.VISIBLE);
             LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
             currentuserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -851,7 +851,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess() {
 
-                    post_progress.setVisibility(View.GONE);
+                    //post_progress.setVisibility(View.GONE);
+                    container.stopShimmer();
                 }
 
                 @Override

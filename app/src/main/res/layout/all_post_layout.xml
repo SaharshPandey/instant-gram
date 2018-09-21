@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/shimmer_view_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="2dp"
@@ -136,28 +135,29 @@
             android:textColor="@android:color/black"
             android:textSize="14sp" />
 
-        <ImageView
-            android:id="@+id/post_image"
+        <com.facebook.shimmer.ShimmerFrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="400dp"
+            android:id="@+id/shimmer_view_container"
             android:layout_gravity="center"
             android:layout_margin="3dp"
             android:adjustViewBounds="true"
             android:maxHeight="430dp"
-            android:background="@android:color/black"
-            />
+            android:background="@color/icongrey"
+            >
+            <ImageView
+                android:id="@+id/post_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:maxHeight="430dp"
 
-        <ProgressBar
-            android:id="@+id/post_progress"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            android:padding="60dp"
+                />
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
 
-            />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -269,4 +269,4 @@
 
     </TableRow>
 
-</com.facebook.shimmer.ShimmerFrameLayout>
+</RelativeLayout>
