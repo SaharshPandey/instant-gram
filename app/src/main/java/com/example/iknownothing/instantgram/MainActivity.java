@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -751,7 +752,7 @@ public class MainActivity extends AppCompatActivity {
             currentuserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
             container = mView.findViewById(R.id.shimmer_view_container);
-            container.startShimmer(); // If auto-start is set to false
+            //container.startShimmer(); // If auto-start is set to false
         }
 
         //Method that check for the Likes when user opens the app..
@@ -838,10 +839,11 @@ public class MainActivity extends AppCompatActivity {
                 //Hiding the postImage visibility....
                 //post_image.setVisibility(View.GONE);
 
+
                 //Hiding the progress bar when user upload text..
                 Picasso.get().load(postimage).into(post_image);
-
-                post_progress.setVisibility(View.GONE);
+                container.setVisibility(View.GONE);
+                //post_progress.setVisibility(View.GONE);
 
 
             }
@@ -853,6 +855,10 @@ public class MainActivity extends AppCompatActivity {
 
                     //post_progress.setVisibility(View.GONE);
                     container.stopShimmer();
+                    container.setBackgroundColor(Color.TRANSPARENT);
+
+
+
                 }
 
                 @Override

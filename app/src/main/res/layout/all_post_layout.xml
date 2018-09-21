@@ -137,13 +137,14 @@
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="430dp"
             android:id="@+id/shimmer_view_container"
             android:layout_gravity="center"
             android:layout_margin="3dp"
             android:adjustViewBounds="true"
             android:maxHeight="430dp"
             android:background="@color/icongrey"
+            app:shimmer_auto_start="true"
             >
             <ImageView
                 android:id="@+id/post_image"
