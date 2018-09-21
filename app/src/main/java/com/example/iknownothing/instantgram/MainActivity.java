@@ -36,6 +36,8 @@ import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -132,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
         LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("     BigInch");
         getSupportActionBar().setIcon(R.drawable.ic_whatshot);
+        getSupportActionBar().setTitle("   BigInch");
         //getSupportActionBar().setIcon(R.drawable.ic_notifications_black_24dp);
 
         v = findViewById(R.id.post_bar_included);
@@ -201,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         postList.setLayoutManager(linearLayoutManager);
+
 
 
         //Inflating Navigation Header in Navigation Menu....
@@ -531,7 +534,7 @@ public class MainActivity extends AppCompatActivity {
         firebaseRecyclerAdapter
                 =new FirebaseRecyclerAdapter<Posts, PostViewHolder>(options)
 
-            
+
         {
             @Override
             protected void onBindViewHolder(@NonNull final PostViewHolder holder, int position, @NonNull final Posts model) {
@@ -544,6 +547,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("result",PostKey);
 
                 //CheckingFirebaseData(PostKey);
+
+
 
 
                 //Setting data to the holder.
@@ -680,6 +685,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                holder.container.stopShimmer();
             //CheckingFirebaseData(PostKey);
             }
 
@@ -726,7 +732,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView Comment;
         ImageView Share;
         TextView PostLikes;
-
+        ShimmerFrameLayout container;
 
         // USING GETTER SETTERS METHODS FROM POSTS CLASS.....
         public PostViewHolder(View itemView)
@@ -743,6 +749,9 @@ public class MainActivity extends AppCompatActivity {
             post_progress.setVisibility(View.VISIBLE);
             LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
             currentuserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+            container = mView.findViewById(R.id.shimmer_view_container);
+            container.startShimmer(); // If auto-start is set to false
         }
 
         //Method that check for the Likes when user opens the app..
@@ -872,6 +881,8 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onStart();
         firebaseRecyclerAdapter.startListening();
+
+
 
         FirebaseUser currentuser =mAuth.getCurrentUser();
 

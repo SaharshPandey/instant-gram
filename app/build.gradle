@@ -29,6 +29,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.+'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.facebook.shimmer:shimmer:0.3.0'
     implementation 'com.google.firebase:firebase-auth:11.8.0'
     implementation 'com.google.firebase:firebase-database:11.8.0'
     implementation 'com.google.firebase:firebase-storage:11.8.0'
