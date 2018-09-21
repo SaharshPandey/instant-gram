@@ -549,7 +549,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //CheckingFirebaseData(PostKey);
 
-                holder.container.stopShimmer();
+                //holder.container.stopShimmer();
 
 
                 //Setting data to the holder.
@@ -855,7 +855,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //post_progress.setVisibility(View.GONE);
                     container.stopShimmer();
-                    container.setBackgroundColor(Color.TRANSPARENT);
+                    //container.setBackgroundColor(Color.TRANSPARENT);
 
 
 

@@ -9,12 +9,18 @@
     app:subtitleTextColor="@android:color/black"
     android:elevation="5dp"
     >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        >
 <ImageButton
+    android:layout_alignParentEnd="true"
     android:id="@+id/notifications"
-    android:layout_width="30dp"
-    android:layout_height= "30dp"
-    android:layout_marginStart="200dp"
+    android:layout_width="20dp"
+    android:layout_height= "20dp"
+    android:layout_marginEnd="15dp"
     android:background="@drawable/ic_notifications_black_24dp"
  />
-
+    </RelativeLayout>
 </android.support.v7.widget.Toolbar>

@@ -143,8 +143,7 @@
             android:layout_margin="3dp"
             android:adjustViewBounds="true"
             android:maxHeight="430dp"
-            android:background="@color/icongrey"
-            app:shimmer_auto_start="true"
+
             >
             <ImageView
                 android:id="@+id/post_image"
