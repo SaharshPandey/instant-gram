@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
         postList = findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
         //Total items that can be reserved ...
-        postList.setItemViewCacheSize(30);
+        postList.setItemViewCacheSize(300);
         //ADDING MANAGER TO THE RECYCLER VIEW...
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
@@ -530,6 +530,8 @@ public class MainActivity extends AppCompatActivity {
         //INITIALISING FIREBASE RECYCLER VIEW...
         firebaseRecyclerAdapter
                 =new FirebaseRecyclerAdapter<Posts, PostViewHolder>(options)
+
+            
         {
             @Override
             protected void onBindViewHolder(@NonNull final PostViewHolder holder, int position, @NonNull final Posts model) {
