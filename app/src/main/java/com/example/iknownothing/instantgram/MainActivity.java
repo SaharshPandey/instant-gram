@@ -746,14 +746,13 @@ public class MainActivity extends AppCompatActivity {
             Comment = mView.findViewById(R.id.comment);
             Share = mView.findViewById(R.id.share);
             PostLikes = mView.findViewById(R.id.postlikes);
-            //      post_progress = mView.findViewById(R.id.post_progress);
-            //post_progress.setVisibility(View.VISIBLE);
+            post_progress = mView.findViewById(R.id.progress_bar);
+            post_progress.setVisibility(View.VISIBLE);
             LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
             currentuserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-            container = mView.findViewById(R.id.shimmer_view_container);
-            container.stopShimmer();
-            //container.startShimmer(); // If auto-start is set to false
+            //container = mView.findViewById(R.id.shimmer_view_container);
+
         }
 
         //Method that check for the Likes when user opens the app..
@@ -843,20 +842,19 @@ public class MainActivity extends AppCompatActivity {
 
                 //Hiding the progress bar when user upload text..
                 Picasso.get().load(postimage).into(post_image);
-                container.setVisibility(View.GONE);
-                //post_progress.setVisibility(View.GONE);
+
+                post_progress.setVisibility(View.GONE);
 
 
             }
             else{
-                container.startShimmer();
+
     //Adding Image from Picasso and calling callback Listener who hides the progressbar when image is loaded....
             Picasso.get().load(postimage).into(post_image, new Callback() {
                 @Override
                 public void onSuccess() {
 
-                    //post_progress.setVisibility(View.GONE);
-                    container.stopShimmer();
+                    post_progress.setVisibility(View.GONE);
                     //container.setBackgroundColor(Color.TRANSPARENT);
 
 

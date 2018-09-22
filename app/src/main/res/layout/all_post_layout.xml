@@ -125,7 +125,7 @@
             android:id="@+id/post_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="12dp"
             android:layout_marginRight="3dp"
             android:layout_marginTop="6dp"
             android:inputType="textMultiLine"
@@ -135,16 +135,14 @@
             android:textColor="@android:color/black"
             android:textSize="14sp" />
 
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="430dp"
-            android:id="@+id/shimmer_view_container"
-            android:layout_gravity="center"
-            android:layout_margin="3dp"
-            android:adjustViewBounds="true"
-            android:maxHeight="430dp"
 
-            >
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/progress_bar"
+
+            />
             <ImageView
                 android:id="@+id/post_image"
                 android:layout_width="match_parent"
@@ -154,7 +152,7 @@
                 android:maxHeight="430dp"
 
                 />
-        </com.facebook.shimmer.ShimmerFrameLayout>
+
 
 
 
