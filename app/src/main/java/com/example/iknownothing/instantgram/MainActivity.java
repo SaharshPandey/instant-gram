@@ -752,6 +752,7 @@ public class MainActivity extends AppCompatActivity {
             currentuserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
             container = mView.findViewById(R.id.shimmer_view_container);
+            container.stopShimmer();
             //container.startShimmer(); // If auto-start is set to false
         }
 
@@ -848,6 +849,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
             else{
+                container.startShimmer();
     //Adding Image from Picasso and calling callback Listener who hides the progressbar when image is loaded....
             Picasso.get().load(postimage).into(post_image, new Callback() {
                 @Override
@@ -909,7 +911,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        firebaseRecyclerAdapter.stopListening();
+        //firebaseRecyclerAdapter.stopListening();
     }
 
     //CHECKING WHETHER THE USER HAS COMPLETED HIS DATA ENTRY AFTER CREATING NEW ACCOUNT...
