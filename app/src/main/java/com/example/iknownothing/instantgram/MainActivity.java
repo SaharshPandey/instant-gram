@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Private objects of FirebaseAuth, NavigationView,DrawerLayout,ToolBar,processDialog
     private FirebaseAuth mAuth;
-    private DatabaseReference UserRef,PostRef,LikesRef;
+    private DatabaseReference UserRef,PostRef,LikesRef,CommentRef;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private RecyclerView postList;
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference ClickPostRef;
     private String description;
     private ImageButton notifications;
+
     View v;
 
     //private ImageView Like,Comment,Share,Saved;
@@ -133,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
+
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setIcon(R.drawable.ic_whatshot);
@@ -561,6 +563,9 @@ public class MainActivity extends AppCompatActivity {
                 holder.setPostimage(getApplicationContext(), model.postimage);
                 holder.setLikeButtonStatus(PostKey);
 
+
+
+
                 UserRef.child(model.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -728,12 +733,13 @@ public class MainActivity extends AppCompatActivity {
         View mView;
         int countlikes;
         String currentuserId;
-        DatabaseReference LikesRef;
+        DatabaseReference LikesRef,CommentRef;
         ImageView Like;
         ImageView Comment;
         ImageView Share;
         TextView PostLikes;
         ShimmerFrameLayout container;
+        TextView postcomment;
 
         // USING GETTER SETTERS METHODS FROM POSTS CLASS.....
         public PostViewHolder(View itemView)
@@ -750,7 +756,8 @@ public class MainActivity extends AppCompatActivity {
             post_progress.setVisibility(View.VISIBLE);
             LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
             currentuserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+            CommentRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+            postcomment = mView.findViewById(R.id.postcomment);
             //container = mView.findViewById(R.id.shimmer_view_container);
 
         }
@@ -778,6 +785,21 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 
+                }
+            });
+        }
+
+        public void setCommentNo(final String PostKey)
+        {
+            CommentRef.child(PostKey).child("Comments").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    postcomment.setText(String.valueOf((int) dataSnapshot.getChildrenCount()));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    
                 }
             });
         }
