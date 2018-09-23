@@ -200,12 +200,15 @@ public class MainActivity extends AppCompatActivity {
         postList = findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
         //Total items that can be reserved ...
-        postList.setItemViewCacheSize(300);
+        postList.setItemViewCacheSize(20);
+        postList.setDrawingCacheEnabled(true);
+        postList.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_AUTO);
         //ADDING MANAGER TO THE RECYCLER VIEW...
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         postList.setLayoutManager(linearLayoutManager);
+
 
 
 
@@ -251,7 +254,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+//THIS METHOD SHOWING THE RECYCLER VIEW ITEMS.....
+        DisplayAllUsersPost();
 
         //LISTENER FOR THE NAVIGATION MENU.....
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -318,8 +322,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //THIS METHOD SHOWING THE RECYCLER VIEW ITEMS.....
-        DisplayAllUsersPost();
+
 
     }
 
