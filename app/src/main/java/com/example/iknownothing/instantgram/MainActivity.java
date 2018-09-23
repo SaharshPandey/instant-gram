@@ -562,6 +562,7 @@ public class MainActivity extends AppCompatActivity {
                 holder.setDescription(model.description);
                 holder.setPostimage(getApplicationContext(), model.postimage);
                 holder.setLikeButtonStatus(PostKey);
+                holder.setCommentNo(PostKey);
 
 
 
@@ -799,7 +800,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    
+
                 }
             });
         }
