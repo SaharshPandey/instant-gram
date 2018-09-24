@@ -223,18 +223,39 @@
                 android:layout_marginStart="5dp"
                 android:textColor="@android:color/black"/>
 
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="5dp"
+            android:id="@+id/comment_layout"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View all "    
+                android:layout_marginStart="5dp"
+                android:textSize="12sp"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/postcomment"
-                android:layout_marginStart="10dp"
-                android:textColor="@android:color/black"/>
+                android:textSize="12sp"
+
+
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Comments"
-                android:layout_marginStart="5dp"
-                android:textColor="@android:color/black"/>
+                android:text=" comments"
+                android:textSize="12sp"
+
+
+                />
 
         </LinearLayout>
         <LinearLayout
