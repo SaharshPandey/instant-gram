@@ -816,7 +816,7 @@ public class MainActivity extends AppCompatActivity {
 
         public void setFullname(String fullname) {
             TextView name= mView.findViewById(R.id.post_fullname);
-            name.setText(fullname);
+            name.setText(fullname+" has been updated a new post");
 
         }
         public void setProfileImage(Context ctx, String profileImage) {
@@ -837,7 +837,6 @@ public class MainActivity extends AppCompatActivity {
         public void setDescription(String description)
         {
             TextView postdescription= mView.findViewById(R.id.post_description);
-            postdescription.setPadding(3,3,3,3);
             postdescription.setTextSize(14);
             postdescription.setText(description);
             postdescription.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
