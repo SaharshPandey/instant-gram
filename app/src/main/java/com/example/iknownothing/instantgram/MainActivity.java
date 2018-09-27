@@ -837,9 +837,16 @@ public class MainActivity extends AppCompatActivity {
         public void setDescription(String description)
         {
             TextView postdescription= mView.findViewById(R.id.post_description);
-            postdescription.setTextSize(14);
-            postdescription.setText(description);
-            postdescription.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+
+            if(description==null || description.equals(""))
+            {
+                postdescription.setVisibility(View.GONE);
+            }
+            else{
+                postdescription.setTextSize(14);
+                postdescription.setText(description);
+                postdescription.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+        }
         }
 
         public void setPostimage(Context ctx,String postimage) {
