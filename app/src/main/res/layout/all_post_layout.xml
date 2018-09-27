@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="2dp"
-    android:layout_margin="3dp"
     app:cardCornerRadius="2dp"
     android:background="@android:color/white"
 
@@ -26,7 +25,7 @@
             android:layout_marginTop="1dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:padding="5dp"
+            android:padding="1dp"
 
 
             >
@@ -127,31 +126,35 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="3dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="3dp"
             android:inputType="textMultiLine"
             android:maxLines="10"
-            android:padding="5dp"
-            android:text="Post Description"
             android:textColor="@android:color/black"
             android:textSize="14sp" />
 
 
         <ProgressBar
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_gravity="center"
             android:id="@+id/progress_bar"
 
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            >
             <ImageView
                 android:id="@+id/post_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:maxHeight="430dp"
+                android:scaleType="fitCenter"
 
                 />
-
+        </LinearLayout>
 
 
 
