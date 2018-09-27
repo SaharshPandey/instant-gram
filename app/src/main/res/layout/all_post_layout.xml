@@ -78,7 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:orientation="horizontal"
-                    android:padding="2dp"
+                    android:paddingRight="2dp"
+                    android:paddingLeft="2dp"
 
 
 
@@ -92,7 +93,6 @@
                         android:layout_marginRight="5dp"
                         android:text="unknown"
                         android:textColor="@color/sendblue1"
-                        android:textStyle="bold"
                         android:textSize="10sp"
 
                         />
