@@ -105,7 +105,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
 
                                 //Adding CurrentUser to the Accepted Friend Database..
                                 HashMap follower_users1= new HashMap();
-                                follower_users1.put("uid",CurrentUserId);
+                                follower_users1.put("uid",getRef(position).getKey());
 
 
                                 FollowersRef.child(getRef(position).getKey()).updateChildren(follower_users1).addOnCompleteListener(new OnCompleteListener() {
@@ -125,9 +125,9 @@ public class FriendRequestsActivity extends AppCompatActivity {
 
                                 //Adding Accepted Friend User to the Current User Database..
                                 HashMap follower_users2= new HashMap();
-                                follower_users2.put("uid",getRef(position).getKey());
+                                follower_users2.put("uid",CurrentUserId);
 
-                                FollowersRef.child(CurrentUserId).updateChildren(follower_users2).addOnCompleteListener(new OnCompleteListener() {
+                                UserRef.child(getRef(position).getKey()).child("Followers").child(CurrentUserId).updateChildren(follower_users2).addOnCompleteListener(new OnCompleteListener() {
                                     @Override
                                     public void onComplete(@NonNull Task task) {
                                         if(task.isSuccessful())
