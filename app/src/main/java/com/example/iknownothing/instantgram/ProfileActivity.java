@@ -134,13 +134,13 @@ public class ProfileActivity extends AppCompatActivity {
                            followuser.setBackgroundColor(getResources().getColor(R.color.sendblue1));
 
                        }
-                       else if(dataSnapshot.child("Followers").hasChild(UserKey))
+                       else if(dataSnapshot.child("Followers").hasChild(CurrentUserId))
                        {
                            followuser.setText("UnFriend");
                            followuser.setBackgroundColor(getResources().getColor(R.color.sendblue1));
                        }
                        //if user already has sent friend request,then it will show unfollow option
-                       else if(!dataSnapshot.child("Followers").hasChild(UserKey))
+                       else if(!dataSnapshot.child("Followers").hasChild(CurrentUserId))
                        {
                        if(dataSnapshot.child("FriendRequests").hasChild(CurrentUserId))
                        {
