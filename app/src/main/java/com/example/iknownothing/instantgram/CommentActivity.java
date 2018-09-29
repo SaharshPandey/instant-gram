@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,6 @@ public class CommentActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     String PostKey,CurrentUserId;
     private TextView name;
-    private ImageButton CommentEdit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +73,7 @@ public class CommentActivity extends AppCompatActivity {
         CommentProfile = findViewById(R.id.comment_photo);
         WriteComment = findViewById(R.id.write_comment);
         CommentButton = findViewById(R.id.postcomment);
-        CommentEdit = findViewById(R.id.comment_edit);
-        //hiding the edit bar in initial time.
-        CommentEdit.setVisibility(View.GONE);
+
 
         //Setting RecyclerView with LinearLayoutManager...
         CommentList = findViewById(R.id.show_comments);
@@ -170,7 +168,12 @@ public class CommentActivity extends AppCompatActivity {
                     }
                 });
 
-                if(getRef(position).getKey().equals(CurrentUserId))
+                ImageButton CommentEdit = holder.mView.findViewById(R.id.comment_edit);
+                //hiding the edit bar in initial time.
+                CommentEdit.setVisibility(View.GONE);
+
+                Log.d("Message",getRef(position).getKey()+"    "+CurrentUserId);
+                if(getRef(position).getKey().substring(0,28).equals(CurrentUserId))
                 {
                     CommentEdit.setVisibility(View.VISIBLE);
                 }
@@ -190,9 +193,11 @@ public class CommentActivity extends AppCompatActivity {
     public static class CommentViewHolder extends RecyclerView.ViewHolder {
         View mView;
 
+
         public CommentViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
+
         }
 
         public void setusername(String username){
