@@ -16,7 +16,6 @@
          android:orientation="horizontal"
          android:layout_marginStart="5dp"
          android:layout_marginEnd="5dp"
-         android:background="@android:color/white"
          android:padding="5dp"
 
 
@@ -54,8 +53,8 @@
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:layout_weight="1"
-                     android:padding="10dp"
-                     android:textSize="12sp"
+                     android:padding="5dp"
+                     android:textSize="13sp"
                      android:text="this is my first comment"
                      android:inputType="textMultiLine"
                      android:maxLines="8"

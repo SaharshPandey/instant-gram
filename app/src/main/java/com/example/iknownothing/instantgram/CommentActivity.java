@@ -46,6 +46,7 @@ public class CommentActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     String PostKey,CurrentUserId;
     private TextView name;
+    private ImageButton CommentEdit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +73,9 @@ public class CommentActivity extends AppCompatActivity {
         CommentProfile = findViewById(R.id.comment_photo);
         WriteComment = findViewById(R.id.write_comment);
         CommentButton = findViewById(R.id.postcomment);
+        CommentEdit = findViewById(R.id.comment_edit);
+        //hiding the edit bar in initial time.
+        CommentEdit.setVisibility(View.GONE);
 
         //Setting RecyclerView with LinearLayoutManager...
         CommentList = findViewById(R.id.show_comments);
@@ -165,6 +169,11 @@ public class CommentActivity extends AppCompatActivity {
 
                     }
                 });
+
+                if(getRef(position).getKey().equals(CurrentUserId))
+                {
+                    CommentEdit.setVisibility(View.VISIBLE);
+                }
             }
         };
 
