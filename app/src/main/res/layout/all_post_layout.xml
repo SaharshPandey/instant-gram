@@ -92,8 +92,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:text="unknown"
-                        android:textColor="@color/sendblue1"
-                        android:textSize="10sp"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:textSize="9sp"
 
                         />
 
@@ -296,9 +296,12 @@
         </LinearLayout>
     </LinearLayout>
     <TableRow
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
         android:layout_below="@+id/post_column"
         android:id="@+id/hr"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/icongrey">
