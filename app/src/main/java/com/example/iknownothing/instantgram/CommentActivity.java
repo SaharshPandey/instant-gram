@@ -289,7 +289,7 @@ public class CommentActivity extends AppCompatActivity {
                         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                CommentRef.child("commenttext").setValue(comments);
+                                CommentRef.child("commenttext").setValue(inputfield.getText().toString());
                                 Toast.makeText(CommentActivity.this,"Updated Successfully",Toast.LENGTH_SHORT);
 
                             }
