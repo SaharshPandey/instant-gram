@@ -3,6 +3,7 @@ package com.example.iknownothing.instantgram;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -57,6 +58,7 @@ public class CommentActivity extends AppCompatActivity {
     String PostKey,CurrentUserId;
     private TextView name;
     String comments;
+    private static Bundle mBundleRecyclerViewState;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -353,6 +355,32 @@ public class CommentActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        //So that the Data should be Retained;
+        //BUNDLE bundles the DATA;
+        mBundleRecyclerViewState =new Bundle();
+        //PARCELABLE save the bundle Object...
+        Parcelable listState = CommentList.getLayoutManager().onSaveInstanceState();
+        mBundleRecyclerViewState.putParcelable("recycler_state",listState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //So that the Data should be Retained;
+        if(mBundleRecyclerViewState != null)
+        {
+            //If bundle is not null then Parcelable unbind the Data from BUNDLE object and Restores it...
+            Parcelable liststate = mBundleRecyclerViewState.getParcelable("recycler_state");
+            CommentList.getLayoutManager().onRestoreInstanceState(liststate);
+        }
     }
 
     //Class Holder for RecyclerView...............

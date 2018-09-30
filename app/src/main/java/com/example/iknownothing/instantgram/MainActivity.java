@@ -949,8 +949,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-
-        //firebaseRecyclerAdapter.stopListening();
+        firebaseRecyclerAdapter.stopListening();
     }
 
     //CHECKING WHETHER THE USER HAS COMPLETED HIS DATA ENTRY AFTER CREATING NEW ACCOUNT...
