@@ -6,8 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.nfc.Tag;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -19,7 +18,6 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -27,7 +25,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -35,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,12 +50,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference ClickPostRef;
     private String description;
     private ImageButton notifications;
+
 
     View v;
 
@@ -218,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
         ProfileUserName = view.findViewById(R.id.nav_user_full_name);
 
 
+
         //REFERENCE TO THE USERS OF FIREBASE....
         UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -238,6 +241,8 @@ public class MainActivity extends AppCompatActivity {
                                 .load(profileImage)
                                 .placeholder(R.drawable.profile)
                                 .into(NavProfileImage);
+
+
                     }
                     else
                         {
