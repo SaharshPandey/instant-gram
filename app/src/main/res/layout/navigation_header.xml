@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="200dp"
-    android:background="@color/colorPrimaryDark"
+    android:background="@android:color/white"
     >
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:gravity="center"
     >
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/nav_profile_image"
@@ -15,20 +16,19 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:src="@drawable/profile"
-        app:civ_border_color="@color/colorPrimaryDark"
+        android:layout_gravity="center"
+        app:civ_border_color="@color/sendblue1"
         app:civ_border_width="2dp" />
 
     <TextView
         android:id="@+id/nav_user_full_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:text="username"
         android:layout_gravity="center"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
+        android:textColor="@android:color/black"
         android:textSize="16sp" />
 </LinearLayout>
 </RelativeLayout>
