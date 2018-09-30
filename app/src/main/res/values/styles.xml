@@ -8,14 +8,29 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="drawerArrowStyle">@style/DrawerIcon</item>
+        <!-- <item name="android:alertDialogStyle">@style/MyAlertDialogStyle</item> -->
+
 
 
     </style>
+
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">#FFC107</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <!-- Used for the background -->
+        <item name="android:background">#4CAF50</item>
+    </style>
+
 
     <style name="AlertDialogCustom" parent="@android:style/Holo.Light.ButtonBar.AlertDialog">
         <item name="android:textColor">#000000</item>
         <item name="android:typeface">sans</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+
     </style>
 
     <style name="PopupMenu" parent="@android:style/Widget.Holo.PopupWindow">

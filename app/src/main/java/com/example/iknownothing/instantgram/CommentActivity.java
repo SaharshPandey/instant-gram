@@ -204,14 +204,17 @@ public class CommentActivity extends AppCompatActivity {
     private void showCommentPopup(View v, String postKey) {
         //Referencing Comments
 
-        final DatabaseReference CommentRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(postKey).child("Comments").child(CurrentUserId);
+        //Log.d("Message",postKey+"         "+PostKey);
+        final DatabaseReference CommentRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey).child("Comments").child(postKey);
 
         CommentRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                 comments = dataSnapshot.child("commenttext").getValue().toString();
-            }
+                   // Log.d("Message","successfull"+"   "+comments);
+
+                }
 
                 else{
                     Toast.makeText(CommentActivity.this,"Data doesn't Exists ! ",Toast.LENGTH_SHORT).show();
@@ -265,7 +268,7 @@ public class CommentActivity extends AppCompatActivity {
                 {
                     case R.id.modify_comment:
                         //AlertDialog Box
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(CommentActivity.this,R.style.AlertDialogCustom));
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(CommentActivity.this,R.style.MyAlertDialogStyle);
                         builder.setTitle("Edit Your Comment");
 
                         //ADDING INPUT FIELD...
@@ -307,7 +310,7 @@ public class CommentActivity extends AppCompatActivity {
 
                     case R.id.delete_comment:
 
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(new ContextThemeWrapper(CommentActivity.this,R.style.AlertDialogCustom));
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(CommentActivity.this,R.style.MyAlertDialogStyle);
                         builder1.setTitle("Delete Comment");
 
                 //Adding Positive and Negative Buttons;
@@ -323,11 +326,11 @@ public class CommentActivity extends AppCompatActivity {
                         });
 
                         //- button;
-                        builder1.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                        builder1.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
-                                
+
                             }
                         });
 
@@ -342,7 +345,7 @@ public class CommentActivity extends AppCompatActivity {
             }
         });
 
-
+        popupMenu.show();
 
 
     }

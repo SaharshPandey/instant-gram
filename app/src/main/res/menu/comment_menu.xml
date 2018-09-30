@@ -4,16 +4,16 @@
 
     <item
         android:id="@+id/modify_comment"
-        android:title="Modify Comment"
         android:icon="@drawable/edit1"
+        android:title="Modify Comment"
         >
 
     </item>
 
     <item
         android:id="@+id/delete_comment"
-        android:title="Delete Comment"
         android:icon="@drawable/delete1"
+        android:title="Delete Comment"
         >
 
     </item>
