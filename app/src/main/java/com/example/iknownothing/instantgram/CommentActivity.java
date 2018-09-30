@@ -1,5 +1,6 @@
 package com.example.iknownothing.instantgram;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
@@ -264,7 +265,7 @@ public class CommentActivity extends AppCompatActivity {
                 {
                     case R.id.modify_comment:
                         //AlertDialog Box
-                        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(CommentActivity.this,R.style.AlertDialogCustom));
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(CommentActivity.this,R.style.AlertDialogCustom));
                         builder.setTitle("Edit Your Comment");
 
                         //ADDING INPUT FIELD...
@@ -290,8 +291,19 @@ public class CommentActivity extends AppCompatActivity {
 
                             }
                         });
-                        
+
                         //Negative Button;
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+
+                        Dialog dialog = builder.create();
+                        dialog.show();
+                        dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
+                        break;
 
                     case R.id.delete_comment:
                 }
