@@ -16,6 +16,8 @@
 
     <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
 
+        <item name="android:typeface">sans</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:elevation">5dp</item>
         <!-- Used for the title and text -->
         <item name="android:textColorPrimary">#000000</item>
@@ -40,7 +42,7 @@
         <item name="android:popupBackground">#FFFFFF</item>
         <item name="android:textSize">12sp</item>
         <item name="android:popupElevation">5dp</item>
-        
+
 
     </style>
 
