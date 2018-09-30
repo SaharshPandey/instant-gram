@@ -4,7 +4,7 @@
     android:background="@android:color/white"
     >
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
@@ -13,7 +13,7 @@
         android:id="@+id/nav_profile_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginStart="16dp"
+
         android:layout_marginTop="12dp"
         android:src="@drawable/profile"
         android:layout_gravity="center"

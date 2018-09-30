@@ -296,8 +296,8 @@
         </LinearLayout>
     </LinearLayout>
     <TableRow
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:layout_below="@+id/post_column"
         android:id="@+id/hr"
         android:layout_marginStart="45dp"
