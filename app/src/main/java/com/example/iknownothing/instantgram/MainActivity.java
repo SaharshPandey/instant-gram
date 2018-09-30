@@ -557,18 +557,6 @@ public class MainActivity extends AppCompatActivity {
 
 
                 //Setting data to the holder.
-
-
-                holder.setDate(model.date);
-                holder.setTime(model.time);
-                holder.setDescription(model.description);
-                holder.setPostimage(getApplicationContext(), model.postimage);
-                holder.setLikeButtonStatus(PostKey);
-                holder.setCommentNo(PostKey);
-
-
-
-
                 UserRef.child(model.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -585,6 +573,18 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+
+                holder.setDate(model.date);
+                holder.setTime(model.time);
+                holder.setDescription(model.description);
+                holder.setPostimage(getApplicationContext(), model.postimage);
+                holder.setLikeButtonStatus(PostKey);
+                holder.setCommentNo(PostKey);
+
+
+
+
+
                 //Adding popup button functionality...
                 popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
                 popup_button=holder.mView.findViewById(R.id.popup_button);
