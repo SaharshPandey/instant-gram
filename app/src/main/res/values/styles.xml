@@ -16,7 +16,7 @@
 
     <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
 
-        <item name="android:elevation">3dp</item>
+        <item name="android:elevation">5dp</item>
         <!-- Used for the title and text -->
         <item name="android:textColorPrimary">#000000</item>
         <!-- Used for the background -->
@@ -31,14 +31,17 @@
         <item name="android:paddingLeft">20dp</item>
         <item name="android:paddingRight">20dp</item>
 
+
     </style>
 
     <style name="PopupMenu" parent="@android:style/Widget.Material.Light.PopupWindow">
-       <item name="android:layout_marginRight">20dp</item>
+
         <item name="android:popupTheme">@style/Widget.AppCompat.Light.PopupMenu</item>
         <item name="android:popupBackground">#FFFFFF</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:popupElevation">4dp</item>
+        <item name="android:popupElevation">5dp</item>
+        
+
     </style>
 
     <style name="DrawerIcon" parent="Widget.AppCompat.DrawerArrowToggle">
