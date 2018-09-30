@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -16,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -47,6 +51,7 @@ public class CommentActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     String PostKey,CurrentUserId;
     private TextView name;
+    String comments;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,7 +151,7 @@ public class CommentActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull final CommentViewHolder holder, int position, @NonNull final Comments model) {
+            protected void onBindViewHolder(@NonNull final CommentViewHolder holder, final int position, @NonNull final Comments model) {
 
 
                 holder.setCommenttext(model.getCommenttext());
@@ -177,11 +182,81 @@ public class CommentActivity extends AppCompatActivity {
                 {
                     CommentEdit.setVisibility(View.VISIBLE);
                 }
+
+                CommentEdit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showCommentPopup(v,getRef(position).getKey());
+                    }
+                });
             }
         };
 
         CommentList.setAdapter(firebaseRecyclerAdapter);
         firebaseRecyclerAdapter.startListening();
+    }
+
+    private void showCommentPopup(View v, String postKey) {
+        //Referencing Comments
+
+        DatabaseReference CommentRef = PostRef.child(CurrentUserId);
+
+        CommentRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                comments = dataSnapshot.child("commenttext").getValue().toString();
+            }
+
+                else{
+                    Toast.makeText(CommentActivity.this,"Data doesn't Exists ! ",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        //CREATING POPUP MENU AND ADDING MENU XML INTO IT...
+        final PopupMenu popupMenu = new PopupMenu(this,v);
+
+        //METHOD TO ADD ICONS TO THE POPUP MENU
+        try{
+            Field[] fields =popupMenu.getClass().getDeclaredFields();
+            for(Field field : fields )
+            {
+                if("mPopup".equals(field.getName()))
+                {
+                    field.setAccessible(true);
+                    Object menuPopupHelper = field.get(popupMenu);
+                    Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
+                    Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon",boolean.class);
+                    setForceIcons.invoke(menuPopupHelper,true);
+
+                    break;
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        //ICONS ADDED TO POPUP SUCCEED..
+
+
+        MenuInflater menuInflater = popupMenu.getMenuInflater();
+        menuInflater.inflate(R.menu.comment_menu,popupMenu.getMenu());
+
+        //Setting On ClickListener for PopupMenu;
+        
+
+
+
+
+
     }
 
     @Override

@@ -428,7 +428,7 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
 
-        //CheckingFirebaseData(PostKey);
+
 
 
 
