@@ -15,12 +15,11 @@
     </style>
 
     <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <!-- Used for the buttons -->
-        <item name="colorAccent">#FFC107</item>
+        
         <!-- Used for the title and text -->
-        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorPrimary">#000000</item>
         <!-- Used for the background -->
-        <item name="android:background">#4CAF50</item>
+        <item name="android:background">#FFFFFF</item>
     </style>
 
 

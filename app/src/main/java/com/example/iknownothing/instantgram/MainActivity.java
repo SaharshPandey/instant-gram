@@ -444,7 +444,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_Edit:
 
                         //EDITING THE POST...
-                        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(MainActivity.this, R.style.AlertDialogCustom));
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.MyAlertDialogStyle);
                         builder.setTitle("Change your Caption?");
 
 
@@ -491,7 +491,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //DELETING THE POST........
 
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(new ContextThemeWrapper(MainActivity.this,R.style.AlertDialogCustom));
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this,R.style.MyAlertDialogStyle);
                         builder1.setMessage("Do you really want to Delete?");
 
          //ADDING BUTTONS -> POSITIVE AND NEGATIVE.....
