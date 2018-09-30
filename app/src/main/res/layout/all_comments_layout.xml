@@ -55,6 +55,7 @@
                      android:layout_weight="1"
                      android:padding="5dp"
                      android:textSize="13sp"
+                     android:textColor="@android:color/black"
                      android:text="this is my first comment"
                      android:inputType="textMultiLine"
                      android:maxLines="8"
