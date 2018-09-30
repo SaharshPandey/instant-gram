@@ -204,7 +204,7 @@ public class CommentActivity extends AppCompatActivity {
     private void showCommentPopup(View v, String postKey) {
         //Referencing Comments
 
-        final DatabaseReference CommentRef = PostRef.child(CurrentUserId);
+        final DatabaseReference CommentRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(postKey).child("Comments").child(CurrentUserId);
 
         CommentRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -306,7 +306,39 @@ public class CommentActivity extends AppCompatActivity {
                         break;
 
                     case R.id.delete_comment:
+
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(new ContextThemeWrapper(CommentActivity.this,R.style.AlertDialogCustom));
+                        builder1.setTitle("Delete Comment");
+
+                //Adding Positive and Negative Buttons;
+
+                        //+ button;
+                        builder1.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                CommentRef.removeValue();
+                                Toast.makeText(CommentActivity.this,"Deleted Successfully",Toast.LENGTH_SHORT);
+
+                            }
+                        });
+
+                        //- button;
+                        builder1.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                
+                            }
+                        });
+
+                        Dialog dialog1 = builder1.create();
+                        dialog1.show();
+                        dialog1.getWindow().setBackgroundDrawableResource(android.R.color.white);
+                        break;
+
                 }
+
+                return true;
             }
         });
 
