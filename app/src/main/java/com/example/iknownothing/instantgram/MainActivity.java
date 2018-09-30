@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ImageUri;
     private ImageButton add_new_upload_button,popup_button;
     private String ts;
-    private LinearLayout popup_button_layout;
+    private LinearLayout popup_button_layout,comment_layout;
     private DatabaseReference ClickPostRef;
     private String description;
     private ImageButton notifications;
@@ -694,6 +694,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                //Listeners to Comment Activity from Comment Number...
+                comment_layout = holder.mView.findViewById(R.id.comment_layout);
+                comment_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent commentIntent = new Intent(MainActivity.this,CommentActivity.class);
+                        commentIntent.putExtra("PostKey",PostKey);
+                        startActivity(commentIntent);
+                    }
+                });
 
             //CheckingFirebaseData(PostKey);
             }
