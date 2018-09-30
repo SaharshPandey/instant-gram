@@ -1,15 +1,19 @@
 package com.example.iknownothing.instantgram;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -199,7 +203,7 @@ public class CommentActivity extends AppCompatActivity {
     private void showCommentPopup(View v, String postKey) {
         //Referencing Comments
 
-        DatabaseReference CommentRef = PostRef.child(CurrentUserId);
+        final DatabaseReference CommentRef = PostRef.child(CurrentUserId);
 
         CommentRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -251,8 +255,48 @@ public class CommentActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.comment_menu,popupMenu.getMenu());
 
         //Setting On ClickListener for PopupMenu;
-        
 
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId())
+                {
+                    case R.id.modify_comment:
+                        //AlertDialog Box
+                        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(CommentActivity.this,R.style.AlertDialogCustom));
+                        builder.setTitle("Edit Your Comment");
+
+                        //ADDING INPUT FIELD...
+                        final EditText inputfield = new EditText(CommentActivity.this);
+
+
+                        //STYLING
+                        inputfield.setPadding(20,100,20,20);
+                        inputfield.setMaxLines(8);
+                        inputfield.setText(comments);
+
+                        //Displaying Edit Text in AlertDialogBox;
+                        builder.setView(inputfield);
+
+                  //Adding Positive and Negative Buttons;
+
+                        //Positive Button;
+                        builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                CommentRef.child("commenttext").setValue(comments);
+                                Toast.makeText(CommentActivity.this,"Updated Successfully",Toast.LENGTH_SHORT);
+
+                            }
+                        });
+                        
+                        //Negative Button;
+
+                    case R.id.delete_comment:
+                }
+            }
+        });
 
 
 
