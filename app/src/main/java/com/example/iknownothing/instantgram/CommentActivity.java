@@ -229,7 +229,7 @@ public class CommentActivity extends AppCompatActivity {
 
 
         //CREATING POPUP MENU AND ADDING MENU XML INTO IT...
-        final PopupMenu popupMenu = new PopupMenu(this,v);
+        final PopupMenu popupMenu = new PopupMenu(new ContextThemeWrapper(this,R.style.PopupMenu),v);
 
         //METHOD TO ADD ICONS TO THE POPUP MENU
         try{
