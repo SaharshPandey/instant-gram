@@ -19,7 +19,7 @@ public class UserPosts {
     public String getPostimage() {
         return postimage;
     }
-    
+
     public void setPostimage(String postimage) {
         this.postimage = postimage;
     }

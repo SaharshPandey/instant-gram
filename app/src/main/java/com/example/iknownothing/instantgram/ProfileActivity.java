@@ -1,7 +1,5 @@
 package com.example.iknownothing.instantgram;
 
-import android.content.Context;
-import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,6 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference FriendRequestReference,FollowerReference,FollowerReferenceCurrent;
     private EditText profile_username_edit,profile_fullname_edit,profile_bio_edit;
     private ImageButton user_profile_image_button;
+    private FirebaseRecyclerAdapter<UserPosts,UserPostsHolder> firebaseRecyclerAdapter;
     //private ImageView going_back;
 
     @Override
@@ -205,10 +204,37 @@ public class ProfileActivity extends AppCompatActivity {
     //THIS MEHTOD IS RESPONSIBLE TO ADD DATA INTO RECYCLER VIEW.....
     public void DispalyUserPostGrid()
     {
+        //QUERY FOR FIREBASE RECYCLER ADAPTER....
         FirebaseRecyclerOptions<UserPosts> options = new FirebaseRecyclerOptions.Builder<UserPosts>()
                 .setQuery(PostRef.orderByChild("timestamp"),UserPosts.class)
                 .build();
+
+        //Initialising firebase recycler adapter..
+
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UserPosts,UserPostsHolder>(options) {
+
+            @Override
+            protected void onBindViewHolder(@NonNull UserPostsHolder holder, int position, @NonNull UserPosts model) {
+
+            }
+
+            @NonNull
+            @Override
+            public UserPostsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                return null;
+            }
+        };
+
     }
+
+    public static class UserPostsHolder extends RecyclerView.ViewHolder
+    {
+
+        public UserPostsHolder(View itemView) {
+            super(itemView);
+        }
+    }
+
 
     public void SendFriendRequest()
     {
