@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,6 +59,11 @@ public class ProfileActivity extends AppCompatActivity {
         CurrentUserId = mAuth.getCurrentUser().getUid();
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+
+        //Differentiating User Posts from Posts..
+        //.
+        //.
+        //.
 
         FriendRequestReference = FirebaseDatabase.getInstance().getReference().child("Users").child(UserKey).child("FriendRequests");
         FollowerReference = FirebaseDatabase.getInstance().getReference().child("Users").child(UserKey).child("Followers");
@@ -196,7 +202,13 @@ public class ProfileActivity extends AppCompatActivity {
       });
     }
 
-
+    //THIS MEHTOD IS RESPONSIBLE TO ADD DATA INTO RECYCLER VIEW.....
+    public void DispalyUserPostGrid()
+    {
+        FirebaseRecyclerOptions<UserPosts> options = new FirebaseRecyclerOptions.Builder<UserPosts>()
+                .setQuery(PostRef.orderByChild("timestamp"),UserPosts.class)
+                .build();
+    }
 
     public void SendFriendRequest()
     {
