@@ -1,9 +1,11 @@
 package com.example.iknownothing.instantgram;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +87,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         //Initialising RecyclerView of User Posts....
         profile_posts_recyclerview = findViewById(R.id.profile_posts_recyclerview);
+        profile_posts_recyclerview.setHasFixedSize(true);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,4);
+        gridLayoutManager.setReverseLayout(true);
+        gridLayoutManager.setStackFromEnd(true);
+        profile_posts_recyclerview.setLayoutManager(gridLayoutManager);
 
         CURRENT_STATE = "not_friends";
 
@@ -188,6 +195,8 @@ public class ProfileActivity extends AppCompatActivity {
           }
       });
     }
+
+
 
     public void SendFriendRequest()
     {
