@@ -202,15 +202,15 @@ public class ProfileActivity extends AppCompatActivity {
       });
 
       //Calling Firebase Recycler View...
-      DispalyUserPostGrid();
+      DispalyUserPostGrid(UserKey);
     }
 
     //THIS MEHTOD IS RESPONSIBLE TO ADD DATA INTO RECYCLER VIEW.....
-    public void DispalyUserPostGrid()
+    public void DispalyUserPostGrid(final String userKey)
     {
         //QUERY FOR FIREBASE RECYCLER ADAPTER....
         FirebaseRecyclerOptions<UserPosts> options = new FirebaseRecyclerOptions.Builder<UserPosts>()
-                .setQuery(PostRef.orderByChild("timestamp"),UserPosts.class)
+                .setQuery(PostRef.orderByChild("uid").equalTo(userKey),UserPosts.class)
                 .build();
 
         //Initialising firebase recycler adapter..
@@ -220,10 +220,9 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull UserPostsHolder holder, int position, @NonNull UserPosts model) {
 
-                if(model.getUid().equals(CurrentUserId) && model.postimage!=null)
-                {
+                //BINDING POST IMAGE INTO THE PROFILE...
                     holder.setPostImage(model.postimage);
-                }
+
             }
 
             @NonNull
