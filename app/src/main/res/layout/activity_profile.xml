@@ -7,9 +7,7 @@
     tools:context=".ProfileActivity"
     android:background="@android:color/white">
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 <RelativeLayout
     android:layout_marginTop="10dp"
     android:layout_width="match_parent"
@@ -274,11 +272,10 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/profile_posts_recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentStart="true"
                     android:clipToPadding="false"
-                    android:nestedScrollingEnabled="false"
                     android:background="@android:color/white"
                     android:paddingTop="2dp" />
 
@@ -286,6 +283,5 @@
 
         </LinearLayout>
 </RelativeLayout>
-    </android.support.v4.widget.NestedScrollView>
 
 </android.support.constraint.ConstraintLayout>

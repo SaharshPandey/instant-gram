@@ -96,6 +96,10 @@ public class ProfileActivity extends AppCompatActivity {
         //Initialising RecyclerView of User Posts....
         profile_posts_recyclerview = findViewById(R.id.profile_posts_recyclerview);
         profile_posts_recyclerview.setHasFixedSize(true);
+        //Total items that can be reserved ...
+        profile_posts_recyclerview.setItemViewCacheSize(20);
+        profile_posts_recyclerview.setDrawingCacheEnabled(true);
+        profile_posts_recyclerview.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_AUTO);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
         profile_posts_recyclerview.setLayoutManager(gridLayoutManager);
 
