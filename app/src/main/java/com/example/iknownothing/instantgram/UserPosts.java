@@ -15,4 +15,29 @@ public class UserPosts {
         this.postimage = postimage;
         this.timestamp = timestamp;
     }
+
+    public String getPostimage() {
+        return postimage;
+    }
+    
+    public void setPostimage(String postimage) {
+        this.postimage = postimage;
+    }
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+
 }
