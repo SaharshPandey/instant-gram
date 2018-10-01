@@ -60,6 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
         CurrentUserId = mAuth.getCurrentUser().getUid();
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+        PostRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
         //Differentiating User Posts from Posts..
         //.
@@ -96,7 +97,6 @@ public class ProfileActivity extends AppCompatActivity {
         profile_posts_recyclerview = findViewById(R.id.profile_posts_recyclerview);
         profile_posts_recyclerview.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
-        gridLayoutManager.setReverseLayout(true);
         profile_posts_recyclerview.setLayoutManager(gridLayoutManager);
 
         CURRENT_STATE = "not_friends";
@@ -220,7 +220,10 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull UserPostsHolder holder, int position, @NonNull UserPosts model) {
 
-                holder.setPostImage(model.postimage);
+                if(model.getUid().equals(CurrentUserId) && model.postimage!=null)
+                {
+                    holder.setPostImage(model.postimage);
+                }
             }
 
             @NonNull
