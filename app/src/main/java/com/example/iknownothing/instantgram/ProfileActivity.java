@@ -5,10 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -93,9 +95,8 @@ public class ProfileActivity extends AppCompatActivity {
         //Initialising RecyclerView of User Posts....
         profile_posts_recyclerview = findViewById(R.id.profile_posts_recyclerview);
         profile_posts_recyclerview.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,4);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
         gridLayoutManager.setReverseLayout(true);
-        gridLayoutManager.setStackFromEnd(true);
         profile_posts_recyclerview.setLayoutManager(gridLayoutManager);
 
         CURRENT_STATE = "not_friends";
@@ -199,6 +200,9 @@ public class ProfileActivity extends AppCompatActivity {
               }
           }
       });
+
+      //Calling Firebase Recycler View...
+      DispalyUserPostGrid();
     }
 
     //THIS MEHTOD IS RESPONSIBLE TO ADD DATA INTO RECYCLER VIEW.....
@@ -216,22 +220,36 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull UserPostsHolder holder, int position, @NonNull UserPosts model) {
 
+                holder.setPostImage(model.postimage);
             }
 
             @NonNull
             @Override
             public UserPostsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
+
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.all_user_post_layout,parent,false);
+                return new UserPostsHolder(view);
             }
         };
 
+        profile_posts_recyclerview.setAdapter(firebaseRecyclerAdapter);
     }
 
     public static class UserPostsHolder extends RecyclerView.ViewHolder
     {
+        ImageView UserPostImage;
 
         public UserPostsHolder(View itemView) {
             super(itemView);
+
+        }
+
+        public void setPostImage(String postImage)
+        {
+            UserPostImage = itemView.findViewById(R.id.user_post_image);
+
+            Picasso.get().load(postImage).into(UserPostImage);
         }
     }
 
@@ -326,5 +344,15 @@ public class ProfileActivity extends AppCompatActivity {
             user_profile_image_button.setVisibility(View.VISIBLE);*/
         }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseRecyclerAdapter.startListening();
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        firebaseRecyclerAdapter.stopListening();
+    }
 }
