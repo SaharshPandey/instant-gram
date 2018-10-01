@@ -1,6 +1,7 @@
 package com.example.iknownothing.instantgram;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,6 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageButton user_profile_image_button;
     private FirebaseRecyclerAdapter<UserPosts,UserPostsHolder> firebaseRecyclerAdapter;
     //private ImageView going_back;
+    private static Bundle mBundleRecyclerViewState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -377,4 +379,31 @@ public class ProfileActivity extends AppCompatActivity {
         super.onStop();
         firebaseRecyclerAdapter.stopListening();
     }
+
+    //Retaining Data....
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        //So that the Data should be Retained;
+        //BUNDLE bundles the DATA;
+        mBundleRecyclerViewState =new Bundle();
+        //PARCELABLE save the bundle Object...
+        Parcelable listState = profile_posts_recyclerview.getLayoutManager().onSaveInstanceState();
+        mBundleRecyclerViewState.putParcelable("recycler_state",listState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //So that the Data should be Retained;
+        if(mBundleRecyclerViewState != null)
+        {
+            //If bundle is not null then Parcelable unbind the Data from BUNDLE object and Restores it...
+            Parcelable liststate = mBundleRecyclerViewState.getParcelable("recycler_state");
+            profile_posts_recyclerview.getLayoutManager().onRestoreInstanceState(liststate);
+        }
+    }
+
 }
