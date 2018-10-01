@@ -1,5 +1,6 @@
 package com.example.iknownothing.instantgram;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -224,8 +225,21 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull UserPostsHolder holder, int position, @NonNull UserPosts model) {
 
+                // GETTING REFERENCE FOR EACH POST THAT HAS BEEN TAPPED...
+                final String PostKey = getRef(position).getKey();
+
                 //BINDING POST IMAGE INTO THE PROFILE...
                     holder.setPostImage(model.postimage);
+
+                //SHOW IMAGE WHEN USER TAP INTO IMAGE....
+                holder.mView.findViewById(R.id.user_post_image).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent clickPostIntent =new Intent(ProfileActivity.this,OpenPostActivity.class);
+                        clickPostIntent.putExtra("PostKey",PostKey);
+                        startActivity(clickPostIntent);
+                    }
+                });
 
             }
 
@@ -244,10 +258,12 @@ public class ProfileActivity extends AppCompatActivity {
 
     public static class UserPostsHolder extends RecyclerView.ViewHolder
     {
+        View mView;
         ImageView UserPostImage;
 
         public UserPostsHolder(View itemView) {
             super(itemView);
+            mView = itemView;
 
         }
 
