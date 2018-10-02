@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
                     if(dataSnapshot.hasChild("fullname"))
                     {
                         String fullname = dataSnapshot.child("fullname").getValue().toString();
-                        ProfileUserName.setText(fullname);
+                        ProfileUserName.setText("Welcome "+fullname);
                     }
 
                     if(dataSnapshot.hasChild("profileImage"))
