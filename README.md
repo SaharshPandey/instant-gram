@@ -1,4 +1,4 @@
-# instant-gram
+# Box
 Worked on a Instagram Clone (Instagram like Android Application) which will have all the features like Following, Likes & Comments, etc
 * User can sent follow request to anyone, other user can accept or decline it.
 * User can like and comment on posts.
