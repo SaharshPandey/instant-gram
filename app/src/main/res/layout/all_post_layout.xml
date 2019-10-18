@@ -194,6 +194,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:src="@drawable/share8"
+                    android:visibility="invisible"
                     android:layout_marginStart="13dp"
                     android:padding="5dp"/>
             </LinearLayout>
@@ -203,6 +204,7 @@
                 android:id="@+id/saved"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                    android:visibility="invisible"
                 android:src="@drawable/ic_ribbon"
                 android:padding="5dp"
                 />
@@ -276,7 +278,7 @@
                 android:id="@+id/post_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="5dp"
                 android:text="31-August-2018"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="9sp"
