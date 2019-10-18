@@ -16,8 +16,7 @@ Implementation Guide
 Not able to carry this project anymore, but anybody who wanted to work on this project can do happily.
 I am attaching images with this, if you like then do try it....
 
-<img src="https://user-images.githubusercontent.com/26492582/67109652-a2f53480-f1ee-11e9-896f-d78a7397e9c5.png" width="300" height="600"/>
-<img src="https://user-images.githubusercontent.com/26492582/67109758-d33cd300-f1ee-11e9-8c7c-ab12cd110f22.png" width="300" height="600"/>
+<img src="https://user-images.githubusercontent.com/26492582/67109652-a2f53480-f1ee-11e9-896f-d78a7397e9c5.png" width="300" height="600"/><img src="https://user-images.githubusercontent.com/26492582/67109758-d33cd300-f1ee-11e9-8c7c-ab12cd110f22.png" width="300" height="600"/>
 <img src="https://user-images.githubusercontent.com/26492582/67109760-d3d56980-f1ee-11e9-89ff-d84430a1418f.png" width="300" height="600"/>
 <img src="https://user-images.githubusercontent.com/26492582/67109763-d3d56980-f1ee-11e9-96e8-2cd8c0f7ffa6.png" width="300" height="600"/>
 <img src="https://user-images.githubusercontent.com/26492582/67109765-d3d56980-f1ee-11e9-98f8-039837d4cb73.png" width="300" height="600"/>
