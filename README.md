@@ -1,8 +1,17 @@
 # instant-gram
-Worked on a InstantGram Clone(Instagram like Android Application) which will have all the features like Follow,Messanging,Searching,etc
+Worked on a Instagram Clone (Instagram like Android Application) which will have all the features like Following, Likes & Comments, etc
 * User can sent follow request to anyone, other user can accept or decline it.
 * User can like and comment on posts.
 * User is able to see posts of his following.
+
+Add yours google-services.json
+Change Authorization:key with your key from firebase project
+
+
+Implementation Guide
+1 - Project
+1 - Open the Project in your android studio;
+2 - IMPORTANT Change the Package Name. (https://stackoverflow.com/questions/16804093/android-studio-rename-package)
 
 Not able to carry this project anymore, but anybody who wanted to work on this project can do happily.
 I am attaching images with this, if you like then do try it....
