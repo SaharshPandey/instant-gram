@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Private objects of FirebaseAuth, NavigationView,DrawerLayout,ToolBar,processDialog
     private FirebaseAuth mAuth;
-    private DatabaseReference UserRef,PostRef,LikesRef,CommentRef;
+    private DatabaseReference UserRef, PostRef, LikesRef, CommentRef;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private RecyclerView postList;
@@ -71,19 +71,19 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog loadingBar;
     private CircleImageView NavProfileImage;
     private TextView ProfileUserName;
-    private String CurrentUserId,Database_User_Id;
-    private ImageButton AddNewPostButton,PostPicture;
-    FirebaseRecyclerAdapter<Posts,PostViewHolder> firebaseRecyclerAdapter;
+    private String CurrentUserId, Database_User_Id;
+    private ImageButton AddNewPostButton, PostPicture;
+    FirebaseRecyclerAdapter<Posts, PostViewHolder> firebaseRecyclerAdapter;
     CardView cardView;
-    private String CurrentDAte,CurrentTime,PostRandomName;
+    private String CurrentDAte, CurrentTime, PostRandomName;
     private String DownloadUrl;
     private EditText text_post;
-    private static int GalleryPic =1;
+    private static int GalleryPic = 1;
     private ImageView post_image_main;
     private ImageView ImageUri;
-    private ImageButton add_new_upload_button,popup_button;
+    private ImageButton add_new_upload_button, popup_button;
     private String ts;
-    private LinearLayout popup_button_layout,comment_layout;
+    private LinearLayout popup_button_layout, comment_layout;
     private DatabaseReference ClickPostRef;
     private String description;
     private ImageButton notifications;
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     //private ImageView Like,Comment,Share,Saved;
     //private TextView PostLikes;
-    boolean LikeChecker= false;
+    boolean LikeChecker = false;
 
     private View post_bar;
     private static Bundle mBundleRecyclerViewState;
@@ -105,9 +105,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        post_bar=new View(this);
+        post_bar = new View(this);
         post_bar.findViewById(R.id.post_bar_included);
-
 
 
         // clear FLAG_TRANSLUCENT_STATUS flag:
@@ -142,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Initialising image buttons.......
         post_image_main = findViewById(R.id.post_image_main);
-        add_new_upload_button =findViewById(R.id.add_new_upload_button);
+        add_new_upload_button = findViewById(R.id.add_new_upload_button);
 
 
         //SENDING TO ADD PHOTOS ACTIVITY....
@@ -157,16 +156,12 @@ public class MainActivity extends AppCompatActivity {
         AddNewPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(text_post.getText().toString().trim() != null && !text_post.getText().toString().trim().equals(""))
-                {
+                if (text_post.getText().toString().trim() != null && !text_post.getText().toString().trim().equals("")) {
                     SavingPostInformationToDatabase();
+                } else {
+                    Toast.makeText(MainActivity.this, "Nothing in mind", Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
-                    Toast.makeText(MainActivity.this,"Nothing in mind",Toast.LENGTH_SHORT).show();
-                }
-        }
-
+            }
 
 
         });
@@ -176,11 +171,11 @@ public class MainActivity extends AppCompatActivity {
         notifications.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,FriendRequestsActivity.class));
+                startActivity(new Intent(MainActivity.this, FriendRequestsActivity.class));
             }
         });
         drawerLayout = findViewById(R.id.drawable_layout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this,drawerLayout,R.string.drawer_open,R.string.drawer_close);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         //drawerLayout.setStatusBarBackgroundColor(getResources().getColor(android.R.color.white));
@@ -192,8 +187,6 @@ public class MainActivity extends AppCompatActivity {
         text_post = findViewById(R.id.text_post);
 
 
-
-
         postList = findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
         //Total items that can be reserved ...
@@ -201,36 +194,30 @@ public class MainActivity extends AppCompatActivity {
         postList.setDrawingCacheEnabled(true);
         postList.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_AUTO);
         //ADDING MANAGER TO THE RECYCLER VIEW...
-        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         postList.setLayoutManager(linearLayoutManager);
 
 
-
-
         //Inflating Navigation Header in Navigation Menu....
-        View view =navigationView.inflateHeaderView(R.layout.navigation_header);
+        View view = navigationView.inflateHeaderView(R.layout.navigation_header);
         NavProfileImage = view.findViewById(R.id.nav_profile_image);
         ProfileUserName = view.findViewById(R.id.nav_user_full_name);
-
 
 
         //REFERENCE TO THE USERS OF FIREBASE....
         UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot){
-                if(dataSnapshot.exists())
-                {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
 
-                    if(dataSnapshot.hasChild("fullname"))
-                    {
+                    if (dataSnapshot.hasChild("fullname")) {
                         String fullname = dataSnapshot.child("fullname").getValue().toString();
-                        ProfileUserName.setText("Welcome "+fullname);
+                        ProfileUserName.setText("Welcome " + fullname);
                     }
 
-                    if(dataSnapshot.hasChild("profileImage"))
-                    {
+                    if (dataSnapshot.hasChild("profileImage")) {
                         String profileImage = dataSnapshot.child("profileImage").getValue().toString();
                         Picasso.get()
                                 .load(profileImage)
@@ -238,10 +225,8 @@ public class MainActivity extends AppCompatActivity {
                                 .into(NavProfileImage);
 
 
-                    }
-                    else
-                        {
-                        Toast.makeText(MainActivity.this,"There in no information Stored",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "There in no information Stored", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -251,7 +236,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
 
 //THIS METHOD SHOWING THE RECYCLER VIEW ITEMS.....
@@ -264,43 +248,42 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 //Checking when the menu item has been clicked..
-                switch (item.getItemId())
-                {
+                switch (item.getItemId()) {
                     case R.id.nav_post:
                         SendUserToPostActivity();
-                        Toast.makeText(MainActivity.this,"Profile",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.nav_profile:
-                        Toast.makeText(MainActivity.this,"Profile",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                         //STARTING PROFILE ACTIVITY..
-                        Intent profile =new Intent(MainActivity.this,ProfileActivity.class);
-                        profile.putExtra("UserKey",CurrentUserId);
+                        Intent profile = new Intent(MainActivity.this, ProfileActivity.class);
+                        profile.putExtra("UserKey", CurrentUserId);
                         startActivity(profile);
                         break;
                     case R.id.nav_home:
-                        Toast.makeText(MainActivity.this,"Home",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_friends:
-                        Toast.makeText(MainActivity.this,"Friend List",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Friend List", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_find_friends:
-                        Intent search = new Intent(MainActivity.this,find_friends_activity.class);
+                        Intent search = new Intent(MainActivity.this, find_friends_activity.class);
                         startActivity(search);
-                        Toast.makeText(MainActivity.this,"Find Friends",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Find Friends", Toast.LENGTH_SHORT).show();
                         break;
-                    case  R.id.nav_notifications:
-                        Intent notifications = new Intent(MainActivity.this,FriendRequestsActivity.class);
+                    case R.id.nav_notifications:
+                        Intent notifications = new Intent(MainActivity.this, FriendRequestsActivity.class);
                         startActivity(notifications);
-                        Toast.makeText(MainActivity.this,"Notifications",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Notifications", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_messages:
-                        Toast.makeText(MainActivity.this,"Messages",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Messages", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_settings:
-                        Toast.makeText(MainActivity.this,"Settings",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
                         //STARTING SETTING ACTIVITY....
-                        Intent setting = new Intent(MainActivity.this,SettingsActivity.class);
+                        Intent setting = new Intent(MainActivity.this, SettingsActivity.class);
                         startActivity(setting);
                         break;
                     case R.id.nav_Logout:
@@ -308,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
                         loadingBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                         loadingBar.show();
                         loadingBar.setCanceledOnTouchOutside(true);
-                        Toast.makeText(MainActivity.this,"Logging Out",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Logging Out", Toast.LENGTH_SHORT).show();
                         mAuth.signOut();
                         loadingBar.dismiss();
                         SendUserToLoginActivity();
@@ -322,48 +305,46 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
     }
 
 
-  /*  public void CheckingFirebaseData(String PostKey)
-    {
-        ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
+    /*  public void CheckingFirebaseData(String PostKey)
+      {
+          ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
 
-        //GETTING REFERENCE FOR THE POST....
-        ClickPostRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+          //GETTING REFERENCE FOR THE POST....
+          ClickPostRef.addValueEventListener(new ValueEventListener() {
+              @Override
+              public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                if(dataSnapshot.exists()) {
+                  if(dataSnapshot.exists()) {
 
-                    Database_User_Id = dataSnapshot.child("uid").getValue().toString();
-                    description = dataSnapshot.child("description").getValue().toString();
+                      Database_User_Id = dataSnapshot.child("uid").getValue().toString();
+                      description = dataSnapshot.child("description").getValue().toString();
 
-                    //Checking whether the post is of the CurrentUser ....
-                     if (CurrentUserId.equals(Database_User_Id)) {
-                        popup_button_layout.setVisibility(View.VISIBLE);
-                        //popup_button.setVisibility(View.VISIBLE);
-                    }
+                      //Checking whether the post is of the CurrentUser ....
+                       if (CurrentUserId.equals(Database_User_Id)) {
+                          popup_button_layout.setVisibility(View.VISIBLE);
+                          //popup_button.setVisibility(View.VISIBLE);
+                      }
 
-                }
+                  }
 
-                else{
-                    Toast.makeText(MainActivity.this,"Data doesn't Exists ! ",Toast.LENGTH_SHORT).show();
-                }
-            }
+                  else{
+                      Toast.makeText(MainActivity.this,"Data doesn't Exists ! ",Toast.LENGTH_SHORT).show();
+                  }
+              }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+              @Override
+              public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
-    }
-*/
-   //METHOD TO SHOW POPUP WHEN USER TAP POPUP MENU...
-    public void showPopup(View v,final String PostKey){
+              }
+          });
+      }
+  */
+    //METHOD TO SHOW POPUP WHEN USER TAP POPUP MENU...
+    public void showPopup(View v, final String PostKey) {
 
         ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
         //REFERENCE FOR THE POST....
@@ -374,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                if(dataSnapshot.exists()) {
+                if (dataSnapshot.exists()) {
 
                     Database_User_Id = dataSnapshot.child("uid").getValue().toString();
                     description = dataSnapshot.child("description").getValue().toString();
@@ -385,10 +366,8 @@ public class MainActivity extends AppCompatActivity {
                         //popup_button.setVisibility(View.VISIBLE);
                     }*/
 
-                }
-
-                else{
-                    Toast.makeText(MainActivity.this,"Data doesn't Exists ! ",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Data doesn't Exists ! ", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -399,36 +378,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //CREATING POPUP MENU AND ADDING MENU XML INTO IT...
-        final PopupMenu popupMenu = new PopupMenu(new ContextThemeWrapper(this,R.style.PopupMenu),v);
+        final PopupMenu popupMenu = new PopupMenu(new ContextThemeWrapper(this, R.style.PopupMenu), v);
         //METHOD TO ADD ICONS TO THE POPUP MENU
-        try{
-            Field[] fields =popupMenu.getClass().getDeclaredFields();
-            for(Field field : fields )
-            {
-                if("mPopup".equals(field.getName()))
-                {
+        try {
+            Field[] fields = popupMenu.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                if ("mPopup".equals(field.getName())) {
                     field.setAccessible(true);
                     Object menuPopupHelper = field.get(popupMenu);
                     Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
-                    Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon",boolean.class);
-                    setForceIcons.invoke(menuPopupHelper,true);
+                    Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon", boolean.class);
+                    setForceIcons.invoke(menuPopupHelper, true);
 
-                        break;
+                    break;
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         //ICONS ADDED TO POPUP SUCCEED..
 
         //NOW INFLATING POPUP MENU TO BUTTON...
         MenuInflater menuInflater = popupMenu.getMenuInflater();
-        menuInflater.inflate(R.menu.popup_menu,popupMenu.getMenu());
-
-
-
+        menuInflater.inflate(R.menu.popup_menu, popupMenu.getMenu());
 
 
         //SETTING ONCLICK LISTENER FOR THE POPUP MENU.....
@@ -437,7 +409,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
 
                     //WHEN EDIT BUTTON IS CLICKED...
                     case R.id.nav_Edit:
@@ -452,22 +424,22 @@ public class MainActivity extends AppCompatActivity {
 
 
                         //STYLING
-                        inputfield.setPadding(20,100,20,20);
+                        inputfield.setPadding(20, 100, 20, 20);
                         inputfield.setMaxLines(8);
                         inputfield.setText(description);
 
                         builder.setView(inputfield);
 
-             //ADDING BUTTONS -> POSITIVE AND NEGATIVE.....
+                        //ADDING BUTTONS -> POSITIVE AND NEGATIVE.....
 
                         //Positive Button...
                         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ClickPostRef.child("description").setValue(inputfield.getText().toString());
-                                Toast.makeText(MainActivity.this,"Updated Successfully",Toast.LENGTH_SHORT);
+                                Toast.makeText(MainActivity.this, "Updated Successfully", Toast.LENGTH_SHORT);
                             }
-                            });
+                        });
                         //Negative Button...
                         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
@@ -475,7 +447,6 @@ public class MainActivity extends AppCompatActivity {
                                 dialog.cancel();
                             }
                         });
-
 
 
                         //Creating Dialog Box...
@@ -490,10 +461,10 @@ public class MainActivity extends AppCompatActivity {
 
                         //DELETING THE POST........
 
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this,R.style.MyAlertDialogStyle);
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this, R.style.MyAlertDialogStyle);
                         builder1.setMessage("Do you really want to Delete?");
 
-         //ADDING BUTTONS -> POSITIVE AND NEGATIVE.....
+                        //ADDING BUTTONS -> POSITIVE AND NEGATIVE.....
 
                         //Positive Button....
                         builder1.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
@@ -511,7 +482,7 @@ public class MainActivity extends AppCompatActivity {
                         });
 
                         //Showing Dialog
-                        Dialog dialog1 =builder1.create();
+                        Dialog dialog1 = builder1.create();
                         dialog1.show();
                         dialog1.getWindow().setBackgroundDrawableResource(android.R.color.white);
 
@@ -521,12 +492,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-    //DISPLAYING POPUP MENU IN EVERY POST...
+        //DISPLAYING POPUP MENU IN EVERY POST...
         popupMenu.show();
     }
 
 
-//THIS MEHTOD IS RESPONSIBLE TO ADD DATA INTO RECYCLER VIEW.....
+    //THIS MEHTOD IS RESPONSIBLE TO ADD DATA INTO RECYCLER VIEW.....
     private void DisplayAllUsersPost() {
 
         //QUERY FOR FIREBASE RECYCLER ADAPTER....
@@ -537,10 +508,7 @@ public class MainActivity extends AppCompatActivity {
 
         //INITIALISING FIREBASE RECYCLER VIEW...
         firebaseRecyclerAdapter
-                =new FirebaseRecyclerAdapter<Posts, PostViewHolder>(options)
-
-
-        {
+                = new FirebaseRecyclerAdapter<Posts, PostViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull final PostViewHolder holder, int position, @NonNull final Posts model) {
 
@@ -549,7 +517,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // GETTING REFERENCE FOR EACH POST THAT HAS BEEN TAPPED...
                 final String PostKey = getRef(position).getKey();
-                Log.d("result",PostKey);
+                Log.d("result", PostKey);
 
                 //CheckingFirebaseData(PostKey);
 
@@ -560,11 +528,25 @@ public class MainActivity extends AppCompatActivity {
                 UserRef.child(model.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists())
-                        {
-                            holder.setUsername(dataSnapshot.child("username").getValue().toString());
-                            holder.setProfileImage(getApplicationContext(),dataSnapshot.child("profileImage").getValue().toString());
-                            holder.setFullname(dataSnapshot.child("fullname").getValue().toString());
+                        if (dataSnapshot.exists()) {
+                            String username = dataSnapshot.child("username").getValue().toString();
+                            if (username != null) {
+                                holder.setUsername(username);
+                            } else {
+                                holder.setUsername("");
+                            }
+                            if(dataSnapshot.hasChild("profileImage")) {
+                                String imageUrl = dataSnapshot.child("profileImage").getValue().toString();
+                                if (imageUrl != null) {
+                                    holder.setProfileImage(getApplicationContext(), imageUrl);
+                                }
+                            }
+                            String fullname = dataSnapshot.child("fullname").getValue().toString();
+                            if (fullname != null) {
+                                holder.setFullname(fullname);
+                            } else {
+                                holder.setFullname("");
+                            }
                         }
                     }
 
@@ -582,35 +564,30 @@ public class MainActivity extends AppCompatActivity {
                 holder.setCommentNo(PostKey);
 
 
-
-
-
                 //Adding popup button functionality...
-                popup_button_layout=holder.mView.findViewById(R.id.popup_button_layout);
-                popup_button=holder.mView.findViewById(R.id.popup_button);
+                popup_button_layout = holder.mView.findViewById(R.id.popup_button_layout);
+                popup_button = holder.mView.findViewById(R.id.popup_button);
                 popup_button_layout.setVisibility(View.INVISIBLE);
 
 
-
-                if(PostKey.substring(0,28).equals(CurrentUserId))
-                {
+                if (PostKey.substring(0, 28).equals(CurrentUserId)) {
                     popup_button_layout.setVisibility(View.VISIBLE);
                 }
 
-                Log.d("result",String.valueOf(position));
+                Log.d("result", String.valueOf(position));
 
 
                 //POPUP LINEAR LAYOUT EVENT LISTENER...
                 popup_button_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showPopup(v,PostKey);
+                        showPopup(v, PostKey);
                     }
                 });
                 popup_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showPopup(v,PostKey);
+                        showPopup(v, PostKey);
                     }
                 });
 
@@ -621,9 +598,9 @@ public class MainActivity extends AppCompatActivity {
                         //STARTING PROFILE ACTIVITY..
 
 
-                        Intent profile =new Intent(MainActivity.this,ProfileActivity.class);
-                        profile.putExtra("UserKey",PostKey.substring(0,PostKey.indexOf('-')-2));
-                        Log.d("result",PostKey.substring(0,PostKey.indexOf('-')));
+                        Intent profile = new Intent(MainActivity.this, ProfileActivity.class);
+                        profile.putExtra("UserKey", PostKey.substring(0, PostKey.indexOf('-') - 2));
+                        Log.d("result", PostKey.substring(0, PostKey.indexOf('-')));
                         startActivity(profile);
                     }
                 });
@@ -636,24 +613,24 @@ public class MainActivity extends AppCompatActivity {
                         //STARTING PROFILE ACTIVITY..
 
 
-                        Intent profile =new Intent(MainActivity.this,ProfileActivity.class);
-                        profile.putExtra("UserKey",PostKey.substring(0,PostKey.indexOf('-')-2));
+                        Intent profile = new Intent(MainActivity.this, ProfileActivity.class);
+                        profile.putExtra("UserKey", PostKey.substring(0, PostKey.indexOf('-') - 2));
 
                         startActivity(profile);
                     }
                 });
 
                 //SHOW IMAGE WHEN USER TAP INTO IMAGE....
-               holder.mView.findViewById(R.id.post_image).setOnClickListener(new View.OnClickListener() {
+                holder.mView.findViewById(R.id.post_image).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent clickPostIntent =new Intent(MainActivity.this,OpenPostActivity.class);
-                        clickPostIntent.putExtra("PostKey",PostKey);
+                        Intent clickPostIntent = new Intent(MainActivity.this, OpenPostActivity.class);
+                        clickPostIntent.putExtra("PostKey", PostKey);
                         startActivity(clickPostIntent);
                     }
                 });
 
-               //LIKE POST WHEN USER CLICKS LIKE BUTTON...
+                //LIKE POST WHEN USER CLICKS LIKE BUTTON...
                 holder.mView.findViewById(R.id.like).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -662,18 +639,15 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 //CHECKING IF THE POST IS LIKED OR NOT.....
-                               if(LikeChecker==true)
-                               {
-                                   if(dataSnapshot.child(PostKey).hasChild(CurrentUserId))
-                                   {
-                                       LikesRef.child(PostKey).child(CurrentUserId).removeValue();
-                                       LikeChecker = false;
-                                   }
-                                   else{
-                                       LikesRef.child(PostKey).child(CurrentUserId).setValue(true);
-                                       LikeChecker = false;
-                                   }
-                               }
+                                if (LikeChecker == true) {
+                                    if (dataSnapshot.child(PostKey).hasChild(CurrentUserId)) {
+                                        LikesRef.child(PostKey).child(CurrentUserId).removeValue();
+                                        LikeChecker = false;
+                                    } else {
+                                        LikesRef.child(PostKey).child(CurrentUserId).setValue(true);
+                                        LikeChecker = false;
+                                    }
+                                }
                             }
 
                             @Override
@@ -688,8 +662,8 @@ public class MainActivity extends AppCompatActivity {
                 holder.mView.findViewById(R.id.comment).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent commentIntent = new Intent(MainActivity.this,CommentActivity.class);
-                        commentIntent.putExtra("PostKey",PostKey);
+                        Intent commentIntent = new Intent(MainActivity.this, CommentActivity.class);
+                        commentIntent.putExtra("PostKey", PostKey);
                         startActivity(commentIntent);
                     }
                 });
@@ -699,13 +673,13 @@ public class MainActivity extends AppCompatActivity {
                 comment_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent commentIntent = new Intent(MainActivity.this,CommentActivity.class);
-                        commentIntent.putExtra("PostKey",PostKey);
+                        Intent commentIntent = new Intent(MainActivity.this, CommentActivity.class);
+                        commentIntent.putExtra("PostKey", PostKey);
                         startActivity(commentIntent);
                     }
                 });
 
-            //CheckingFirebaseData(PostKey);
+                //CheckingFirebaseData(PostKey);
             }
 
             @NonNull
@@ -727,7 +701,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemRangeInserted(int positionStart, int itemCount) {
                 super.onItemRangeInserted(positionStart, itemCount);
                 postList.smoothScrollToPosition(firebaseRecyclerAdapter.getItemCount());
-                Log.d("result1",String.valueOf(firebaseRecyclerAdapter.getItemCount()));
+                Log.d("result1", String.valueOf(firebaseRecyclerAdapter.getItemCount()));
             }
         });
 
@@ -739,14 +713,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //CLASS THAT EXTENDS VIEW HOLDER CLASS....
-    public static class PostViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class PostViewHolder extends RecyclerView.ViewHolder {
         //Declaring Widgets and Reference Variables....
         ProgressBar post_progress;
         View mView;
         int countlikes;
         String currentuserId;
-        DatabaseReference LikesRef,CommentRef;
+        DatabaseReference LikesRef, CommentRef;
         ImageView Like;
         ImageView Comment;
         ImageView Share;
@@ -755,13 +728,12 @@ public class MainActivity extends AppCompatActivity {
         TextView postcomment;
 
         // USING GETTER SETTERS METHODS FROM POSTS CLASS.....
-        public PostViewHolder(View itemView)
-        {
+        public PostViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
 
             //Instantiating Like,Comment,Share widgets
-            Like  = mView.findViewById(R.id.like);
+            Like = mView.findViewById(R.id.like);
             Comment = mView.findViewById(R.id.comment);
             Share = mView.findViewById(R.id.share);
             PostLikes = mView.findViewById(R.id.postlikes);
@@ -777,18 +749,15 @@ public class MainActivity extends AppCompatActivity {
 
         //Method that check for the Likes when user opens the app..
         //It will show liked or not liked image.
-        public void setLikeButtonStatus(final String PostKey)
-        {
+        public void setLikeButtonStatus(final String PostKey) {
             LikesRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.child(PostKey).hasChild(currentuserId))
-                    {
+                    if (dataSnapshot.child(PostKey).hasChild(currentuserId)) {
                         countlikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
                         Like.setImageResource(R.drawable.heartfill8);
                         PostLikes.setText(Integer.toString(countlikes));
-                    }
-                    else{
+                    } else {
                         countlikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
                         Like.setImageResource(R.drawable.heartempty8);
                         PostLikes.setText(Integer.toString(countlikes));
@@ -802,8 +771,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        public void setCommentNo(final String PostKey)
-        {
+        public void setCommentNo(final String PostKey) {
             CommentRef.child(PostKey).child("Comments").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -817,63 +785,57 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        public void setUsername(String username)
-        {
+        public void setUsername(String username) {
             TextView name = mView.findViewById(R.id.post_username);
             name.setText(username);
         }
 
         public void setFullname(String fullname) {
-            TextView name= mView.findViewById(R.id.post_fullname);
-            name.setText(fullname+" has been updated a new post");
+            TextView name = mView.findViewById(R.id.post_fullname);
+            name.setText(fullname + " has been updated a new post");
 
         }
+
         public void setProfileImage(Context ctx, String profileImage) {
             CircleImageView image = mView.findViewById(R.id.post_profile_image);
             Picasso.get().load(profileImage).into(image);
         }
-        public void setTime(String time)
-        {
-            TextView posttime= mView.findViewById(R.id.post_time);
+
+        public void setTime(String time) {
+            TextView posttime = mView.findViewById(R.id.post_time);
             posttime.setText(time);
         }
-        public void setDate(String date)
-        {
-            TextView postdate= mView.findViewById(R.id.post_date);
+
+        public void setDate(String date) {
+            TextView postdate = mView.findViewById(R.id.post_date);
             postdate.setText(date);
         }
 
-        public void setDescription(String description)
-        {
-            TextView postdescription= mView.findViewById(R.id.post_description);
+        public void setDescription(String description) {
+            TextView postdescription = mView.findViewById(R.id.post_description);
 
-            if(description==null || description.equals(""))
-            {
+            if (description == null || description.equals("")) {
                 postdescription.setVisibility(View.GONE);
-            }
-            else{
+            } else {
                 postdescription.setTextSize(14);
                 postdescription.setText(description);
                 postdescription.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-        }
+            }
         }
 
-        public void setPostimage(Context ctx,String postimage) {
+        public void setPostimage(Context ctx, String postimage) {
 
-            ImageView post_image=mView.findViewById(R.id.post_image);
-            if(postimage.equals("none"))
-            {
-                TextView postdes= mView.findViewById(R.id.post_description);
-                if(postdes.getText().toString().length() <= 10) {
+            ImageView post_image = mView.findViewById(R.id.post_image);
+            if (postimage.equals("none")) {
+                TextView postdes = mView.findViewById(R.id.post_description);
+                if (postdes.getText().toString().length() <= 10) {
                     postdes.setTextSize(35);
                     postdes.setPadding(5, 30, 5, 0);
                     postdes.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                }
-                else if( postdes.getText().toString().length() > 10 && postdes.getText().toString().length() <= 30 ) {
+                } else if (postdes.getText().toString().length() > 10 && postdes.getText().toString().length() <= 30) {
                     postdes.setTextSize(20);
                     postdes.setPadding(5, 30, 5, 0);
-                }
-                else if(postdes.getText().toString().length() > 30) {
+                } else if (postdes.getText().toString().length() > 30) {
                     postdes.setTextSize(15);
                     postdes.setPadding(5, 30, 5, 0);
                 }
@@ -887,27 +849,25 @@ public class MainActivity extends AppCompatActivity {
                 post_progress.setVisibility(View.GONE);
 
 
+            } else {
+
+                //Adding Image from Picasso and calling callback Listener who hides the progressbar when image is loaded....
+                Picasso.get().load(postimage).into(post_image, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                        post_progress.setVisibility(View.GONE);
+                        //container.setBackgroundColor(Color.TRANSPARENT);
+
+
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
             }
-            else{
-
-    //Adding Image from Picasso and calling callback Listener who hides the progressbar when image is loaded....
-            Picasso.get().load(postimage).into(post_image, new Callback() {
-                @Override
-                public void onSuccess() {
-
-                    post_progress.setVisibility(View.GONE);
-                    //container.setBackgroundColor(Color.TRANSPARENT);
-
-
-
-                }
-
-                @Override
-                public void onError(Exception e) {
-
-                }
-            });
-        }
         }
 
     }
@@ -915,30 +875,25 @@ public class MainActivity extends AppCompatActivity {
 
     //SENDING USER TO POST ACTIVITY...
     private void SendUserToPostActivity() {
-        Intent postIntent = new Intent(MainActivity.this,PostActivity.class);
+        Intent postIntent = new Intent(MainActivity.this, PostActivity.class);
         //Putting caption data in intent
-        postIntent.putExtra("caption",text_post.getText().toString());
+        postIntent.putExtra("caption", text_post.getText().toString());
         startActivity(postIntent);
     }
 
 
-
     //onStart method is used for checking that user is LoggedIn or not?......
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
         firebaseRecyclerAdapter.startListening();
 
 
+        FirebaseUser currentuser = mAuth.getCurrentUser();
 
-        FirebaseUser currentuser =mAuth.getCurrentUser();
-
-        if(currentuser ==null)
-        {
+        if (currentuser == null) {
             SendUserToLoginActivity();
-        }
-        else{
+        } else {
             ChechUserExistence();
 
 
@@ -954,14 +909,13 @@ public class MainActivity extends AppCompatActivity {
 
     //CHECKING WHETHER THE USER HAS COMPLETED HIS DATA ENTRY AFTER CREATING NEW ACCOUNT...
     private void ChechUserExistence() {
-        final String Current_User_Id=mAuth.getCurrentUser().getUid();
+        final String Current_User_Id = mAuth.getCurrentUser().getUid();
 
         UserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(!dataSnapshot.hasChild(Current_User_Id))
-                {
+                if (!dataSnapshot.hasChild(Current_User_Id)) {
                     SendUserToSetupActivity();
                 }
             }
@@ -972,9 +926,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     //SENDING USER TO SETUP ACTIVITY...
     private void SendUserToSetupActivity() {
-        Intent setupIntent =new Intent(MainActivity.this,SetupActivity.class);
+        Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
         setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(setupIntent);
         finish();
@@ -983,27 +938,24 @@ public class MainActivity extends AppCompatActivity {
     //Method to redirect User to Login Activity....
     private void SendUserToLoginActivity() {
 
-        Intent loginIntent =new Intent(MainActivity.this, LoginActivity.class);
+        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
         finish();
     }
 
 
-
-
     //Menu Item Selection ....
     @Override
-public boolean onOptionsItemSelected(MenuItem item)
-{
-    if(actionBarDrawerToggle.onOptionsItemSelected(item))
-    {return true;}
-return super.onOptionsItemSelected(item);
-}
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-//SAVING DATA WHEN USER UPDATE NEW POSTS....
-    private void SavingPostInformationToDatabase()
-    {
+    //SAVING DATA WHEN USER UPDATE NEW POSTS....
+    private void SavingPostInformationToDatabase() {
         //SETTING LOADING BAR...
         loadingBar.setTitle("Updating Post");
         loadingBar.setMessage("Please wait while we update your post");
@@ -1015,14 +967,14 @@ return super.onOptionsItemSelected(item);
         UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
+                if (dataSnapshot.exists()) {
 
 
-                    if(ImageUri == null)//checking whether this image is not selected..
+                    if (ImageUri == null)//checking whether this image is not selected..
                     {
-                        Calendar calForDAte =Calendar.getInstance();
+                        Calendar calForDAte = Calendar.getInstance();
 
-                        Long tsLong = System.currentTimeMillis()/1000;
+                        Long tsLong = System.currentTimeMillis() / 1000;
                         ts = tsLong.toString();
 
                         SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
@@ -1031,8 +983,8 @@ return super.onOptionsItemSelected(item);
                         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
                         CurrentTime = currentTime.format(calForDAte.getTime());
 
-                        PostRandomName = CurrentDAte+CurrentTime;
-                        DownloadUrl="none";
+                        PostRandomName = CurrentDAte + CurrentTime;
+                        DownloadUrl = "none";
                     }
                     //String userFullname = dataSnapshot.child("fullname").getValue().toString();
                     //String profileImage = dataSnapshot.child("profileImage").getValue().toString();
@@ -1049,26 +1001,22 @@ return super.onOptionsItemSelected(item);
                     postMap.put("postimage", DownloadUrl);
                     //postMap.put("profileImage", profileImage);
                     //postMap.put("fullname", userFullname);
-                    postMap.put("timestamp",ts);
+                    postMap.put("timestamp", ts);
 
                     //making new node in database....
-                    PostRef.child(CurrentUserId +PostRandomName).updateChildren(postMap)
+                    PostRef.child(CurrentUserId + PostRandomName).updateChildren(postMap)
                             .addOnCompleteListener(new OnCompleteListener() {
                                 @Override
                                 public void onComplete(@NonNull Task task) {
 
-                                    if(task.isSuccessful())
-                                    {
+                                    if (task.isSuccessful()) {
                                         loadingBar.dismiss();
 
-                                        Toast.makeText(MainActivity.this,"Post is Updated Successfully",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainActivity.this, "Post is Updated Successfully", Toast.LENGTH_SHORT).show();
 
-                                    }
-
-                                    else
-                                    {
+                                    } else {
                                         loadingBar.dismiss();
-                                        Toast.makeText(MainActivity.this,"Error Occurred while Updating the Post,Try Again...",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainActivity.this, "Error Occurred while Updating the Post,Try Again...", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -1090,10 +1038,10 @@ return super.onOptionsItemSelected(item);
 
         //So that the Data should be Retained;
         //BUNDLE bundles the DATA;
-        mBundleRecyclerViewState =new Bundle();
+        mBundleRecyclerViewState = new Bundle();
         //PARCELABLE save the bundle Object...
         Parcelable listState = postList.getLayoutManager().onSaveInstanceState();
-        mBundleRecyclerViewState.putParcelable("recycler_state",listState);
+        mBundleRecyclerViewState.putParcelable("recycler_state", listState);
     }
 
     @Override
@@ -1101,8 +1049,7 @@ return super.onOptionsItemSelected(item);
         super.onResume();
 
         //So that the Data should be Retained;
-        if(mBundleRecyclerViewState != null)
-        {
+        if (mBundleRecyclerViewState != null) {
             //If bundle is not null then Parcelable unbind the Data from BUNDLE object and Restores it...
             Parcelable liststate = mBundleRecyclerViewState.getParcelable("recycler_state");
             postList.getLayoutManager().onRestoreInstanceState(liststate);
